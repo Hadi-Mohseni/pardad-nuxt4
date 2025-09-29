@@ -32,6 +32,7 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   modules:['@nuxtjs/i18n', '@pinia/nuxt', '@vueuse/nuxt'],
   i18n: {
+
     locales: [
       { code: 'en', iso: 'en-US', file: 'en.json' },
       { code: 'fa', iso: 'fa-IR', file: 'fa.json' },
@@ -39,12 +40,7 @@ export default defineNuxtConfig({
     ],
     defaultLocale: 'fa', // پوشه‌ای که فایل‌های ترجمه‌ات توشه
     strategy: 'no_prefix', // یا 'prefix_except_default' اگر بخوای URL چندزبانه داشته باشی
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'lang',
-      fallbackLocale: 'fa',
-      redirectOn: 'root' // optional
-    }
+
   },
   css: [
     '~/assets/css/main-3.css',

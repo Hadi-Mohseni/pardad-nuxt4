@@ -6,6 +6,7 @@ export const useGlobalStore = defineStore('global', {
         return {
             themeObj: 'black',
             showLoading: true,
+            isShowContent:false,
             loading: true,
             isLoadingPlayed: false,
             showLogo: false,
@@ -26,6 +27,9 @@ export const useGlobalStore = defineStore('global', {
     actions: {
         setLocale(value) {
             this.locale = value
+        },
+        setShowContent(payload) {
+            this.isShowContent = payload
         },
         setLayoutData(value) {
             this.layout.title = value.title
@@ -85,6 +89,7 @@ export const useGlobalStore = defineStore('global', {
 
             return this.appLocale;
         },
+        getShowContent: (state) => state.isShowContent,
         getThemeObj: (state) => state.themeObj,
         getLayoutData: (state) => state.layout,
         getLoadingStart: (state) => state.isStart,

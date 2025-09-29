@@ -5,7 +5,7 @@
         v-show="getContentLoad"
         dir="rtl"
         ref="section"
-        class="relative grid grid-cols-9 w-full h-full bg-gradient-to-b from-[#D3D3D3]  to-[#F4F4F4]"
+        class="relative grid grid-cols-9 w-full min-h-screen h-full bg-gradient-to-b from-[#D3D3D3]  to-[#F4F4F4]"
         :data-page="pageMeta?.dataPage"
         data-color="light"
     >

@@ -219,7 +219,10 @@ const paginateHandler = (value) => {
   if (value > 0) {
     showPaginate.value = true
     setTimeout(() => {
-      paginate.value.goToStep(currentSlide.value)
+      if(paginate.value){
+        paginate.value.goToStep(currentSlide.value)
+      }
+
     }, 5)
   } else {
     showPaginate.value = false
@@ -279,20 +282,32 @@ const prevSlide = () => {
 const backAnimationHandler = (value) => {
   switch (value) {
     case 0:
-      Home.value.closeAnimation()
+      if(Home.value){
+        Home.value.closeAnimation()
+      }
+
       break;
     case 1:
-      First.value.closeAnimation()
+      if(First.value){
+        First.value.closeAnimation()
+      }
       break;
     case 2:
-      Second.value.closeAnimation()
+      if(Second.value){
+        Second.value.closeAnimation()
+      }
       break;
     case 3:
-      Third.value.closeAnimation()
+      if(Third.value){
+        Third.value.closeAnimation()
+      }
+
 
       break;
     case 4:
-      Fourth.value.closeAnimation()
+      if(Fourth.value){
+        Fourth.value.closeAnimation()
+      }
       break;
     default:
 
@@ -303,20 +318,37 @@ const backAnimationHandler = (value) => {
 const startAnimationHandler = (value) => {
   switch (value) {
     case 0:
-      Home.value.startAnimation()
+      if(Home.value){
+        Home.value.startAnimation()
+      }
+
       break;
     case 1:
-      First.value.startAnimation()
+      if( First.value){
+        First.value.startAnimation()
+      }
+
       break;
     case 2:
-      Second.value.startAnimation()
+      if(Second.value){
+        Second.value.startAnimation()
+      }
+
       break;
     case 3:
-      Third.value.startAnimation()
+      if(Third.value){
+
+        Third.value.startAnimation()
+
+      }
+
 
       break;
     case 4:
-      Fourth.value.startAnimation()
+      if(Fourth.value){
+        Fourth.value.startAnimation()
+      }
+
       break;
     default:
 
@@ -363,7 +395,10 @@ const showSlide = (value) => {
     case 0:
       showHome.value = true
       setTimeout(() => {
-        Home.value.showSectionHandler(true);
+        if(Home.value){
+          Home.value.showSectionHandler(true);
+        }
+
 
         setShowLogo(true)
 
@@ -373,14 +408,20 @@ const showSlide = (value) => {
     case 1:
       showFirst.value = true
       setTimeout(() => {
-        First.value.showSectionHandler(true);
+        if(First.value){
+          First.value.showSectionHandler(true);
+        }
+
       }, 5)
 
       break;
     case 2:
       showSecond.value = true
       setTimeout(() => {
-        Second.value.showSectionHandler(true);
+        if(Second.value){
+          Second.value.showSectionHandler(true);
+        }
+
 
       }, 5)
 
@@ -388,7 +429,9 @@ const showSlide = (value) => {
     case 3:
       showThird.value = true
       setTimeout(() => {
-        Third.value.showSectionHandler(true);
+        if(Third.value){
+          Third.value.showSectionHandler(true);
+        }
       }, 5)
 
 
@@ -396,7 +439,9 @@ const showSlide = (value) => {
     case 4:
       showFourth.value = true
       setTimeout(() => {
-        Fourth.value.showSectionHandler(true);
+        if(Fourth.value){
+          Fourth.value.showSectionHandler(true);
+        }
       }, 5)
 
       break;
@@ -409,31 +454,41 @@ const hideSlide = (value) => {
 
   switch (value) {
     case 0:
-      Home.value.showSectionHandler(false);
+      if(Home.value){
+        Home.value.showSectionHandler(false);
+      }
       setTimeout(() => {
         showHome.value = false
       }, 5)
       break;
     case 1:
-      First.value.showSectionHandler(false);
+      if(First.value){
+        First.value.showSectionHandler(false);
+      }
       setTimeout(() => {
         showFirst.value = false
       }, 5)
       break;
     case 2:
-      Second.value.showSectionHandler(false);
+      if(Second.value){
+        Second.value.showSectionHandler(false);
+      }
       setTimeout(() => {
         showSecond.value = false
       }, 5)
       break;
     case 3:
-      Third.value.showSectionHandler(false);
+      if(Third.value){
+        Third.value.showSectionHandler(false);
+      }
       setTimeout(() => {
         showThird.value = false
       }, 5)
       break;
     case 4:
-      Fourth.value.showSectionHandler(false);
+      if(Fourth.value){
+        Fourth.value.showSectionHandler(false);
+      }
       setTimeout(() => {
         showFourth.value = false
       }, 5)
@@ -503,8 +558,10 @@ const handleKey = (event) => {
 */
 
 const mobileLine = (ind) => {
+  if(hoverLine.value){
+    hoverLine.value.style.width = `${((ind) / 4) * 100}%`
+  }
 
-  hoverLine.value.style.width = `${((ind) / 4) * 100}%`
 }
 const mobileLineAnimation = (ind) => {
   bgLine.value.style.width = `100%`

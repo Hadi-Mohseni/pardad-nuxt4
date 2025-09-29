@@ -331,6 +331,7 @@ onMounted(() => {
   window.addEventListener('scroll', handleScroll)
   setTimeout(() => {
     endLoading()
+
   }, 100)
 
 

@@ -1,7 +1,7 @@
 <template>
   <div dir="rtl" class="relative">
 
-    <div class="text-black-100 h-dvh relative bg-transparent transition-all duration-500" v-if="showContent" >
+    <div class="text-black-100 h-dvh relative bg-transparent transition-all duration-500" v-if="getShowContent" >
       <div ref="sliderSection" class="text-black-100 w-full h-full mx-auto flex items-center justify-start">
         <div class="md:mt-0 mt-16 w-full h-full py-10 text-right md:mb-0 mb-auto md:pt-[200px] pt-0 md:px-24 px-0">
           <div class="flex flex-col md:flex-row w-full ">
@@ -235,10 +235,11 @@ import {useGlobalStore} from "~/stores/global.js";
 
 const store = useGlobalStore()
 
-const {getLoading} = storeToRefs(useGlobalStore())
+const {getLoading , getShowContent} = storeToRefs(useGlobalStore())
 
 
 const categoryStore = useCategoryStore()
+
 
 const {setActiveCategory,setActiveSubCategory} = categoryStore
 
@@ -265,7 +266,10 @@ const activeProduct = ref(null)
 const config = useRuntimeConfig()
 watch(getLoading, (value) => {
   if (!value) {
+  setTimeout(()=>{
     initPage()
+  },200)
+
   }
 })
 
@@ -472,7 +476,7 @@ const initPage=()=>{
   store.setContentLoad(true)
   setTimeout(() => {
     setTimeout(() => {
-      showContent.value = true
+      store.setShowContent(true)
     }, 5)
   }, 10)
 }
@@ -567,9 +571,16 @@ onMounted(()=>{
   /* setActiveCatFunc(route.params.category_name)*/
    setTimeout(() => {
     endLoading()
-    initPage()
-  }, 1000)
+  }, 100)
 })
+onBeforeRouteLeave(()=>{
+  store.setShowContent(false)
+})
+
+onBeforeUnmount(()=>{
+  store.setShowContent(false)
+})
+
 
 </script>
 

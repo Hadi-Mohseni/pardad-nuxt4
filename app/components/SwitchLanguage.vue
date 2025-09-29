@@ -1,21 +1,22 @@
 <template>
   <div class="flex items-center">
+
     <button
-        v-for="(item, index) in languages"
+        v-for="(item, index) in locales"
         :key="index"
-        @click="setLocale(item.value)"
+        @click="changeLocale(item)"
         class="transition-colors duration-200 text-black-60 hover:opacity-60 flex"
     >
       <span
           :class="[
-          language === item.value ? 'font-bold text-black' : 'text-gray-500',
+          locale === item.code ? 'text-black' : 'text-gray-500',
           'lg:text-sm text-xs'
         ]"
       >
-        {{ item.short }}
+        {{ item.code.toUpperCase() }}
       </span>
       <span
-          v-if="index < languages.length - 1"
+          v-if="index < locales.length - 1"
           class="text-gray-500 mx-1 lg:text-sm text-xs"
       >
         /
@@ -27,31 +28,31 @@
 <script setup>
 import {ref, onMounted} from 'vue'
 import {useGlobalStore} from '~/stores/global'
-import {useI18n} from 'vue-i18n'
 import {setAppLocale} from '~/services/preference'
 
-const {locale} = useI18n()
+
+const {locale,locales, setLocale} = useI18n()
 const store = useGlobalStore()
 
-// reactive state
-const language = ref(locale.value)
 
-// language options (short labels for UI)
-const languages = ref([
-  {value: 'ar', label: 'Arabic', short: 'AR'},
-  {value: 'en', label: 'English', short: 'EN'},
-  {value: 'fa', label: 'Farsi', short: 'FA'}
-])
+const def = useCookie('lang')
+// reactive state
+const language = ref(def.value)
+
+
 
 // set locale
-const setLocale = (lang) => {
-  language.value = lang
-  locale.value = lang
-  store.setLocale(lang)
-  setAppLocale(lang)
+const changeLocale = async (lang) => {
+
+  language.value = lang.code
+  locale.value = lang.code
+
+  store.setLocale(lang.code)
+  setAppLocale(lang.code)
+  await setLocale(lang.code)
 }
 
 onMounted(() => {
-  language.value = locale.value
+  language.value = def.value
 })
 </script>

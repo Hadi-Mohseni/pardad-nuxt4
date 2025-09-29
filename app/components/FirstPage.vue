@@ -5,6 +5,7 @@
   <div ref="section"
        v-show="showSection"
        class="w-full h-full flex justify-center items-center">
+
     <div class="w-full grid grid-cols-12 relative h-max lg:pr-20">
       <div class="lg:col-span-7 col-span-12 relative lg:w-[75%] mx-auto h-full">
         <div class="lg:text-[20px] text-base font-light lg:leading-10 leading-7"
@@ -12,6 +13,7 @@
           <p class="text-justify -mt-20"
              :class="(locale === 'en') && 'dir-ltr'">
             {{ t('landing.first_page.paragraph')}}
+
           </p>
         </div>
         <div class="mt-16"
@@ -32,6 +34,7 @@
                  ref="titleElement">
               <p>{{
                   t('landing.first_page.footer.0.p')
+
                 }}</p>
               <p>{{
                   t('landing.first_page.footer.1.p')
@@ -50,7 +53,7 @@
 
 
 <script setup>
-import {useI18n} from "vue-i18n";
+
 
 const {t} = useI18n()
 const {locale} = useI18n()

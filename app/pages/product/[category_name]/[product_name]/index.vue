@@ -1,6 +1,4 @@
 <template>
-
-  <div>
     <div class="h-full" ref="el">
       <div v-if="isLoading" class="flex w-full h-24  my-auto items-center justify-center text-center">
         <div class="text-center flex items-center justify-center flex-col gap-y-2">
@@ -65,7 +63,6 @@
 
 
     </div>
-  </div>
 </template>
 
 <script setup>
@@ -432,9 +429,11 @@ onMounted(async () => {
   //
   // await loadInitial()
   // startInfiniteScroll()
-  if (process.client) {
-    /* setupInfiniteScroll()*/
-  }
+  setTimeout(() => {
+
+    endLoading()
+
+  }, 100)
 
 
 });

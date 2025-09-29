@@ -75,10 +75,10 @@
 
 
         <div :class="[subHoverItemIndex === 1 ? 'text-black' : 'text-white']" class="col-span-12 row-span-6 transition-all duration-500  bg-blend-darken border-[#C5C5C5] border-y text-[140px] relative tracking-[40px] flex items-center justify-center">
-          <nuxt-link v-if="subCats.length > 0 && subCats[0]" :to="`/product/${subCats[0].slug}`"  >
-            {{ subCats[0].title }}
+          <nuxt-link v-if="subCats.length >  0 " :to="`/product/${subCats[0].slug}`"  >
+            {{ subCats[0].slug }}
             <div class="absolute inset-0 flex items-center justify-center">
-              <img :src="subCategories[0].image" class="w-60" alt="">
+
             </div>
 
             <div class="absolute left-2 top-2 text-base tracking-normal w-4 ">
@@ -89,10 +89,10 @@
         </div>
         <div :class="[subHoverItemIndex === 2 ? 'text-black' : 'text-white']" class="col-span-5 row-span-6 transition-all duration-500  border-l border-[#C5C5C5] text-[140px] tracking-[15px] relative flex items-center justify-center">
 
-          <nuxt-link v-if="subCats.length === 0 && subCats[1]" :to="`/product/${subCats[1].slug}`"   >
-            {{ subCats[1].title }}
+          <nuxt-link v-if="subCats.length > 1 " :to="`/product/${subCats[1].slug}`"   >
+            {{ subCats[1].slug }}
             <div class="absolute inset-0 flex items-center justify-center">
-              <img :src="subCategories[1].image"  class="w-60" alt="">
+
             </div>
             <div class="absolute left-2 top-2 text-base tracking-normal w-4 ">
               <img src="~/assets/img/Vector.png" alt="">
@@ -101,10 +101,10 @@
         </div>
 
         <div   :class="[subHoverItemIndex === 3 ? 'text-black' : 'text-white']" class="col-span-7 transition-all duration-500 px-2 row-span-6   text-[130px] tracking-[40px] flex items-center justify-center relative">
-          <nuxt-link v-if="subCats.length === 2 && subCats[2]" :to="`/product/${subCats[2].slug}`"  >
-            {{ subCats[2].title }}
+          <nuxt-link v-if="subCats.length > 2 " :to="`/product/${subCats[2].slug}`"  >
+            {{ subCats[2].slug }}
             <div class="absolute inset-0 flex items-center justify-center">
-              <img :src="subCategories[2].image"  class="w-60" alt="">
+
             </div>
             <div class="absolute left-2 top-2 text-base tracking-normal w-4 ">
               <img src="~/assets/img/Vector.png" alt="">
@@ -170,7 +170,7 @@ const {data: response} = await useAsyncData(
 
 if(response.value){
   categories.value = response.value
-  subCategories.value = response.value.flatMap(cat => cat.subcategories)
+
 }
 
 
@@ -178,7 +178,11 @@ isDataLoad.value = true
 
 
 const subCats = computed(()=>{
-  return subCategories.value.filter(item=>item.parent_id === selectedItem.value.id)
+  const find = categories.value.findIndex(item=>item.id === selectedItem.value.id)
+  if(find > -1){
+    return categories.value[find].children
+  }
+  return []
 })
 
 

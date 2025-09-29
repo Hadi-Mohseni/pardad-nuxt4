@@ -291,7 +291,7 @@ const initData = (data) => {
 
     const h2Elements = root.querySelectorAll('h2')
     headings.value = h2Elements.map((el, index) => {
-      const id = `h2-${index}`
+      const id = `${el.text.trim().replaceAll(' ' , '-')}`
       el.setAttribute('id', id)
       return {text: el.text.trim(), id}
     })
