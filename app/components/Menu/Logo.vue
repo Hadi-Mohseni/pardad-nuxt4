@@ -194,11 +194,6 @@ onMounted( () => {
     maxHeight: toPx('36px', 'y')
   })
   animateLogo()
-
-/*  animateLogo()*/
-  console.log(getLoading.value , 'loading....')
-  console.log(route.name === "index" , route.name)
-  console.log(getMenuStatus.value === "OPEN" ,  'menu')
 })
 
 
