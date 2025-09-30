@@ -2,8 +2,8 @@
 
     <div class="fixed  left-[5%] top-[55vh] h-[35vh]" ref="loadingLineWrap">
       <div class="w-px relative " ref="loadingLine">
-        <div class="absolute left-0 right-0 h-full bottom-0 bg-[#fff1a]" ref="loadingBackground"></div>
-        <div class="absolute left-0 right-0 h-full  bottom-0 bg-[#323232]"  ref="loadingProgress"></div>
+        <div class="absolute left-0 right-0 h-full  bottom-0 bg-[#e1e1e1]" ref="loadingBackground"></div>
+        <div class="absolute left-0 right-0 h-full  bottom-0 bg-[#363d46]"  ref="loadingProgress"></div>
       </div>
     </div>
 
@@ -51,69 +51,80 @@ watch(() => getLoadingEnd.value, (v) => {
 
 
 const animateSubLine = (speed = defaultSpeedSubLine.value) => {
-  progress.value = 0;
-  isComplete = false;
-  if(loadingLineWrap.value && loadingLineWrap.value.style){
-    loadingLineWrap.value.style.display = "flex";
-    loadingLineWrap.value.style.visibility = "inherit";
+  progress.value = 0
+  isComplete = false
+
+  if (loadingLineWrap.value && loadingLineWrap.value.style) {
+    loadingLineWrap.value.style.display = "flex"
+    loadingLineWrap.value.style.visibility = "inherit"
   }
 
-
-
-
-
   timeline = new TimelineLite()
-      .set(loadingLine.value, {scaleY: 1})
-      .set(loadingProgress.value, {scaleY: 0})
-      .fromTo(
-          loadingBackground.value, speed,
-          {scaleY: 0},
-          {
-            scaleY: 1,
-            ease: Power3.easeOut,
-            onComplete: animateOnLine(defaultStepOnline.value, defaultSpeedOnline.value)
-          }
-      );
 
+  // همیشه از پایین شروع کنن
+  timeline.set([loadingBackground.value, loadingProgress.value], {
+    transformOrigin: "bottom center",
+    scaleY: 0
+  })
 
+  // ۱) اول بک‌گراند از پایین تا 100% پر بشه
+  timeline.to(loadingBackground.value, speed, {
+    scaleY: 1,
+    ease: Power3.easeOut
+  })
+
+  // ۲) بعد با کمی فاصله پروگرس شروع کنه درصدی پر بشه
+  timeline.to(loadingProgress.value, defaultSpeedOnline.value, {
+    scaleY: defaultStepOnline.value, // مثلاً 0.7 = 70٪
+    ease: Power2.easeInOut
+  }, "-=0.3") // کمی overlap برای حس روان
 }
 
 
 const animateFinish = (speed) => {
+  const tl = new TimelineLite()
 
-  const timeline = new TimelineLite()
-      .to(loadingLine.value, speed, {scaleY: 0, ease: Power3.easeInOut}, speed);
+  // مبدا همه scale ها از پایین باشه
+  tl.set([loadingProgress.value, loadingBackground.value], { transformOrigin: "top center" })
 
-  timeline.to(loadingLine.value, speed, {
+  // مرحله ۱: جمع شدن از پایین
+  tl.to([loadingProgress.value, loadingBackground.value], speed, {
+    scaleY: 0,
+    ease: Power3.easeInOut
+  }, 0)
+
+  // مرحله ۲: بعد کل خط (قاب) بره بالا
+  tl.to(loadingLine.value, speed, {
     yPercent: -100,
     ease: Power3.easeInOut,
     onComplete: onAnimateFinishComplete
-  }, speed);
+  }, `-=${speed / 2}`)
 }
+
 
 
 const animateOnLine = (step = 0.65, speed = 2) => {
-  if (!progress.value) {
-    progressTween = TweenLite.to(loadingProgress.value, speed, {
-      scaleY: step,
-      ease: Power2.easeInOut,
-      /*   onComplete: animateOnLineFull*/
-    });
-  }
+
+  TweenLite.to(loadingProgress.value, speed, {
+    scaleY: step,
+    ease: Power2.easeInOut
+  })
 }
 
 const animateOnLineFull = (duration = 1, speed = 0.5) => {
-  if (!progress.value) {
-    progressTween = TweenLite.to(loadingProgress.value, speed, {
-      scaleY: duration,
-      ease: Power2.easeInOut,
-      onComplete: animateFinish(defaultSpeedSubLine.value)
-    });
-  }
+
+  TweenLite.to(loadingProgress.value, speed, {
+    scaleY: 1,
+    ease: Power2.easeInOut,
+    onComplete: () => animateFinish(defaultSpeedSubLine.value)
+  })
 }
 
 
 const onAnimateFinishComplete = () => {
+
+
+
 
   if(loadingLineWrap.value && loadingLineWrap.value.style){
     loadingLineWrap.value.style.display = "flex";
