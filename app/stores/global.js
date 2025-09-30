@@ -25,6 +25,7 @@ export const useGlobalStore = defineStore('global', {
         }
     },
     actions: {
+
         setLocale(value) {
             this.locale = value
         },
