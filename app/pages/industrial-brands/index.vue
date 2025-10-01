@@ -294,7 +294,9 @@ watch(
     (newBrands) => {
       useHead({
         titleTemplate: '%s - برندهای صنعتی',
-        meta: [{name: 'robots', content: 'noindex, nofollow'}],
+        meta: [
+
+        ],
         script: [
           {
             id: 'org-schema',
