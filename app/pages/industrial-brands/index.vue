@@ -196,6 +196,9 @@ const anim = (items) => {
 
 // تابع برای هایلایت برند بر اساس هش
 const highlightBrandFromHash = () => {
+  setTimeout(()=>{
+    endLoading()
+  },50)
   const hash = window.location.hash.replace('#', '');
   if (hash) {
     // Remove old highlights
@@ -410,6 +413,7 @@ const downloadFile = (url) => {
 onMounted(async () => {
   await getData();
   setupInfiniteScroll();
+  console.log('heeeloooooooooooooo')
   setTimeout(() => endLoading(), 100);
 
 })

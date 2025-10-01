@@ -15,6 +15,7 @@
       </div>
       <div class="lg:col-span-3 col-span-9 pt-[300px] order-1 lg:order-2 relative">
         <slot name="title"></slot>
+        {{getLoading}}
 
         <CommonHorizontalLine v-if="store.getContentLoad"
                               class="lg:hidden flex"
@@ -164,7 +165,10 @@ const handleScroll = (e) => {
         pageLine.value.update(0)
 
       } else {
-        pageLine.value.update(contentRefs.title?.value?.getBoundingClientRect().top)
+        if( pageLine.value){
+          pageLine.value.update(contentRefs.title?.value?.getBoundingClientRect().top)
+        }
+
       }
     }, 100);
 
