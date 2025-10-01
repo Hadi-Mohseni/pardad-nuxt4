@@ -71,5 +71,11 @@
   },
   "blog": "وبلاگ پرداد",
   "about_us": { "title": "درباره ما" },
-  "commercial": { "title": "بازرگانی بین الملل" }
+  "commercial": { "title": "بازرگانی بین الملل" },
+  "our_team": {
+    "title": "اعضای تیم ما"
+  },
+  "performance_guarantee": {
+    "title": "حسن انجام کار"
+  }
 }

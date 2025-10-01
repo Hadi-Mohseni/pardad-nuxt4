@@ -71,5 +71,11 @@
     },
     "blog": "مدونة بارداد",
     "about_us": { "title": "عنوان عنا" },
-    "commercial": { "title": "التجارة الدولية" }
+    "commercial": { "title": "التجارة الدولية" },
+    "our_team": {
+        "title": "أعضاء فريقنا"
+    },
+    "performance_guarantee": {
+        "title": "ضمان الأداء"
+    }
 }

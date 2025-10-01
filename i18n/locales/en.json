@@ -76,5 +76,11 @@
     },
     "blog": "Pardad Blog",
     "about_us": { "title": "About Us" },
-    "commercial": { "title": "International trade" }
+    "commercial": { "title": "International trade" },
+    "our_team": {
+        "title": "Our Team Members"
+    },
+    "performance_guarantee": {
+        "title": "Performance Guarantee"
+    }
 }
