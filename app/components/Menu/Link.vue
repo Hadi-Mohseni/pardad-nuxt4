@@ -13,6 +13,12 @@
       <span class="relative z-10">{{t('blog')}}</span>
       <span class="absolute left-0 bottom-0 h-[1px] w-full bg-current scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
     </nuxt-link>
+    <nuxt-link
+               :to="{name:'product'}"
+               class=" cubic-animation relative group origin-top-left text-[14px] 2xl:text-[16px]">
+      <span class="relative z-10">{{t('menuItems.product')}}</span>
+      <span class="absolute left-0 bottom-0 h-[1px] w-full bg-current scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
+    </nuxt-link>
     <SwitchLanguage/>
   </div>
 

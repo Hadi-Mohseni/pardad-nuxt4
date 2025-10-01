@@ -134,10 +134,9 @@ const menuItems = [
   {name: 'category', label: 'menuItems.category', to: {name: 'category'}, ref: 'item1'},
   {name: 'technical-knowledge', label: 'menuItems.technicalKnowledge', to: {name: 'technical-knowledge'}, ref: 'item2'},
   {name: 'industrial-brands', label: 'menuItems.industrialBrands', to: {name: 'industrial-brands'}, ref: 'item3'},
-  {name: 'pardad-media', label: 'menuItems.pardadMedia', to: 'https://media.pardad-group.com', external: true, ref: 'item4'},
+  {name: 'product', label: 'menuItems.product', to: {name: 'product'}, ref: 'item4'},
   {name: 'about', label: 'menuItems.about', to: {name: 'about'}, ref: 'item5'},
   {name: 'contact', label: 'menuItems.contact', to: {name: 'contact'}, ref: 'item6'},
-  {name: 'product', label: 'menuItems.product', to: {name: 'product'}, ref: 'item7'}
 ];
 const refsArray = ref([]);
 
