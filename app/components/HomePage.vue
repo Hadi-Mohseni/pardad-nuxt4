@@ -11,8 +11,8 @@
         <div class="lg:mb-12 mb-0 flex flex-col gap-x-1 items-start w-full"
              :class="(locale === 'en') && 'dir-ltr'">
           <div class="mb-4 lg:mb-8 flex flex-col lg:flex-row lg:gap-x-1 items-end lg:justify-start">
-            <h1 class="lg:text-[46px] 2xl:text-[58px]  font-bold leading-tight"
-                :class="(locale !== 'en') ? 'mb-1 md:mb-9 text-[30px]' : 'text-[22px]'"
+            <h1 class="lg:text-[46px] 2xl:text-[58px]   font-bold leading-tight"
+                :class="(locale !== 'en') ? `mb-1 md:mb-9 text-[30px] ` : `text-[22px] `"
                 ref="titleElement">
               {{ t('landing.home_page.main_title') }}
             </h1>
@@ -295,23 +295,63 @@ const createScrollTextAnimation = () => {
 }
 
 
-const createPageLineAnimation = () => {
+const seperatedLineAnimationFunc = (val)=>{
+
+
 
   seperatedTimeLine.value = new TimelineLite({})
-      .addLabel("separator", 0.9)
-      .from(seperatedLine.value, 0.9, {
-        scaleX: 0,
-        xPercent: 100,
-        ease: "easeOut"
-      }, "separator")
-      .from(seperatedLineChild.value, 0.9, {
-        scaleX: 1,
-        ease: "easeOut"
-      }, "separator+=0.5")
-      .to(seperatedLineChild.value, 0.9, {
-        scaleX: 0.1,
-        ease: "easeOut"
-      }, "separator+=0.5")
+
+
+  // همیشه از پایین شروع کنن
+  seperatedTimeLine.value.set([seperatedLine.value, seperatedLineChild.value], {
+    transformOrigin: locale.value === 'en' ? 'left center'  :  "right center",
+    scaleX: 0
+  })
+
+  // ۱) اول بک‌گراند از پایین تا 100% پر بشه
+  seperatedTimeLine.value.to(seperatedLine.value, 0.8, {
+    scaleX: 1,
+    ease: Power3.easeOut,
+    delay:0.4
+  })
+  seperatedTimeLine.value.to(seperatedLineChild.value, 0.7, {
+    scaleX: 1, // مثلاً 0.7 = 70٪
+    ease: Power2.easeInOut
+  }, )
+  seperatedTimeLine.value.to(seperatedLineChild.value, 0.7, {
+    transformOrigin: locale.value === 'en' ? 'right center'  :  "left center",
+    scaleX: 0.1, // مثلاً 0.7 = 70٪
+    ease: Power2.easeInOut
+  },)
+}
+const seperatedLineAnimationFuncReverse = ()=>{
+  seperatedTimeLine.value = new TimelineLite({})
+
+
+  seperatedTimeLine.value.to(seperatedLineChild.value, 0.3, {
+    transformOrigin: locale.value === 'en' ? 'right center'  :  "left center",
+    scaleX: 1,
+    ease: Power3.easeOut
+  })
+
+  seperatedTimeLine.value.to(seperatedLineChild.value, 0.2, {
+    transformOrigin: locale.value === 'en' ? 'left center'  :  "right center",
+    scaleX: 0,
+    ease: Power3.easeOut
+  })
+  seperatedTimeLine.value.to(seperatedLine.value, 0.1, {
+    transformOrigin: locale.value === 'en' ? 'left center'  :  "right center",
+    scaleX: 0,
+    ease: Power3.easeOut
+  })
+
+
+}
+
+const createPageLineAnimation = () => {
+
+
+  seperatedLineAnimationFunc()
 
   lineTimeline.value = new TimelineLite({paused: true})
       .from(slideLine.value, 0.9, {
@@ -348,6 +388,7 @@ const closeAnimation = () => {
   handleAnimation("reverse", contentTimeLine.value);
   scrollCTA_timeline.value.timeScale(2);
   handleAnimation("reverse", scrollCTA_timeline.value);
+  seperatedLineAnimationFuncReverse()
   lineTimeline.value.timeScale(2);
   handleAnimation("reverse", lineTimeline.value);
 

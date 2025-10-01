@@ -192,6 +192,8 @@
 </template>
 
 <script setup>
+import {useI18n} from "vue-i18n";
+
 definePageMeta({
   dataPage: 'contact'
 })
@@ -199,10 +201,8 @@ definePageMeta({
 
 import {useGlobalStore} from "~/stores/global.js";
 import {useContentAnimation} from "~/composables/useContentAnimation.js";
-import {useI18n} from 'vue-i18n'
+const {t , locale} = useI18n()
 
-const {t} = useI18n()
-const {locale} = useI18n()
 const {getLoading, getIsLoadingPlayed} = storeToRefs(useGlobalStore())
 
 const store = useGlobalStore()
@@ -248,7 +248,7 @@ const actionElements = ref(null);
 const titleElement = ref(null)
 const subtitleElement = ref(null)
 
-in
+
 // Provide refs to layout
 provide('contentRefs', {
   body: bodyElement,

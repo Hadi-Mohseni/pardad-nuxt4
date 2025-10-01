@@ -209,7 +209,7 @@ onMounted( () => {
   // مقدار اولیه فقط یکبار ست بشه (بدون tween)
   if(isMobile()){
     TweenLite.set(el, {
-      position: 'fixed',
+      position: 'absolute',
       zIndex: 60,
       transformOrigin: 'center',
       display: 'block',
@@ -220,7 +220,7 @@ onMounted( () => {
     })
   }else{
     TweenLite.set(el, {
-      position: 'fixed',
+      position: 'absolute',
       zIndex: 60,
       transformOrigin: 'center',
       display: 'block',
@@ -245,7 +245,7 @@ const isMobile = () => {
 
 <style scoped>
 #main-logo {
-  position: fixed;
+  position: absolute;
   z-index: 60;
   transform-origin: center;
   width: 100px;

@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed top-[4vw] left-0 right-[4vw] z-10">
+  <div class="absolute top-[4vw] left-0 right-[4vw] z-10">
     <div class="flex items-center justify-between bg-transparent w-full   gap-x-16 " >
 
 

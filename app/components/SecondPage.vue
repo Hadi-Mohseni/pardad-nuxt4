@@ -11,7 +11,7 @@
              ref="bodyElement">
 
           <!-- لیست آیتم‌ها -->
-          <div class="flex flex-col justify-center h-full gap-y-5">
+          <div class="flex flex-col justify-center h-full gap-y-5" >
             <div class="flex items-start lg:gap-5 gap-4">
               <img src="~/assets/images/home/third-page/1.png"
                    alt="power line"
@@ -68,7 +68,7 @@
                    :class="(locale === 'en') ? 'origin-top-left right-0' : 'origin-top-left left-0'"></div>
             </div>
             <h2 class="lg:text-[15px] 2xl:text-[17px] text-[16px] font-bold text-body-100"
-                ref="titleElement">
+                ref="subtitleElement">
               {{ t('landing.second_page.footer') }}
             </h2>
           </div>
@@ -83,7 +83,7 @@
 </template>
 
 <script setup>
-import {useI18n} from "vue-i18n";
+
 
 const {t} = useI18n()
 const {locale} = useI18n()
@@ -171,7 +171,7 @@ const createAnimInContent = () => {
   contentTimeLine.value = new TimelineLite();
   const delay = 0.07;
 
-  const children = Array.from(section.value.querySelectorAll('p, h5') || []); //section
+  const children = Array.from(section.value.querySelectorAll('p, h5,img') || []); //section
 
 
   children.forEach((child) => {
@@ -205,6 +205,61 @@ const createAnimInContent = () => {
 
 };
 
+
+
+const seperatedLineAnimationFunc = (val)=>{
+
+
+
+  seperatedTimeLine.value = new TimelineLite({})
+
+
+  // همیشه از پایین شروع کنن
+  seperatedTimeLine.value.set([seperatedLine.value, seperatedLineChild.value], {
+    transformOrigin: locale.value === 'en' ? 'left center'  :  "right center",
+    scaleX: 0
+  })
+
+  // ۱) اول بک‌گراند از پایین تا 100% پر بشه
+  seperatedTimeLine.value.to(seperatedLine.value, 0.7, {
+    scaleX: 1,
+    ease: Power3.easeOut,
+    delay:0.5
+  })
+  seperatedTimeLine.value.to(seperatedLineChild.value, 0.6, {
+    scaleX: 1, // مثلاً 0.7 = 70٪
+    ease: Power2.easeInOut
+  }, )
+  seperatedTimeLine.value.to(seperatedLineChild.value, 0.5, {
+    transformOrigin: locale.value === 'en' ? 'right center'  :  "left center",
+    scaleX: 0.1, // مثلاً 0.7 = 70٪
+    ease: Power2.easeInOut
+  },)
+}
+const seperatedLineAnimationFuncReverse = ()=>{
+  seperatedTimeLine.value = new TimelineLite({})
+
+
+  seperatedTimeLine.value.to(seperatedLineChild.value, 0.3, {
+    transformOrigin: locale.value === 'en' ? 'right center'  :  "left center",
+    scaleX: 1,
+    ease: Power3.easeOut
+  })
+
+  seperatedTimeLine.value.to(seperatedLineChild.value, 0.2, {
+    transformOrigin: locale.value === 'en' ? 'left center'  :  "right center",
+    scaleX: 0,
+    ease: Power3.easeOut
+  })
+  seperatedTimeLine.value.to(seperatedLine.value, 0.1, {
+    transformOrigin: locale.value === 'en' ? 'left center'  :  "right center",
+    scaleX: 0,
+    ease: Power3.easeOut
+  })
+
+
+}
+
 const createScrollTextAnimation = () => {
   /*scrollCTA_timeline.value = new TimelineLite()
       .from(scroll_CTA_lines.value, 0.9, {
@@ -229,23 +284,9 @@ const createScrollTextAnimation = () => {
 
 
 const createPageLineAnimation = () => {
+  seperatedLineAnimationFunc()
 
 
-  seperatedTimeLine.value = new TimelineLite({})
-      .addLabel("separator", 0.9)
-      .from(seperatedLine.value, 0.9, {
-        scaleX: 0,
-        xPercent: 100,
-        ease: "easeOut"
-      }, "separator")
-      .from(seperatedLineChild.value, 0.9, {
-        scaleX: 1,
-        ease: "easeOut"
-      }, "separator+=0.5")
-      .to(seperatedLineChild.value, 0.9, {
-        scaleX: 0.1,
-        ease: "easeOut"
-      }, "separator+=0.5")
 
 }
 
@@ -262,8 +303,9 @@ const startAnimation = () => {
 const closeAnimation = () => {
   contentTimeLine.value.timeScale(2);
   handleAnimation("reverse", contentTimeLine.value);
-  seperatedTimeLine.value.timeScale(2);
-  handleAnimation("reverse", seperatedTimeLine.value);
+  seperatedLineAnimationFuncReverse()
+/*  seperatedTimeLine.value.timeScale(2);
+  handleAnimation("reverse", seperatedTimeLine.value);*/
 
 
 }

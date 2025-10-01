@@ -128,11 +128,11 @@ const {getLoading, getIsLoadingPlayed} = storeToRefs(useGlobalStore())
 
 
 
-watch(getLoading, (value) => {
+/*watch(getLoading, (value) => {
   if (!value) {
     initPage()
   }
-})
+})*/
 
 // refs
 const bodyElement = ref(null)
@@ -215,11 +215,11 @@ const highlightBrandFromHash = () => {
     }
   }
 };
-
+const config = useRuntimeConfig()
 
 
 async function getData() {
-  const config = useRuntimeConfig()
+
   isLoading.value = true;
   try {
     const data = await $fetch(`${config.public.apiUrl}/brands`, {
@@ -399,12 +399,12 @@ const downloadFile = (url) => {
   }
 };
 
-const initPage = async ()=>{
+/*const initPage = async ()=>{
   if(import.meta.client){
     await nextTick();
     highlightBrandFromHash();
   }
-}
+}*/
 
 
 onMounted(async () => {

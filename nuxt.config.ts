@@ -9,9 +9,9 @@ export default defineNuxtConfig({
         lang: 'en',
       },
       title: 'گروه پرداد',
-      /* meta: [
+       meta: [
            {name: 'google-site-verification', content: 'pq8Ud3rzIIL_Qnwi_M89CNGzVwchAC72U8zCiiy7vng'}
-       ],*/
+       ],
 
       script: [
         {src: '/TweenMax.min.js', defer: true},
@@ -30,7 +30,7 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2025-07-15',
   devtools: { enabled: false },
-  modules:['@nuxtjs/i18n', '@pinia/nuxt', '@vueuse/nuxt'],
+  modules:['@nuxtjs/i18n', '@pinia/nuxt', '@vueuse/nuxt', '@nuxtjs/color-mode'],
   i18n: {
 
     locales: [
@@ -44,8 +44,19 @@ export default defineNuxtConfig({
   },
   css: [
     '~/assets/css/main-3.css',
-    /*'animate.css/animate.min.css',*/
+    'animate.css/animate.min.css',
   ],
+  colorMode: {
+    preference: 'dark', // default value of $colorMode.preference
+    fallback: 'dark', // fallback value if not system preference found
+    hid: 'nuxt-color-mode-script',
+    globalName: '__NUXT_COLOR_MODE__',
+    componentName: 'ColorScheme',
+    classPrefix: '',
+    classSuffix: '',
+    storage: 'localStorage', // or 'sessionStorage' or 'cookie'
+    storageKey: 'nuxt-color-mode'
+  },
   vite:{
     plugins: [
       tailwindcss(),

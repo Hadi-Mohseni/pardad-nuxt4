@@ -65,6 +65,8 @@
 </template>
 
 <script setup>
+import {useI18n} from "vue-i18n";
+
 definePageMeta({
   dataPage: "our-team",
 });
@@ -74,9 +76,9 @@ useHead({
 });
 
 import { useGlobalStore } from "~/stores/global.js";
-import { useI18n } from "vue-i18n";
 
-const { t } = useI18n();
+
+const {t , locale} = useI18n()
 const store = useGlobalStore();
 const { endLoading } = store;
 

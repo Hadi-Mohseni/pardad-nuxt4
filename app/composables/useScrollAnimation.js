@@ -156,9 +156,14 @@ export const useScrollAnimation = () => {
             }
 
         }
-        /*updatePageLineRunner()*/
+     /*   updatePageLineRunner()*/
 
     };
+
+
+    onMounted(()=>{
+        window.addEventListener('scroll' , checkElementPosition)
+    })
 
 
 

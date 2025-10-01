@@ -38,6 +38,8 @@
 </template>
 
 <script setup>
+import {useI18n} from "vue-i18n";
+
 definePageMeta({
   dataPage: 'commercial'
 })
@@ -50,9 +52,9 @@ useHead({
 
 import {useGlobalStore} from "~/stores/global.js";
 import {useContentAnimation} from "~/composables/useContentAnimation.js";
-import {useI18n} from 'vue-i18n'
 
-const {t} = useI18n()
+
+const {t , locale} = useI18n()
 
 const {getLoading, getIsLoadingPlayed} = storeToRefs(useGlobalStore())
 

@@ -44,8 +44,8 @@
 ========================= */
 @font-face {
     font-family: 'Peyda';
-    src: url(/assets/fonts/peyda/variable/PeydaWebVF.woff2) format('woff2'),
-    url(/assets/fonts/peyda/variable/PeydaWebVF.woff) format('woff');
+    src: url("/assets/fonts/peyda/variable/PeydaWebVF.woff2") format('woff2'),
+    url("/assets/fonts/peyda/variable/PeydaWebVF.woff") format('woff');
     font-weight: 100 1000; /* full variable weight range */
     font-style: normal;
     font-display: swap;
@@ -56,21 +56,17 @@
    Archia (Latin / English)
 ========================= */
 @font-face {
-    font-family: 'Peyda';
-    src: url(/assets/fonts/subset-Archia-Regular.woff) format('woff');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-    unicode-range: U+0020-007F, U+00A0-00FF; /* Latin */
+    font-family: "Montserrat";
+    src: url("/assets/fonts/Montserrat-VariableFont_wght.ttf") format("truetype");
+    unicode-range: U+0020-007F; /* محدوده حروف لاتین */
 }
 
 @font-face {
-    font-family: 'Peyda';
+    font-family: 'Archia';
     src: url(/assets/fonts/subset-Archia-SemiBold.woff) format('woff');
     font-weight: 600;
     font-style: normal;
     font-display: swap;
-    unicode-range: U+0020-007F, U+00A0-00FF;
 }
 
 /* =========================
@@ -96,14 +92,13 @@
    Defaults
 ========================= */
 body {
-    font-family: 'Peyda', sans-serif !important;
+    font-family: 'Peyda', 'Montserrat' !important;
     font-weight: 400;
     direction: rtl;
 
     background-color: #fff;
     color: black;
 
-    font-weight: 400;
     font-variation-settings: "dots" 3;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

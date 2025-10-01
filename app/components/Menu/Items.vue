@@ -118,6 +118,9 @@ const item4 = ref(null)
 const item5 = ref(null)
 const item6 = ref(null)
 const item7 = ref(null)
+const item8 = ref(null)
+const item9 = ref(null)
+const item10 = ref(null)
 const itemLineIsVisible = ref(false);
 const itemLine2Rect = ref(null)
 const itemsElement = ref(null) //element.querySelector(".nav__items");
@@ -585,12 +588,12 @@ const itemClick = (item) => {
 
 
 onMounted(() => {
-  [item1, item2, item3, item4, item5, item6 , item7].forEach((itemRef, i) => {
+  [item1, item2, item3, item4, item5, item6 , item7 , item8].forEach((itemRef, i) => {
     itemRef.value = refsArray.value[i];
   });
 
   itemLines.value = [item_line1.value, item_line2.value]
-  itemElements.value = [item1.value, item2.value, item3.value, item4.value, item5.value, item6.value , item7.value]
+  itemElements.value = [item1.value, item2.value, item3.value, item4.value, item5.value, item6.value , item7.value , item8.value ]
   itemLine2Rect.value = item_line2.value.getBoundingClientRect();
   selectedItem.value = document.querySelector('.selected-nav')
 

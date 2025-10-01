@@ -41,10 +41,9 @@
 </template>
 
 <script setup>
-import {useI18n} from "vue-i18n";
 
-const {t} = useI18n()
-const {locale} = useI18n()
+
+const {t , locale} = useI18n()
 const contentTimeLine = ref(null)
 const backgroundTimeLine = ref(null)
 const lineTimeline = ref(null)
@@ -143,24 +142,64 @@ const createAnimInContent = () => {
 
 };
 
-const createPageLineAnimation = () => {
+
+const seperatedLineAnimationFunc = (val)=>{
+
 
 
   seperatedTimeLine.value = new TimelineLite({})
-      .addLabel("separator", 0.9)
-      .from(seperatedLine.value, 0.9, {
-        scaleX: 0,
-        xPercent: 100,
-        ease: "easeOut",
-      }, "separator")
-      .from(seperatedLineChild.value, 0.9, {
-        scaleX: 1,
-        ease: "easeOut"
-      }, "separator+=0.5")
-      .to(seperatedLineChild.value, 0.9, {
-        scaleX: 0.1,
-        ease: "easeOut"
-      }, "separator+=0.5")
+
+
+  // همیشه از پایین شروع کنن
+  seperatedTimeLine.value.set([seperatedLine.value, seperatedLineChild.value], {
+    transformOrigin: locale.value === 'en' ? 'left center'  :  "right center",
+    scaleX: 0
+  })
+
+  // ۱) اول بک‌گراند از پایین تا 100% پر بشه
+  seperatedTimeLine.value.to(seperatedLine.value, 0.7, {
+    scaleX: 1,
+    ease: Power3.easeOut,
+    delay:0.5
+  })
+  seperatedTimeLine.value.to(seperatedLineChild.value, 0.6, {
+    scaleX: 1, // مثلاً 0.7 = 70٪
+    ease: Power2.easeInOut
+  }, )
+  seperatedTimeLine.value.to(seperatedLineChild.value, 0.5, {
+    transformOrigin: locale.value === 'en' ? 'right center'  :  "left center",
+    scaleX: 0.1, // مثلاً 0.7 = 70٪
+    ease: Power2.easeInOut
+  },)
+}
+const seperatedLineAnimationFuncReverse = ()=>{
+  seperatedTimeLine.value = new TimelineLite({})
+
+
+  seperatedTimeLine.value.to(seperatedLineChild.value, 0.3, {
+    transformOrigin: locale.value === 'en' ? 'right center'  :  "left center",
+    scaleX: 1,
+    ease: Power3.easeOut
+  })
+
+  seperatedTimeLine.value.to(seperatedLineChild.value, 0.2, {
+    transformOrigin: locale.value === 'en' ? 'left center'  :  "right center",
+    scaleX: 0,
+    ease: Power3.easeOut
+  })
+  seperatedTimeLine.value.to(seperatedLine.value, 0.1, {
+    transformOrigin: locale.value === 'en' ? 'left center'  :  "right center",
+    scaleX: 0,
+    ease: Power3.easeOut
+  })
+
+
+}
+
+const createPageLineAnimation = () => {
+
+
+seperatedLineAnimationFunc()
 
 }
 
@@ -178,8 +217,7 @@ const startAnimation = () => {
 const closeAnimation = () => {
   contentTimeLine.value.timeScale(2);
   handleAnimation("reverse", contentTimeLine.value);
-  seperatedTimeLine.value.timeScale(2);
-  handleAnimation("reverse", seperatedTimeLine.value);
+  seperatedLineAnimationFuncReverse()
 
 
 }

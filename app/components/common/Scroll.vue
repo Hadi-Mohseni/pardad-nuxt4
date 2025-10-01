@@ -54,7 +54,7 @@ onBeforeUnmount(() => {
        ref="scroll">
 
     <div
-        class="absolute top-[-40px] opacity-20 right-0 text-[9px] font-['Archia'] font-bold uppercase tracking-[0.4em] origin-[left_bottom] rotate-[-90deg] translate-x-full -translate-y-full"
+        class="absolute top-[-40px] opacity-20 -right-[5px] text-[9px] font-['Archia'] font-bold uppercase tracking-[0.4em] origin-[left_bottom] rotate-[-90deg] translate-x-full -translate-y-full"
         aria-hidden="true"
         ref="scroll_background">
       Scroll
@@ -62,7 +62,7 @@ onBeforeUnmount(() => {
 
 
     <div
-        class="absolute top-[-40px] right-0 text-[9px] font-['Archia'] font-bold uppercase tracking-[0.4em] origin-[left_bottom] rotate-[-90deg] translate-x-full -translate-y-full">
+        class="absolute top-[-40px] -right-[5px] text-[9px] font-['Archia'] font-bold uppercase tracking-[0.4em] origin-[left_bottom] rotate-[-90deg] translate-x-full -translate-y-full">
       <div class="overflow-hidden"
            ref="scroll_label_mask">
         <div ref="scroll_label_mask_inner">

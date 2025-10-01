@@ -49,8 +49,8 @@ onMounted(() => {
   };
 
   document.addEventListener('dblclick', preventDoubleClickZoom, { passive: false });
-  document.documentElement.style.touchAction = 'manipulation';
-  document.documentElement.style.userSelect = 'none';
+/*  document.documentElement.style.touchAction = 'manipulation';*/
+ /* document.documentElement.style.userSelect = 'none';*/
   updateFavicon();
 
   // گوش دادن به تغییرات تم مرورگر
@@ -59,9 +59,9 @@ onMounted(() => {
 </script>
 <style>
 html, body {
-  touch-action: manipulation;
+ /* touch-action: manipulation;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  user-select: none;
+  user-select: none;*/
 }
 </style>
