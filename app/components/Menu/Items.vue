@@ -137,6 +137,8 @@ const menuItems = [
   {name: 'product', label: 'menuItems.product', to: {name: 'product'}, ref: 'item4'},
   {name: 'about', label: 'menuItems.about', to: {name: 'about'}, ref: 'item5'},
   {name: 'contact', label: 'menuItems.contact', to: {name: 'contact'}, ref: 'item6'},
+  {name: 'performance-guarantee', label: 'menuItems.performanceGuarantee', to: {name: 'performance-guarantee'}, ref: 'item7'},
+  {name: 'our-team', label: 'menuItems.ourTeam', to: {name: 'our-team'}, ref: 'item8'},
 ];
 const refsArray = ref([]);
 

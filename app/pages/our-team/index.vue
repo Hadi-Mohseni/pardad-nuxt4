@@ -66,7 +66,7 @@
 
 <script setup>
 definePageMeta({
-  dataPage: "commercial",
+  dataPage: "our-team",
 });
 
 useHead({
