@@ -124,6 +124,15 @@ import img_3 from '@/assets/img/logo/3.png'*/
 const {animateNewItems} = useContentAnimation()
 const store = useGlobalStore()
 const {endLoading} = store
+const {getLoading, getIsLoadingPlayed} = storeToRefs(useGlobalStore())
+
+
+
+watch(getLoading, (value) => {
+  if (!value) {
+    initPage()
+  }
+})
 
 // refs
 const bodyElement = ref(null)
@@ -243,6 +252,8 @@ async function getData() {
       const newItems = Array.from(allItems).slice(currentLength - ln);
       anim(newItems);
     }
+
+
 
   } catch (error) {
     console.error("Error loading more items:", error);
@@ -388,11 +399,19 @@ const downloadFile = (url) => {
   }
 };
 
+const initPage = async ()=>{
+  if(import.meta.client){
+    await nextTick();
+    highlightBrandFromHash();
+  }
+}
+
 
 onMounted(async () => {
   await getData();
   setupInfiniteScroll();
   setTimeout(() => endLoading(), 100);
+
 })
 </script>
 
