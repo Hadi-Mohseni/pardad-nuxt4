@@ -189,23 +189,24 @@ const anim = (items) => {
 const highlightBrandFromHash = () => {
   const hash = window.location.hash.replace('#', '');
   if (hash) {
-    // حذف هایلایت قبلی
+    // Remove old highlights
     document.querySelectorAll('.highlight-brand').forEach(el => {
-      el.classList.remove('highlight-brand');
+      el.classList.remove('highlight-brand', 'force-hover');
     });
 
     const el = document.getElementById(hash);
     if (el) {
-      el.classList.add('highlight-brand');
-      el.scrollIntoView({behavior: 'smooth', block: 'center'});
+      el.classList.add('highlight-brand', 'force-hover');
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-      // حذف هایلایت پس از 5 ثانیه
+      // Remove after 5s
       setTimeout(() => {
-        el.classList.remove('highlight-brand');
+        el.classList.remove('highlight-brand', 'force-hover');
       }, 5000);
     }
   }
-}
+};
+
 
 
 async function getData() {
@@ -394,6 +395,18 @@ onMounted(async () => {
 </script>
 
 <style>
+/* Apply hover state when .force-hover is present */
+.brand-item.force-hover .absolute.left-2.top-2,
+.brand-item.force-hover .absolute.left-0.bottom-0 .relative,
+.brand-item.force-hover .absolute.inset-0 {
+  opacity: 1 !important;
+}
+
+.brand-item.force-hover .absolute.left-0.bottom-0 .relative:after,
+.brand-item.force-hover .absolute.left-0.bottom-0 span {
+  transform: scaleX(1) !important;
+}
+
 .highlight-brand {
   border: 3px solid #007bff !important;
   border-radius: 8px;
