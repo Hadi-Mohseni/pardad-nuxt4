@@ -268,7 +268,7 @@ watch(getLoading, (value) => {
   if (!value) {
   setTimeout(()=>{
     initPage()
-  },200)
+  },50)
 
   }
 })

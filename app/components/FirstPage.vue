@@ -11,7 +11,7 @@
         <div class="lg:text-[20px] text-base font-light lg:leading-10 leading-7"
              ref="titleElement">
           <p class="text-justify -mt-20"
-             :class="(locale === 'en') && 'dir-ltr'">
+             :class="(locale === 'en') && 'dir-ltr'" ref="bodyElement">
             {{ t('landing.first_page.paragraph')}}
 
           </p>
@@ -31,7 +31,7 @@
             </div>
 
             <div class="lg:text-[13px] 2xl:text-[16px] text-[14px] font-bold leading-7"
-                 ref="subtitleElement">
+                 ref="bodyElement">
               <p>{{
                   t('landing.first_page.footer.0.p')
 

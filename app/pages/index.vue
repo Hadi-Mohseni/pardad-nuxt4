@@ -1,6 +1,6 @@
 <template>
 
-
+<div v-if="getShowContent">
   <section ref="section" v-show="showSection" class="" data-page="home" style="">
 
     <!--      <canvas class="home__background"></canvas>-->
@@ -100,15 +100,18 @@
 
 
   </section>
+</div>
+
 
 
 </template>
 
 <script setup>
 import {useGlobalStore} from "~/stores/global.js";
+const store = useGlobalStore()
 
-const {getLoading, getIsLoadingPlayed} = storeToRefs(useGlobalStore())
-const {setShowLogo, setCurrentSlide, endLoading} = useGlobalStore()
+const {getLoading, getIsLoadingPlayed , getShowContent} = storeToRefs(useGlobalStore())
+const {setShowLogo, setCurrentSlide, endLoading , setShowContent} = useGlobalStore()
 const manualProgress = ref(50);
 
 const bgLine = ref(null)
@@ -570,6 +573,7 @@ const mobileLineAnimation = (ind) => {
 }
 
 const initPage = () => {
+  setShowContent(true)
   showSection.value = true
   moving.value = true
 
@@ -698,7 +702,8 @@ onMounted(() => {
 
   setTimeout(() => {
     endLoading()
-  }, 150)
+    store.setShowContent(true)
+  }, 100)
 });
 onUnmounted(() => {
   document.removeEventListener("wheel", handleWheel);

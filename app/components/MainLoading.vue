@@ -1,6 +1,6 @@
 <template>
 
-    <div class="fixed  left-[5%] top-[55vh] h-[35vh]" ref="loadingLineWrap">
+    <div class="fixed  left-[4vw] top-[55vh] h-[34vh]" ref="loadingLineWrap">
       <div class="w-px relative " ref="loadingLine">
         <div class="absolute left-0 right-0 h-full  bottom-0 bg-[#e1e1e1]" ref="loadingBackground"></div>
         <div class="absolute left-0 right-0 h-full  bottom-0 bg-[#363d46]"  ref="loadingProgress"></div>
