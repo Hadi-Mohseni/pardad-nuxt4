@@ -4,7 +4,6 @@
     <MenuLogo ref="menuLogo"  />
     <Menu ref="menu"/>
     <NuxtLayout >
-
       <NuxtPage />
     </NuxtLayout>
     <MainLoading ref="mainLoading"  />

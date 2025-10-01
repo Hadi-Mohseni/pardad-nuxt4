@@ -5,7 +5,8 @@
 
 
 
-    <div class="relative">
+    <div class="relative"  >
+
       <slot />
     </div>
 
@@ -24,7 +25,8 @@
 <script setup>
 const mainLoading = ref(null)
 import {useGlobalStore} from "~/stores/global.js";
-const {getLoading} = storeToRefs(useGlobalStore())
+const store = useGlobalStore()
+const {getLoading,getShowContent} = storeToRefs(useGlobalStore())
 const {setMainLoading , setShowLogo , startLoading } = useGlobalStore()
 
 useHead({
@@ -41,7 +43,15 @@ onMounted(()=>{
     setShowLogo(true)
     setMainLoading(true)
 
+
   },100)
+})
+
+
+
+
+onBeforeUnmount(()=>{
+  store.setShowContent(false)
 })
 
 

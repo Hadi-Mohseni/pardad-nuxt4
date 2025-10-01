@@ -62,12 +62,12 @@
         </div>
         <div class="absolute h-full hidden sm:block xl:top-20 top-0"
              :class="(locale === 'en') ? 'lg:-left-[70px]' : 'lg:-left-[130px]'">
-          <div class="relative w-px h-2/5" ref="slideLine">
 
-            <div class="absolute top-0 left-0 w-full h-full bg-[#0000001a] origin-[left_top]"></div>
-
-            <div class="absolute top-0 left-0 w-full h-full bg-[#323232]  origin-[left_top]"
-                 ref="slideLineChild"></div>
+          <div class="relative w-px h-2/5 " ref="loadingLineWrap">
+            <div class="w-px relative " ref="loadingLine">
+              <div class="absolute left-0 right-0 h-full  bottom-0 bg-[#e1e1e1]" ref="loadingBackground"></div>
+              <div class="absolute left-0 right-0 h-full  bottom-0 bg-[#363d46]"  ref="loadingProgress"></div>
+            </div>
           </div>
         </div>
 
@@ -148,9 +148,9 @@ const backgroundElement = ref(null)
 const bodyElement = ref(null);
 const actionElements = ref(null);
 const actionElements2 = ref(null);
-
+/*
 const slideLine = ref(null)
-const slideLineChild = ref(null);
+const slideLineChild = ref(null);*/
 
 
 const scroll_CTA = ref(null);
@@ -313,7 +313,7 @@ const createPageLineAnimation = () => {
         ease: "easeOut"
       }, "separator+=0.5")
 
-  lineTimeline.value = new TimelineLite({paused: true})
+  /*lineTimeline.value = new TimelineLite({paused: true})
       .from(slideLine.value, 0.9, {
         scaleY: 1,
         yPercent: 100,
@@ -326,7 +326,7 @@ const createPageLineAnimation = () => {
       .to(slideLineChild.value, 0.9, {
         scaleY: 0.1,
         ease: Power4.easeOut,
-      }, 0.7)
+      }, 0.7)*/
 
 }
 
@@ -338,8 +338,9 @@ const startAnimation = () => {
   scrollCTA_timeline.value.timeScale(1);
   handleAnimation("play", scrollCTA_timeline.value);
   createPageLineAnimation()
-  lineTimeline.value.timeScale(1);
-  handleAnimation("play", lineTimeline.value);
+ /* lineTimeline.value.timeScale(1);
+  handleAnimation("play", lineTimeline.value);*/
+  animateSubLine()
 
 
 }
@@ -348,24 +349,172 @@ const closeAnimation = () => {
   handleAnimation("reverse", contentTimeLine.value);
   scrollCTA_timeline.value.timeScale(2);
   handleAnimation("reverse", scrollCTA_timeline.value);
-  lineTimeline.value.timeScale(2);
-  handleAnimation("reverse", lineTimeline.value);
+  animateSubLineReverse()
+
 
 
 }
 const restartAnimation = () => {
   contentTimeLine.value.timeScale(1);
   scrollCTA_timeline.value.timeScale(1);
-  lineTimeline.value.timeScale(1);
+/*  lineTimeline.value.timeScale(1);*/
   handleAnimation("restart", contentTimeLine.value);
   handleAnimation("restart", scrollCTA_timeline.value);
-  handleAnimation("restart", lineTimeline.value);
+/*  handleAnimation("restart", lineTimeline.value);*/
 
 }
 const killAnimation = () => {
   handleAnimation("kill", contentTimeLine.value);
   handleAnimation("kill", scrollCTA_timeline.value);
-  handleAnimation("kill", lineTimeline.value);
+/*  handleAnimation("kill", lineTimeline.value);*/
+
+}
+
+
+
+
+
+const progress = ref(0)
+const mainLogo = ref(null)
+let progressTween = ''
+let timeline = ''
+let isComplete = false
+const defaultStepOnline = ref(1);
+
+const defaultSpeedOnline = ref(0.6);
+
+const defaultSpeedSubLine = ref(0.4);
+
+
+const loadingLineWrap = ref(null)
+
+const loadingLine = ref(null)
+
+const loadingBackground = ref(null)
+
+const loadingProgress = ref(null)
+
+
+
+const animateSubLine = (speed = defaultSpeedSubLine.value) => {
+  progress.value = 0
+  isComplete = false
+
+  if (loadingLineWrap.value && loadingLineWrap.value.style) {
+    loadingLineWrap.value.style.display = "flex"
+    loadingLineWrap.value.style.visibility = "inherit"
+  }
+
+  timeline = new TimelineLite()
+
+  // همیشه از پایین شروع کنه
+  timeline.set([loadingBackground.value, loadingProgress.value], {
+    transformOrigin: "bottom center",
+    scaleY: 0
+  })
+
+  // ۱) بک‌گراند تا 100% پر بشه
+  timeline.to(loadingBackground.value, speed, {
+    scaleY: 1,
+    ease: Power3.easeOut
+  })
+
+  // ۲) پروگرس تا درصد مشخص (مثلا 70%) پر بشه
+  timeline.to(loadingProgress.value, defaultSpeedOnline.value, {
+    scaleY: defaultStepOnline.value, // مثلا 0.7 = 70٪
+    ease: Power2.easeInOut
+  }, "-=0.3") // کمی overlap برای حس روان
+
+  // ۳) بعد پروگرس دوباره حرکت کنه تا فقط 20٪ کل بک‌گراند رو پر کنه
+  timeline.to(loadingProgress.value, 0.8, {
+    transformOrigin: "top center",
+    scaleY: 0.1, // یعنی 20٪ ارتفاع کل
+    ease: Power2.easeInOut,
+  })
+  setTimeout(()=>{
+    animateSubLineReverse()
+  },5000)
+}
+
+const animateSubLineReverse = (speed = defaultSpeedSubLine.value) => {
+
+
+  timeline = new TimelineLite()
+
+
+  timeline.to(loadingProgress.value, 0.4, {
+    transformOrigin: "top center",
+    scaleY: 1, // مثلا 0.7 = 70٪
+    ease: Power2.easeInOut
+  }, "+=0.3")
+  timeline.to(loadingProgress.value, 0.4, {
+    transformOrigin: "bottom center",
+    scaleY: 0, // مثلا 0.7 = 70٪
+    ease: Power2.easeInOut
+  },)
+  timeline.to(loadingBackground.value, 0.4, {
+    transformOrigin: "bottom center",
+    scaleY: 0, // مثلا 0.7 = 70٪
+    ease: Power2.easeInOut
+  },)
+
+}
+
+
+
+
+const animateFinish = (speed) => {
+  const tl = new TimelineLite()
+
+  // مبدا همه scale ها از پایین باشه
+  tl.set([loadingProgress.value, loadingBackground.value], { transformOrigin: "top center" })
+
+  // مرحله ۱: جمع شدن از پایین
+  tl.to([loadingProgress.value, loadingBackground.value], speed, {
+    scaleY: 0,
+    ease: Power3.easeInOut
+  }, 0)
+
+  // مرحله ۲: بعد کل خط (قاب) بره بالا
+  tl.to(loadingLine.value, speed, {
+    yPercent: -100,
+    ease: Power3.easeInOut,
+    onComplete: onAnimateFinishComplete
+  }, `-=${speed / 2}`)
+}
+
+
+
+const animateOnLine = (step = 0.65, speed = 2) => {
+
+  TweenLite.to(loadingProgress.value, speed, {
+    scaleY: step,
+    ease: Power2.easeInOut
+  })
+}
+
+const animateOnLineFull = (duration = 1, speed = 0.5) => {
+
+  TweenLite.to(loadingProgress.value, speed, {
+    scaleY: 1,
+    ease: Power2.easeInOut,
+    onComplete: () => animateFinish(defaultSpeedSubLine.value)
+  })
+}
+
+
+const onAnimateFinishComplete = () => {
+
+
+
+
+  if(loadingLineWrap.value && loadingLineWrap.value.style){
+    loadingLineWrap.value.style.display = "flex";
+    loadingLineWrap.value.style.visibility = "hidden";
+
+    TweenLite.set(loadingLine.value, {clearProps: "all"});
+  }
+
 
 }
 
