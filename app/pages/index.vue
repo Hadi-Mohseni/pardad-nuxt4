@@ -125,8 +125,10 @@ watch(getLoading, (value) => {
 
 useHead({
   title: 'گروه پرداد',
-  description: 'گروه پرداد',
-  keywords: 'گروه پرداد',
+  meta: [
+    { name: 'description', content: 'گروه پرداد' },
+    { name: 'keywords', content: 'گروه پرداد' }
+  ],
   script: [
     {
       id: 'org-schema',

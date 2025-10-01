@@ -137,7 +137,7 @@ const setState = () => {
 
 const animToOpenState  = () => {
   timeline
-      .set([toggleElements.shapeElement, toggleElements.textOpenElement], {visibility: "inherit"})
+      .set([toggleElements.shapeElement, toggleElements.textOpenElement , toggleElements.textCloseElement , toggleElements.lineElement], {visibility: "inherit"})
       .to(toggleElements.shapePaths[1], 0.7, {drawSVG: "50% 50%"}, 0)
       .to(toggleElements.shapePaths[0], 0.7, {drawSVG: "50% 50%"}, 0.3)
       .to(toggleElements.textOpenElement, 0.4, {opacity: 0, x: -14}, 0)
@@ -156,6 +156,7 @@ const animToOpenState  = () => {
           {scaleX: lineScale},
           0.6
       );
+
 }
 
 const animToCloseState = () => {
@@ -227,7 +228,7 @@ const init = ()=>{
                     </svg>`
     setTimeout(()=>{
       initializeNavigationToggle()
-    },2000)
+    },100)
   }
 
 }
@@ -236,7 +237,7 @@ watch(getLoading , (value)=>{
   if(value){
     setTimeout(()=>{
       init()
-    },100)
+    },10)
   }
 
 })
@@ -244,8 +245,7 @@ watch(getLoading , (value)=>{
 
 onMounted(() => {
 
-
- setTimeout(()=>{init()},100)
+ setTimeout(()=>{init()},10)
 })
 
 defineExpose({

@@ -216,7 +216,6 @@ watch(getLoading, (value) => {
 useHead({
   title: 'وبلاگ گروه پرداد',
   meta: [
-
     {name: 'robots', content: 'index, follow'},
     {
       name: 'وبلاگ گروه پرداد',

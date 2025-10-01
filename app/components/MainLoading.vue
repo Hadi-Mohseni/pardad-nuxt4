@@ -10,6 +10,7 @@
 </template>
 <script setup>
 import {useGlobalStore} from "~/stores/global.js";
+import {nextTick} from "vue";
 
 const {setMainLoading, setShowLogo, startLoading, endLoading} = useGlobalStore()
 
@@ -40,9 +41,10 @@ const loadingProgress = ref(null)
 watch(() => getLoadingStart.value, (v) => {
   if (v) {
     animateSubLine()
+
   }
 })
-watch(() => getLoadingEnd.value, (v) => {
+watch(() => getLoadingEnd.value, async (v) => {
   if (v) {
     animateOnLineFull()
   }
@@ -113,11 +115,15 @@ const animateOnLine = (step = 0.65, speed = 2) => {
 
 const animateOnLineFull = (duration = 1, speed = 0.5) => {
 
-  TweenLite.to(loadingProgress.value, speed, {
-    scaleY: 1,
-    ease: Power2.easeInOut,
-    onComplete: () => animateFinish(defaultSpeedSubLine.value)
-  })
+  if(loadingProgress.value){
+    TweenLite.to(loadingProgress.value, speed, {
+      scaleY: 1,
+      ease: Power2.easeInOut,
+      onComplete: () => animateFinish(defaultSpeedSubLine.value)
+    })
+  }
+
+
 }
 
 

@@ -206,7 +206,7 @@ const activeCategoryObj = computed(() =>
     props.categories.find((c) => c.id === activeCategoryId.value) || null
 )
 const categoryMobile = computed(() =>
-    props.categories.reverse()
+    props.categories
 )
 const selectTab = computed(() =>
    props.activeTab
