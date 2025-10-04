@@ -108,7 +108,7 @@ const animateLogo = async () => {
     } else {
       // بالا کوچیک
       TweenLite.to(el, 0.6, {
-        top: toPx('calc(4vw + 8px)', 'y'),
+        top: toPx('calc(4vw)', 'y'),
         left: toPx('4vw', 'x'),
         width: toPx('100px', 'x'),
         maxHeight: toPx('36px', 'y'),
@@ -123,7 +123,7 @@ const animateLogo = async () => {
     TweenLite.to(el, 0.7, {
       top: toPx('22vh', 'y'),
       left: toPx('10vw', 'x'),
-      width: toPx('300px', 'x'),
+      width: toPx('200px', 'x'),
       ease: Power2.easeInOut,
       overwrite: 'auto'
     })
@@ -134,7 +134,7 @@ const animateLogo = async () => {
     TweenLite.to(el, 0.5, {
       top: toPx('42vh', 'y'),
       left: toPx('4vw', 'x'),
-      width: toPx('14vw', 'x'),
+      width: toPx('11vw', 'x'),
       maxHeight: toPx('36px', 'y'),
       ease: Power2.easeOut,
       overwrite: 'auto'
@@ -145,7 +145,7 @@ const animateLogo = async () => {
   if (route.name === 'index' && getCurrentSlide.value === 0) {
     TweenLite.to(el, 0.6, {
       top: toPx('32vh', 'y'),
-      left: toPx('4vw', 'x'),
+      left: toPx('8vw', 'x'),
       width: toPx('14vw', 'x'),
       maxHeight: toPx('36px', 'y'),
       ease: Power2.easeOut,
@@ -156,7 +156,7 @@ const animateLogo = async () => {
 
   // صفحات غیر index — قبلاً پرش داشتی چون calc بود
   TweenLite.to(el, 0.6, {
-    top: toPx('calc(4vw + 3px)', 'y'), // الان به px تبدیل میشه
+    top: toPx('calc(4vw)', 'y'), // الان به px تبدیل میشه
     left: toPx('4vw', 'x'),
     width: toPx('110px', 'x'),
     height: toPx('43px', 'y'),
@@ -213,7 +213,7 @@ onMounted( () => {
       zIndex: 60,
       transformOrigin: 'center',
       display: 'block',
-      top: toPx('calc(4vw + 8px)', 'y'),
+      top: toPx('calc(4vw + 4px)', 'y'),
       left: toPx('4vw', 'x'),
       width: toPx('100px', 'x'),
       maxHeight: toPx('36px', 'y'),

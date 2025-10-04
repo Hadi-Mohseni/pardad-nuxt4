@@ -1,6 +1,6 @@
 <template>
 
-    <div class="fixed  left-[4vw] top-[55vh] h-[34vh]" ref="loadingLineWrap">
+    <div class="fixed  sm:left-[4vw] left-[25px] top-[55vh] h-[34vh]" ref="loadingLineWrap">
       <div class="w-px relative " ref="loadingLine">
         <div class="absolute left-0 right-0 h-full  bottom-0 bg-[#e1e1e1]" ref="loadingBackground"></div>
         <div class="absolute left-0 right-0 h-full  bottom-0 bg-[#363d46]"  ref="loadingProgress"></div>
@@ -126,7 +126,42 @@ const animateOnLineFull = (duration = 1, speed = 0.5) => {
 
 }
 
+function toPx(val, axis /* 'x' | 'y' */) {
+  if (val == null) return 0
+  if (typeof val === 'number') return val
+  const s = (val + '').trim()
+  const W = window.innerWidth
+  const H = window.innerHeight
 
+  const unitVal = v => {
+    v = v.trim()
+    if (v.endsWith('px')) return parseFloat(v)
+    if (v.endsWith('vw')) return (parseFloat(v) / 100) * W
+    if (v.endsWith('vh')) return (parseFloat(v) / 100) * H
+    if (v.endsWith('%')) return (parseFloat(v) / 100) * (axis === 'y' ? H : W) // برای position: fixed
+    // خالی یا فقط عدد
+    const n = parseFloat(v)
+    return isNaN(n) ? 0 : n
+  }
+
+  if (s.startsWith('calc(') && s.endsWith(')')) {
+    const expr = s.slice(5, -1).replace(/\s+/g, '') // داخل calc(...)
+    // فقط حالت‌های ساده + و - که نیاز داری
+    // مثال‌ها: 50vh-14vw  ، 4vw+3px
+    let out = 0
+    // split به علامت‌های + و - با نگه‌داشتن sign
+    const parts = expr.split(/([+\-])/).filter(Boolean)
+    let sign = +1
+    for (const p of parts) {
+      if (p === '+') { sign = +1; continue }
+      if (p === '-') { sign = -1; continue }
+      out += sign * unitVal(p)
+    }
+    return out
+  }
+
+  return unitVal(s)
+}
 const onAnimateFinishComplete = () => {
 
 
@@ -145,6 +180,7 @@ const onAnimateFinishComplete = () => {
 
 
 onMounted(() => {
+  console.log('helllooooooooo')
 
   animateSubLine()
 })

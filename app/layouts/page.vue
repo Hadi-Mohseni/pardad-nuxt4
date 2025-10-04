@@ -10,12 +10,21 @@
          :data-page="pageMeta?.dataPage"
          data-color="light"
     >
+
       <div class="lg:col-span-6 col-span-9 lg:pt-[200px] pt-0 order-2 lg:order-1">
-        <slot name="content"/>
+        <Transition
+            :name="transitionName"
+            :mode="transitionMode"
+
+        >
+          <div  class="w-full h-full">
+            <slot name="content"/>
+          </div>
+        </Transition>
+
       </div>
       <div class="lg:col-span-3 col-span-9 pt-[300px] order-1 lg:order-2 relative">
         <slot name="title"></slot>
-        {{getLoading}}
 
         <CommonHorizontalLine v-if="store.getContentLoad"
                               class="lg:hidden flex"
@@ -48,6 +57,9 @@ useHead({
   // where `%s` is replaced with the title
   titleTemplate: '%s',
 })
+
+const transitionName = ref('page-transition')
+const transitionMode = ref('out-in')
 
 const {getLoading, getIsLoadingPlayed} = storeToRefs(useGlobalStore())
 

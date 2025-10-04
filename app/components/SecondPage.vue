@@ -13,31 +13,31 @@
           <!-- لیست آیتم‌ها -->
           <div class="flex flex-col justify-center h-full gap-y-5" >
             <div class="flex items-start lg:gap-5 gap-4">
-              <img src="~/assets/images/home/third-page/1.png"
+              <img src="~/assets/icons/line.svg"
                    alt="power line"
-                   class="lg:w-24 w-16"/>
-              <p class="lg:text-lg text-xs">{{ t('landing.second_page.description.0.p') }}</p>
+                   class="lg:w-24 w-16 mt-[5px]"/>
+              <p class="lg:text-base text-xs">{{ t('landing.second_page.description.0.p') }}</p>
             </div>
 
             <div class="flex items-start lg:gap-5 gap-4">
-              <img src="~/assets/images/home/third-page/2.png"
+              <img src="~/assets/icons/nex.svg"
                    alt="flow line"
-                   class="lg:w-24 w-16"/>
-              <p class="lg:text-lg text-xs">{{ t('landing.second_page.description.1.p') }}</p>
+                   class="lg:w-24 w-16 mt-[5px]"/>
+              <p class="lg:text-base text-xs">{{ t('landing.second_page.description.1.p') }}</p>
             </div>
 
             <div class="flex items-start lg:gap-5 gap-4">
-              <img src="~/assets/images/home/third-page/3.png"
+              <img src="~/assets/icons/electro.svg"
                    alt="nex drive"
-                   class="lg:w-24 w-16"/>
-              <p class="lg:text-lg text-xs">{{ t('landing.second_page.description.2.p') }}</p>
+                   class="lg:w-24 w-16 mt-[5px]"/>
+              <p class="lg:text-base text-xs">{{ t('landing.second_page.description.2.p') }}</p>
             </div>
 
             <div class="flex items-start lg:gap-5 gap-4">
-              <img src="~/assets/images/home/third-page/4.png"
+              <img src="~/assets/icons/flow.svg"
                    alt="electro line"
-                   class="lg:w-24 w-16"/>
-              <p class="lg:text-lg text-xs">{{ t('landing.second_page.description.3.p') }}</p>
+                   class="lg:w-24 w-16 mt-[5px]"/>
+              <p class="lg:text-base text-xs">{{ t('landing.second_page.description.3.p') }}</p>
             </div>
           </div>
 

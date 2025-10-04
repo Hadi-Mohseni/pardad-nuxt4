@@ -158,6 +158,7 @@ const seperatedText = (text) => {
 const product = ref({})
 
 
+
 const {data: response} = await useAsyncData(
     `product_id`,
     () => useApi(`/product/slug/${route.params.product_name}`, {
@@ -264,6 +265,8 @@ const initPage = (val) => {
 
 
 async function getData(id) {
+
+  console.log(id , 'idddd')
 
   if (!id) return
   selectedId.value = id
@@ -396,7 +399,7 @@ const loadMore = async () => {
   if (page.value >= paginateInfo.value.last_page) return
 
   page.value += 1
-  await getData(selectedId.value)
+  await getData(product.value)
 }
 
 const {reset} = useInfiniteScroll(

@@ -189,7 +189,7 @@ input:required {
 
 .description * {
     color: #1e1e1e !important;
-    font-family: PeydaNum !important;
+    font-family: Peyda !important;
     font-weight: 300 !important;
     line-height: 30px !important;
     user-select: none !important;
@@ -209,22 +209,22 @@ input:required {
 
 .description strong {
     color: #373737 !important;
-    font-family: PeydaNum !important;
+    font-family: Peyda !important;
 }
 
 .description a {
     color: #2F55E8 !important;
-    font-family: PeydaNum !important;
+    font-family: Peyda !important;
 }
 
 .description a * {
     color: #2F55E8 !important;
-    font-family: PeydaNum !important;
+    font-family: Peyda !important;
 }
 
 .accordion-content * {
     color: #1e1e1e !important;
-    font-family: PeydaNum !important;
+    font-family: Peyda !important;
     font-weight: 300 !important;
     line-height: 26px !important;
     font-size: 14px !important;

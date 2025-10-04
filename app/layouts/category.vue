@@ -1,7 +1,7 @@
 <template>
   <div dir="rtl" class="relative">
 
-    <div class="text-black-100 h-dvh relative bg-transparent transition-all duration-500" v-if="getShowContent" >
+    <div class="text-black-100 h-dvh relative bg-transparent transition-all duration-500"  >
       <div ref="sliderSection" class="text-black-100 w-full h-full mx-auto flex items-center justify-start">
         <div class="md:mt-0 mt-16 w-full h-full py-10 text-right md:mb-0 mb-auto md:pt-[200px] pt-0 md:px-24 px-0">
           <div class="flex flex-col md:flex-row w-full ">
@@ -264,6 +264,7 @@ const activeCategory = ref(null)
 const activeProduct = ref(null)
 
 const config = useRuntimeConfig()
+
 watch(getLoading, (value) => {
   if (!value) {
   setTimeout(()=>{
@@ -295,8 +296,8 @@ const {data: response} = await useAsyncData(
 const goToProductPage = (product) => {
   activeProduct.value = product
   updateGreenBarPosition(activeCategory.value.slug, product.slug)
+  router.push(`/product/${product.category_slug}/${product.slug}`)
   // ریدایرکت
-  navigateTo(`/product/${product.category_slug}/${product.slug}`)
 }
 const updateGreenBarPosition = async (categorySlug, subCategorySlug = null) => {
 
@@ -379,6 +380,8 @@ const getProducts = async (category)=>{
   }
 }
 if(response.value){
+
+  console.log('heeel')
 
 
   categories.value = response.value
@@ -482,6 +485,11 @@ const initPage=()=>{
 }
 
 
+const initData = ()=>{
+
+}
+
+
 
 
 // Props from page
@@ -567,6 +575,7 @@ useHead({
 
 
 onMounted(()=>{
+
    /*getActiveCat(route.params.category_name)*/
   /* setActiveCatFunc(route.params.category_name)*/
    setTimeout(() => {

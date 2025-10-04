@@ -8,6 +8,7 @@
 
     <div class="home__inner lg:px-7 px-14 h-dvh overflow-hidden relative flex flex-col select-none" id="home-inner">
       <div
+
           class="h-12 lg:hidden lg:mt-0 lg:h-0"
           :class="(currentSlide > 0) ? 'mt-[130px]' : 'mt-[70px]'">
         <template v-if="!getLoading">
@@ -110,7 +111,7 @@
 import {useGlobalStore} from "~/stores/global.js";
 const store = useGlobalStore()
 
-const {getLoading, getIsLoadingPlayed , getShowContent} = storeToRefs(useGlobalStore())
+const {getLoading , getShowContent} = storeToRefs(useGlobalStore())
 const {setShowLogo, setCurrentSlide, endLoading , setShowContent} = useGlobalStore()
 const manualProgress = ref(50);
 
@@ -637,8 +638,18 @@ const onTouchMove = (e) => {
 
 const onTouchEnd = () => {
   if (!isMobile()) return;
-  // بعد از رها کردن تاچ، صبر کن تا مومنتوم اسکرول تموم بشه
-  scheduleScrollEndCheck();
+  if (isTransitioning) return; // لاک داریم
+
+  if (!lastIntent) return;
+  const { atTop, atBottom } = atEdges();
+
+  if (lastIntent === 'down' && atBottom) {
+    triggerOnce(nextSlide);
+  } else if (lastIntent === 'up' && atTop) {
+    triggerOnce(prevSlide);
+  }
+
+  lastIntent = null; // حتما ریست شه
 };
 
 const onScroll = () => {
@@ -653,36 +664,40 @@ const scheduleScrollEndCheck = () => {
 
 const onScrollEnd = () => {
   if (!isMobile()) return;
-  if (isTransitioning) return;
-  if (!lastIntent) return; // جهت نامشخص؛ کاربر شاید فقط تپ کرده
+  if (isTransitioning) return; // جلوی پرش چندتا اسلاید
+
+  if (!lastIntent) return;
   const { atTop, atBottom } = atEdges();
 
   if (lastIntent === 'down' && atBottom) {
-    // کاربر خواسته پایین‌تر بره ولی دیگه اسکرول نمی‌خوره → اسلاید بعد
     triggerOnce(nextSlide);
     lastIntent = null;
-    return;
   }
   if (lastIntent === 'up' && atTop) {
-    // کاربر خواسته بالاتر بره ولی دیگه اسکرول نمی‌خوره → اسلاید قبل
     triggerOnce(prevSlide);
     lastIntent = null;
-    return;
   }
-
-  // هنوز وسط صفحه‌ایم یا به مرز نرسیدیم → کاری نکن
 };
 
-// ====== DESKTOP: wheel ======
-const handleWheel = (event) => {
-  if (isMobile()) return; // روی موبایل با touch/scroll کنترل می‌کنیم
-  if (isTransitioning) return;
 
-  if (event.deltaY > 0) {
-    triggerOnce(nextSlide);
-  } else if (event.deltaY < 0) {
-    triggerOnce(prevSlide);
-  }
+// ====== DESKTOP: wheel ======
+let wheelTimeout = null;
+
+const handleWheel = (event) => {
+  if (isMobile()) return; // فقط دسکتاپ
+
+  if (isTransitioning) return; // قفل انیمیشن فعال
+
+  clearTimeout(wheelTimeout);
+
+  // اگه deltaY خیلی ریزه (اسکرول جزئی تاچ‌پد) → صبر کنیم ببینیم ادامه داره یا نه
+  wheelTimeout = setTimeout(() => {
+    if (event.deltaY > 0) {
+      triggerOnce(nextSlide);
+    } else if (event.deltaY < 0) {
+      triggerOnce(prevSlide);
+    }
+  }, 80); // این عددو می‌تونی تنظیم کنی (۵۰-۱۲۰ میلی‌ثانیه خوبه)
 };
 
 // ====== KEYBOARD (هر بار یک اسلاید) ======

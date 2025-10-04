@@ -16,7 +16,7 @@
 
           </p>
         </div>
-        <div class="mt-16"
+        <div class="mt-8 lg:mt-8"
              :class="(locale === 'en') && 'dir-ltr'">
           <div class="w-max">
             <div class="relative h-[1px] w-full my-2"
@@ -35,10 +35,12 @@
               <p>{{
                   t('landing.first_page.footer.0.p')
 
-                }}</p>
-              <p>{{
+                }}
+                {{
                   t('landing.first_page.footer.1.p')
-                }}</p>
+                }}
+              </p>
+
 
             </div>
 

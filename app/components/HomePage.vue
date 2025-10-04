@@ -24,7 +24,7 @@
           </div>
 
           <div v-if="(locale !== 'en')"
-               class="lg:text-[20px] xl:text-[21px] 2xl:text-[30px] text-[18px] lg:pb-6 space-y-2 text-right mb-4 lg:mb-0">
+               class="lg:text-[20px] xl:text-[21px] 2xl:text-[30px] text-[18px] lg:pb-4 space-y-2 text-right mb-4 lg:mb-0">
             <p>{{ t('landing.home_page.main_paraph.0.p') }}</p>
             <p v-if="locale === 'en'">{{ t('landing.home_page.main_paraph.1.p') }}</p>
             <p v-if="locale === 'en'">{{ t('landing.home_page.main_paraph.2.p') }}</p>
@@ -36,16 +36,16 @@
         </div>
 
         <div class="w-max">
-          <div class="relative h-[1px] w-m my-2"
+<!--          <div class="relative h-[1px] w-m my-2"
                ref="seperatedLine">
-            <!-- First child: opacity 0.1 -->
+            &lt;!&ndash; First child: opacity 0.1 &ndash;&gt;
             <div class="absolute top-0 right-0 w-full h-full bg-black opacity-10"></div>
 
-            <!-- Second child: scale + origin -->
+            &lt;!&ndash; Second child: scale + origin &ndash;&gt;
             <div ref="seperatedLineChild"
                  class="absolute top-0  w-full h-full bg-black"
                  :class="(locale === 'en') ? 'origin-top-left right-0' : 'origin-top-left left-0'"></div>
-          </div>
+          </div>-->
           <div :class="(locale === 'en') && 'dir-ltr text-gray-400'"
                class="mt-5 lg:mt-0 lg:mb-20 2xl:mb-0 opacity-75  font-normal lg:text-[14px] 2xl:text-[14px] text-xs lg:leading-[22px]">
             <p class=""> {{ t('landing.home_page.footer.0.p') }}</p>
@@ -297,7 +297,7 @@ const createScrollTextAnimation = () => {
 
 const seperatedLineAnimationFunc = (val)=>{
 
-
+return
 
   seperatedTimeLine.value = new TimelineLite({})
 
@@ -325,6 +325,7 @@ const seperatedLineAnimationFunc = (val)=>{
   },)
 }
 const seperatedLineAnimationFuncReverse = ()=>{
+  return
   seperatedTimeLine.value = new TimelineLite({})
 
 
@@ -392,8 +393,8 @@ const closeAnimation = () => {
   animateSubLineReverse()
 
   seperatedLineAnimationFuncReverse()
-  lineTimeline.value.timeScale(2);
-  handleAnimation("reverse", lineTimeline.value);
+ /* lineTimeline.value.timeScale(2);
+  handleAnimation("reverse", lineTimeline.value);*/
 
 
 }
@@ -474,9 +475,7 @@ const animateSubLine = (speed = defaultSpeedSubLine.value) => {
     scaleY: 0.1, // یعنی 20٪ ارتفاع کل
     ease: Power2.easeInOut,
   })
-  setTimeout(()=>{
-    animateSubLineReverse()
-  },5000)
+
 }
 
 const animateSubLineReverse = (speed = defaultSpeedSubLine.value) => {
