@@ -1,13 +1,14 @@
 <template>
   <div class="relative dir-rtl">
 
-
-    <NuxtLayout >
-      <MenuLogo ref="menuLogo"/>
-      <Menu ref="menu"/>
+    <MenuLogo ref="menuLogo"/>
+    <Menu ref="menu"/>
+    <MainLoading ref="mainLoading"  />
+    <NuxtLayout>
       <NuxtPage />
-      <MainLoading ref="mainLoading"  />
     </NuxtLayout>
+
+
 
   </div>
 </template>

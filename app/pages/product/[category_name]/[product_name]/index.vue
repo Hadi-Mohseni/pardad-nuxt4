@@ -103,21 +103,8 @@ const blogList = ref([])
 const activeSubItemTop = ref(0)
 const activeSubItemHeight = ref(24)
 
-const titleElement = ref(null)
-const selectedSlug = ref(null)
-const requestId = ref(0)
-const subList = ref([])
-const subListLoading = ref(false)
-const selectedId = ref(route.params.category_id)
-const items = ref()
 
-const itemRefs = ref({})
-const sliderSection = ref()
-const slideList = ref()
-const currentSection = ref('slider')
-const pageHorizontalLine = ref(null)
-const colors = useBlogColor()
-const scrollPage = ref()
+
 const showSection = ref(false)
 const sect = ref()
 const reversedSliderItems = ref([])
@@ -159,19 +146,26 @@ const product = ref({})
 
 
 
-const {data: response} = await useAsyncData(
-    `product_id`,
-    () => useApi(`/product/slug/${route.params.product_name}`, {
-      query: {
-        locale: 'fa',
-      }
-    })
-    , {})
 
 
-if (response.value) {
-  product.value = response.value.data
-  getData(product.value.code)
+if(route.params.product_name === 'list'){
+
+}else{
+  const {data: response} = await useAsyncData(
+      `product_id_${route.params.product_name}`,
+      () => useApi(`/product/slug/${route.params.product_name}`, {
+        query: {
+          locale: 'fa',
+        }
+      })
+      , {})
+
+
+  if (response.value) {
+
+    product.value = response.value.data
+    getBlogProduct(product.value.code)
+  }
 }
 
 
@@ -264,12 +258,10 @@ const initPage = (val) => {
 }
 
 
-async function getData(id) {
-
-  console.log(id , 'idddd')
-
-  if (!id) return
-  selectedId.value = id
+async function getBlogProduct() {
+  if(!product.value.code){
+    return
+  }
   if (page.value === 1) {
     isLoading.value = true
   }
@@ -297,81 +289,11 @@ async function getData(id) {
 
   } catch (error) {
     console.error("Error loading more items:", error)
-    selectedId.value = null
   } finally {
     isLoading.value = false
   }
 }
 
-
-const startAllAnimation = () => {
-  pageHorizontalLine.value.start()
-
-
-}
-
-const createAllAnimation = () => {
-  pageHorizontalLine.value.create()
-
-}
-
-
-const updateGreenBarPosition = async (categoryId) => {
-  await nextTick()
-
-  if (!containerRef.value) return
-
-  const activeItem = containerRef.value.querySelector(`[data-category-id="${categoryId}"]`)
-  if (!activeItem) return
-
-  const containerRect = containerRef.value.getBoundingClientRect()
-  const activeItemRect = activeItem.getBoundingClientRect()
-
-  greenBarTop.value = activeItemRect.top - containerRect.top
-
-  let height = activeItemRect.height
-
-  if (activeTab.value === categoryId) {
-    const childrenList = activeItem.nextElementSibling?.querySelector('ul')
-    if (childrenList) {
-      height += childrenList.getBoundingClientRect().height
-    }
-  }
-  greenBarHeight.value = height
-}
-// const handleGetBlog = (category, type) => {
-//   getBlog(category, type)
-//   updateGreenBarPosition(category.id)
-// }
-//
-// const handleSelectSubcategory = (subcategory) => {
-//   selectSubcategory(subcategory)
-//   updateGreenBarPosition(activeTab.value)
-// }
-//
-// const handleToggleCategory = (categoryId) => {
-//   toggleCategory(categoryId)
-//   updateGreenBarPosition(categoryId)
-// }
-// تابع برای toggle کردن دسته‌ها
-const toggleCategory = (categoryId) => {
-  activeTab.value = activeTab.value === categoryId ? null : categoryId;
-};
-
-// تابع برای انتخاب زیردسته
-const selectSubcategory = (subcategory) => {
-  subActiveTab.value = subcategory.id;
-  selectedSlug.value = subcategory.slug;
-  getBlog(subcategory, 'subcategory')
-
-  // منطق دیگر برای بارگیری محتوا
-};
-
-watch(() => activeTab, (newVal) => {
-  if (newVal) {
-    updateGreenBarPosition(newVal)
-  }
-})
 
 
 const anim = (items) => {
@@ -399,7 +321,7 @@ const loadMore = async () => {
   if (page.value >= paginateInfo.value.last_page) return
 
   page.value += 1
-  await getData(product.value)
+  await getBlogProduct(product.value.code)
 }
 
 const {reset} = useInfiniteScroll(
@@ -421,22 +343,7 @@ useHead({
 
 onMounted(async () => {
 
-  setTimeout(() => {
-    if (activeTab.value) {
-      updateGreenBarPosition(activeTab.value)
-    }
-  }, 1000)
-
-
-  //
-  // await loadInitial()
-  // startInfiniteScroll()
-  setTimeout(() => {
-
-    endLoading()
-
-  }, 100)
-
+  endLoading()
 
 });
 onBeforeRouteLeave(() => {

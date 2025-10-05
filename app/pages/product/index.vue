@@ -131,8 +131,7 @@ definePageMeta({
 })
 
 
-
-
+console.log('hey page rpoduct')
 
 const store = useGlobalStore()
 
@@ -144,7 +143,8 @@ import img from 'assets/img/01.png'
 
 const categories = ref([])
 const subCategories = ref([])
-const isDataLoad = ref(false)
+const isDataLoad = ref(true)
+
 const {data: response} = await useAsyncData(
     `categories-product`,
     () => useApi('/categories', {
@@ -169,12 +169,13 @@ const {data: response} = await useAsyncData(
 
 
 if(response.value){
+
   categories.value = response.value
 
 }
 
 
-isDataLoad.value = true
+
 
 
 const subCats = computed(()=>{

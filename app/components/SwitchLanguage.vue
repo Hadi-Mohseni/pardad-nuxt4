@@ -5,19 +5,19 @@
         v-for="(item, index) in locales"
         :key="index"
         @click="changeLocale(item)"
-        class="transition-colors duration-200 text-black-60 hover:opacity-60 flex"
+        class="transition-colors duration-200 text-black-60 hover:opacity-60 flex mt-[3px]"
     >
       <span
           :class="[
           locale === item.code ? 'text-black' : 'text-gray-500',
-          'lg:text-sm text-xs'
+          'lg:text-xs text-xs'
         ]"
       >
         {{ item.code.toUpperCase() }}
       </span>
       <span
           v-if="index < locales.length - 1"
-          class="text-gray-500 mx-1 lg:text-sm text-xs"
+          class="text-gray-500 mx-1 lg:text-xs text-xs"
       >
         /
       </span>

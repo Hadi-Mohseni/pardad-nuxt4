@@ -56,8 +56,9 @@
    Archia (Latin / English)
 ========================= */
 @font-face {
-    font-family: "Montserrat";
-    src: url("/assets/fonts/Montserrat-VariableFont_wght.ttf") format("truetype");
+    font-family: "Atlas";
+    src: url("/assets/fonts/subset-AtlasGrotesk-Light.woff") format('woff');
+    font-display: swap;
     unicode-range: U+0020-007F; /* محدوده حروف لاتین */
 }
 
@@ -92,7 +93,7 @@
    Defaults
 ========================= */
 body {
-    font-family: 'Peyda', 'Montserrat' !important;
+    font-family: 'Peyda', 'Atlas' !important;
     font-weight: 400;
     direction: rtl;
 
