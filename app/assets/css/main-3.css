@@ -59,26 +59,16 @@
     font-family: "Atlas";
     src: url("/assets/fonts/subset-AtlasGrotesk-Light.woff") format('woff');
     font-display: swap;
+    font-style: normal;
     unicode-range: U+0020-007F; /* محدوده حروف لاتین */
 }
-
-@font-face {
-    font-family: 'Archia';
-    src: url(/assets/fonts/subset-Archia-SemiBold.woff) format('woff');
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
-}
-
-/* =========================
-   Atlas Grotesk (Optional)
-========================= */
 @font-face {
     font-family: 'Atlas';
     src: url(/assets/fonts/subset-AtlasGrotesk-Light.woff) format('woff');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
+    unicode-range: U+0020-007F; /* محدوده حروف لاتین */
 }
 
 @font-face {
@@ -87,7 +77,22 @@
     font-weight: 100;
     font-style: normal;
     font-display: swap;
+    unicode-range: U+0020-007F; /* محدوده حروف لاتین */
 }
+
+@font-face {
+    font-family: 'Archia';
+    src: url("/assets/fonts/subset-Archia-SemiBold.woff") format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+0020-007F; /* محدوده حروف لاتین */
+}
+
+/* =========================
+   Atlas Grotesk (Optional)
+========================= */
+
 
 /* =========================
    Defaults

@@ -31,7 +31,7 @@
             </div>
 
             <div class="lg:text-[13px] 2xl:text-[16px] text-[14px] font-bold leading-7"
-                 ref="bodyElement">
+                 ref="subtitleElement">
               <p>{{
                   t('landing.first_page.footer.0.p')
 
@@ -152,7 +152,7 @@ const createAnimInContent = () => {
   if (subtitleElement.value) {
     contentTimeLine.value.from(
       subtitleElement.value,
-      0.5,
+      0.9,
       { y: 120, opacity: 0, ease: Power3.easeOut },
     );
   }

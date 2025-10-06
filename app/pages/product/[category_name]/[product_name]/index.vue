@@ -1,5 +1,6 @@
 <template>
     <div class="h-full" ref="el">
+
       <div v-if="isLoading" class="flex w-full h-24  my-auto items-center justify-center text-center">
         <div class="text-center flex items-center justify-center flex-col gap-y-2">
           <div role="status">
@@ -99,7 +100,7 @@ import {useInfiniteScroll} from '@vueuse/core';
 const searchTerm = ref('')
 const bodyElement = ref(null)
 const categoryItems = ref([])
-const blogList = ref([])
+const blogList = inject('blogs')
 const activeSubItemTop = ref(0)
 const activeSubItemHeight = ref(24)
 
@@ -132,7 +133,7 @@ const per_page = ref(12)
 const observer = ref(null)
 const infiniteScrollTrigger = ref(null)
 const animationTimeline = ref(null)
-const updateBlogList = ref([])
+const updateBlogList = inject('blogs')
 const blogLoadingList = ref(false)
 const seperatedText = (text) => {
   return text.replace(
@@ -140,6 +141,9 @@ const seperatedText = (text) => {
       `<span class="font-['Archia'] text-sm font-semibold">$&</span>`
   );
 }
+
+
+
 
 
 const product = ref({})
@@ -151,7 +155,8 @@ const product = ref({})
 if(route.params.product_name === 'list'){
 
 }else{
-  const {data: response} = await useAsyncData(
+
+ /* const {data: response} = await useAsyncData(
       `product_id_${route.params.product_name}`,
       () => useApi(`/product/slug/${route.params.product_name}`, {
         query: {
@@ -165,7 +170,7 @@ if(route.params.product_name === 'list'){
 
     product.value = response.value.data
     getBlogProduct(product.value.code)
-  }
+  }*/
 }
 
 
@@ -259,6 +264,7 @@ const initPage = (val) => {
 
 
 async function getBlogProduct() {
+  return
   if(!product.value.code){
     return
   }
@@ -343,7 +349,9 @@ useHead({
 
 onMounted(async () => {
 
-  endLoading()
+  setTimeout(()=>{
+    endLoading()
+  },100)
 
 });
 onBeforeRouteLeave(() => {

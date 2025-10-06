@@ -180,7 +180,7 @@ const onAnimateFinishComplete = () => {
 
 
 onMounted(() => {
-  console.log('helllooooooooo')
+
 
   animateSubLine()
 })

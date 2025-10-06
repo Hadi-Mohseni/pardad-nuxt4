@@ -5,10 +5,10 @@
        class="w-full h-full grid grid-cols-12 relative">
 
     <div class="lg:col-span-7 col-span-12 relative lg:order-1 order-2">
-      <div class="lg:pr-21 lg:pt-9 flex flex-col justify-center 2xl:justify-around h-full"
+      <div class="lg:pr-21 lg:pt-9 flex flex-col justify-between 2xl:justify-around h-full"
            ref="bodyElement">
 
-        <div class="lg:mb-12 mb-0 flex flex-col gap-x-1 items-start w-full"
+        <div class=" mb-0 flex flex-col gap-x-1 items-start lg:mt-12 w-full"
              :class="(locale === 'en') && 'dir-ltr'">
           <div class="mb-4 lg:mb-8 flex flex-col lg:flex-row lg:gap-x-1 items-end lg:justify-start">
             <h1 class="lg:text-[46px] 2xl:text-[58px]   font-bold leading-tight"
@@ -35,7 +35,7 @@
           </div>
         </div>
 
-        <div class="w-max">
+        <div class="w-max lg:mb-0">
 <!--          <div class="relative h-[1px] w-m my-2"
                ref="seperatedLine">
             &lt;!&ndash; First child: opacity 0.1 &ndash;&gt;
@@ -60,6 +60,10 @@
             </p>
           </div>
         </div>
+
+
+
+
         <div class="absolute h-full hidden sm:block xl:top-20 top-0"
              :class="(locale === 'en') ? 'lg:-left-[70px]' : 'lg:-left-[130px]'">
 
@@ -108,16 +112,7 @@
 
       </div>
     </div>
-    <!--    <div class="lg:col-span-5 col-span-12 h-full flex lg:items-end lg:justify-start lg:px-2 order-1 lg:order-2">-->
-    <!--      <div v-if="locale === 'fa'"-->
-    <!--           class="lg:mb-12 mb-8 flex gap-x-1 items-end justify-start">-->
-    <!--        <h1 class="lg:text-[46px] 2xl:text-[58px] text-2xl mb-0 md:mb-9 font-bold"-->
-    <!--            ref="titleElement">{{ t('landing.home_page.main_title') }}</h1>-->
-    <!--        <p class="lg:text-[17px] 2xl:text-[20px] text-sm mb-0 md:mb-4 " ref="secondTitleElement">{{-->
-    <!--            t('landing.home_page.sub_title')-->
-    <!--          }}</p>-->
-    <!--      </div>-->
-    <!--    </div>-->
+
   </div>
 
 

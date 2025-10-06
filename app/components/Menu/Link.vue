@@ -1,6 +1,6 @@
 <template>
 
-  <div class="hidden lg:flex min-w-max  gap-x-8 lg:leading-[41px] lg:uppercase lg:text-[14px]  lg:z-3 ">
+  <div class="hidden lg:flex min-w-max  gap-x-8 lg:leading-[41px] lg:uppercase lg:text-[14px] -mt-[3px]  lg:z-3 ">
     <nuxt-link v-show="getShowContactNav"
                :to="{name:'contact'}"
                class=" cubic-animation relative group origin-top-left text-[14px] 2xl:text-[16px]">

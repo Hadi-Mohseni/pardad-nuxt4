@@ -179,13 +179,13 @@ const createAnimInContent = () => {
   });
 
 
-  // if (subtitleElement.value) {
-  //   contentTimeLine.value.from(
-  //     subtitleElement.value,
-  //     0.6,
-  //     { y: 120, opacity: 0, ease: Power3.easeOut },
-  //   );
-  // }
+   if (subtitleElement.value) {
+     contentTimeLine.value.from(
+       subtitleElement.value,
+       0.9,
+       { y: 120, opacity: 0, ease: Power3.easeOut },
+     );
+   }
 
   contentTimeLine.value.staggerFrom(
       children,

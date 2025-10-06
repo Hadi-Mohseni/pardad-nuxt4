@@ -216,7 +216,8 @@
             <!-- Content Cards -->
             <div class="md:pr-10 flex flex-col w-full lg:w-[68%] px-4">
 
-                <slot />
+                <slot :items="items" />
+
             </div>
           </div>
         </div>
@@ -228,10 +229,11 @@
 </template>
 
 <script setup>
-import {ref, computed, watch, nextTick, onMounted} from 'vue'
+import {ref, computed, watch, nextTick, onMounted , provide} from 'vue'
 import {useCategoryStore} from "~/stores/category.js";
 import {useGlobalStore} from "~/stores/global.js";
 
+const items = ref([])
 
 const store = useGlobalStore()
 
@@ -257,6 +259,7 @@ const showContent = ref(false)
 const {endLoading} = useGlobalStore()
 const titleElement = ref(null)
 const containerRef = ref(null)
+const blogs = ref([])
 
 const route = useRoute()
 const router = useRouter()
@@ -264,7 +267,7 @@ const activeCategory = ref(null)
 const activeProduct = ref(null)
 
 const config = useRuntimeConfig()
-
+provide('blogs', blogs)
 watch(getLoading, (value) => {
   if (!value) {
   setTimeout(()=>{
@@ -299,7 +302,67 @@ const goToProductPage = (product) => {
   router.push(`/product/${product.category_slug}/${product.slug}`)
   // ریدایرکت
 }
+
+
+
+const getProducts = async (category , select=false)=>{
+
+  try {
+    const data = await $fetch(`${config.public.apiUrl}/product`, {
+      query: {
+        locale: 'fa',
+        category_id:category.code
+      },
+    })
+    const findEl = categories.value.findIndex(item=>item.code === category.code)
+
+    categories.value[findEl].products = data.data
+
+
+    if(data.data.length > 0 && select){
+      const findPr = categories.value[findEl].products.find(item=>item.slug === route.params.product_name)
+      activeProduct.value = findPr
+      setActiveCatFunc(activeProduct.value.slug)
+      console.log(activeProduct.value.slug ,'ss')
+      getBlogListFunc(activeProduct.value.slug)
+    }
+
+
+
+
+
+
+
+
+
+  } catch (error) {
+
+  } finally {
+
+  }
+}
+if(response.value){
+
+
+
+  categories.value = response.value
+  activeCategory.value  = categories.value.find(item=>item.slug === route.params.category_name)
+
+
+  setActiveCategory(activeCategory.value)
+
+
+
+  getProducts(activeCategory.value , true)
+
+
+}
+
 const updateGreenBarPosition = async (categorySlug, subCategorySlug = null) => {
+
+
+
+
 
   if(!categorySlug) return
   await nextTick()
@@ -313,7 +376,7 @@ const updateGreenBarPosition = async (categorySlug, subCategorySlug = null) => {
   if (subCategorySlug) {
 
     // If subcategory is active, find the subcategory element
-    activeElement = containerRef.value.querySelector(`[data-sub-category-slug="${subCategorySlug}"]`)
+    activeElement = containerRef.value.querySelector(`[data-product-slug="${subCategorySlug}"]`)
   }
 
 
@@ -349,127 +412,27 @@ const updateGreenBarPosition = async (categorySlug, subCategorySlug = null) => {
 }
 
 
-const getProducts = async (category)=>{
-  try {
-    const data = await $fetch(`${config.public.apiUrl}/product`, {
-      query: {
-        locale: 'fa',
-        category_id:category.code
-      },
-    })
-    const findEl = categories.value.findIndex(item=>item.code === category.code)
-
-    categories.value[findEl].products = data.data
-
-    if(data.data.length > 0){
-      const findPr = categories.value[findEl].products.find(item=>item.slug === route.params.product_name)
-      activeProduct.value = findPr
-      setActiveCatFunc(activeProduct.value.slug)
-      /*updateGreenBarPosition(categories.value[findEl].slug , activeProduct.value.slug)*/
-    }
-
-
-
-
-
-
-  } catch (error) {
-
-  } finally {
-
-  }
-}
-if(response.value){
-
-  console.log('heeel')
-
-
-  categories.value = response.value
-  activeCategory.value  = categories.value.find(item=>item.slug === route.params.category_name)
-
-
-  setActiveCategory(activeCategory.value)
-
-
-  getProducts(activeCategory.value)
-
-
-}
-
-
-
-
 const toggleCategory = (category) => {
+
   if (activeCategory.value?.slug === category.slug) {
     activeCategory.value = null
     activeProduct.value = null
-  } else {
-    activeCategory.value = category
-    getProducts(activeCategory.value)
+    updateGreenBarPosition(null , null)
+    blogs.value = []
 
+  } else {
     activeProduct.value = null
-    updateGreenBarPosition(category.slug , null)
+    activeCategory.value = category
+    getProducts(activeCategory.value , false)
+    getBlogListFunc('list')
+    setTimeout(()=>{
+      updateGreenBarPosition(category.slug , null)
+    },250)
+
+
   }
 }
-function transformCategories(data) {
 
-  // ایجاد یک مپ برای دسترسی سریع به آیتم‌ها بر اساس id
-  const itemsMap = new Map();
-  const result = [];
-
-  // اول همه آیتم‌ها را به مپ اضافه می‌کنیم
-  data.forEach(item => {
-    itemsMap.set(item.id, { ...item });
-  });
-
-  // حالا آیتم‌ها را پردازش می‌کنیم
-  data.forEach(item => {
-    if (item.parent_id === null) {
-      // این یک والد است - باید به نتیجه اضافه شود
-      const parentItem = itemsMap.get(item.id);
-
-      // اگر children دارد، باید آنها را با داده کامل پر کنیم
-      if (parentItem.children && parentItem.children.length > 0) {
-        parentItem.children = parentItem.children.map(child => {
-          const childData = itemsMap.get(child.id);
-          if (childData) {
-            // حذف child از مپ چون به والد منتقل شده
-            itemsMap.delete(child.id);
-            return childData;
-          }
-          return child;
-        });
-      }
-
-      result.push(parentItem);
-    }
-  });
-
-  // آیتم‌های باقی مانده در مپ (آنهایی که parent_id دارند اما والدشان children ندارد)
-  // باید به صورت جداگانه اضافه شوند
-  itemsMap.forEach((item, id) => {
-    if (item.parent_id !== null) {
-      // پیدا کردن والد این آیتم
-      const parent = result.find(parent => parent.id === item.parent_id) ||
-          data.find(parent => parent.id === item.parent_id);
-
-      if (parent) {
-        if (!parent.children) {
-          parent.children = [];
-        }
-        parent.children.push(item);
-
-        // حذف از نتیجه اگر قبلاً اضافه شده
-        const indexInResult = result.findIndex(i => i.id === item.id);
-        if (indexInResult !== -1) {
-          result.splice(indexInResult, 1);
-        }
-      }
-    }
-  });
-
-  return result;
-}
 
 
 
@@ -485,18 +448,13 @@ const initPage=()=>{
 }
 
 
-const initData = ()=>{
 
-}
 
 
 
 
 // Props from page
 const goToBlogPage = (category)=>{
-
-
-
   router.push(`/product/${category.slug}`)
 
 }
@@ -504,6 +462,7 @@ const goToBlogPage = (category)=>{
 
 
 const setActiveCatFunc = (name) => {
+
 
 
   let foundCategory = null;
@@ -540,14 +499,84 @@ const setActiveCatFunc = (name) => {
   }
 
   if (foundSubCategory) {
+
     updateGreenBarPosition(foundCategory.slug , foundSubCategory.slug)
 
-    activeProduct.value = foundSubCategory.value
+
+    activeProduct.value = foundSubCategory
 
   } else {
     // اگر زیردسته پیدا نشد، مقدار آن را null کنید
     setActiveSubCategory(null);
     activeProduct.value = null
+  }
+}
+
+async function getBlogProduct(code) {
+
+
+  if(!code){
+    return
+  }
+
+  const config = useRuntimeConfig()
+  try {
+    const data = await $fetch(`${config.public.apiUrl}/product/${code}/blogs`, {
+      query: {
+        locale: 'fa',
+        page: 1,
+        per_page: 15,
+      },
+    })
+
+    blogs.value = data.data
+
+  } catch (error) {
+    console.error("Error loading more items:", error)
+  } finally {
+
+  }
+}
+
+
+
+
+const getBlogListFunc = async (val)=>{
+
+  if(val === 'list'){
+    try {
+      const data = await $fetch(`/api/blog`, {
+        query: {
+          locale: 'fa',
+          category_id: activeCategory.value.code,
+          page: 1,
+          per_page: 1,
+        },
+      })
+
+      blogs.value = data.data
+
+    } catch (error) {
+      console.error("Error loading more items:", error)
+
+    } finally {
+
+    }
+      //request for category blogs
+  }else{
+    const {data: response} = await useAsyncData(
+        `product_id_${val}`,
+        () => useApi(`/product/slug/${val}`, {
+          query: {
+            locale: 'fa',
+          }
+        })
+        , {})
+    if (response.value) {
+
+
+      getBlogProduct(response.value.data.code)
+    }
   }
 }
 
@@ -558,10 +587,10 @@ const setActiveCatFunc = (name) => {
 
 // واچ کردن تغییرات روی object مسیر
 watch(
-    () => route.params.category_id, // یا route.path اگر پارامترها براتون مهم نیست
+    () => route.params.product_name, // یا route.path اگر پارامترها براتون مهم نیست
     (newId) => {
       if (newId) {
-
+        getBlogListFunc(newId)
       }
     }
 );
@@ -576,8 +605,6 @@ useHead({
 
 onMounted(()=>{
 
-   /*getActiveCat(route.params.category_name)*/
-  /* setActiveCatFunc(route.params.category_name)*/
    setTimeout(() => {
     endLoading()
   }, 100)
