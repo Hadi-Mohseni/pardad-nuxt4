@@ -74,53 +74,42 @@ const route = useRoute()
 
 definePageMeta({
   layout: 'category',
-  pageTransition: {
-    name: 'page-transition',
-    mode: 'fade-in'
-  }
 })
 
 
 import {useGlobalStore} from "~/stores/global.js";
 
 import {formatJalaliDate} from '~/utils/dateFormatter'
-import MainCategory from "~/pages/MainCategory.vue";
 import {ref, useTemplateRef} from "vue";
 
 const el = useTemplateRef('el')
 
-import {useContentAnimation} from "~/composables/useContentAnimation.js";
 
-const {animateNewItems} = useContentAnimation()
 const {endLoading} = useGlobalStore()
 const {getLoading} = storeToRefs(useGlobalStore())
-const navLine = ref(null)
+
 import {useInfiniteScroll} from '@vueuse/core';
 
-const searchTerm = ref('')
+
 const bodyElement = ref(null)
-const categoryItems = ref([])
-const blogList = inject('blogs')
-const activeSubItemTop = ref(0)
-const activeSubItemHeight = ref(24)
+
+const blogData = inject('blogs')
+
+
+const blogList = computed(()=>blogData.value.list)
+const updateBlogList = computed(()=>blogData.value.list)
+
 
 
 
 const showSection = ref(false)
 const sect = ref()
-const reversedSliderItems = ref([])
-const greenBarTop = ref(0)
-const greenBarHeight = ref(0)
-const containerRef = ref(null)
 
-const activeTab = ref(null)
-const subActiveTab = ref(null)
-const selectedActiveTab = ref(false)
-const activeTabTitle = ref(null)
-const activeSubTabTitle = ref(null)
-const activeCategory = ref(null)
-const activeSubCategory = ref(null)
-const isLoading = ref(false)
+const isLoading = computed(()=>{
+  return blogData.value.loading
+})
+
+
 const paginateInfo = ref({
   total: 1,
   per_page: 1,
@@ -130,11 +119,9 @@ const paginateInfo = ref({
 const page = ref(1)
 const per_page = ref(12)
 
-const observer = ref(null)
 const infiniteScrollTrigger = ref(null)
 const animationTimeline = ref(null)
-const updateBlogList = inject('blogs')
-const blogLoadingList = ref(false)
+
 const seperatedText = (text) => {
   return text.replace(
       /([a-zA-Z][a-zA-Z0-9 ,.'"-]+[a-zA-Z0-9])/g,
@@ -150,62 +137,11 @@ const product = ref({})
 
 
 
+const blogFn = inject('getBlogFn')
 
 
-if(route.params.product_name === 'list'){
-
-}else{
-
- /* const {data: response} = await useAsyncData(
-      `product_id_${route.params.product_name}`,
-      () => useApi(`/product/slug/${route.params.product_name}`, {
-        query: {
-          locale: 'fa',
-        }
-      })
-      , {})
 
 
-  if (response.value) {
-
-    product.value = response.value.data
-    getBlogProduct(product.value.code)
-  }*/
-}
-
-
-const processedText = computed(() => {
-  // تشخیص زبان هر بخش از متن
-  return props.text.split(/([\u0600-\u06FF]+)/).map(part => {
-    if (/[\u0600-\u06FF]/.test(part)) {
-      // متن فارسی
-      return `<span class="fa-font">${part}</span>`;
-    } else if (/[a-zA-Z]/.test(part)) {
-      // متن انگلیسی
-      return `<span class="en-font">${part}</span>`;
-    }
-    return part;
-  }).join('');
-});
-
-
-const currentSubcategories = computed(() => {
-
-  const category = categoryItems.value.find(item => item.id === activeCategory.value.id);
-  return category ? category.children : [];
-})
-
-watch(searchTerm, (v) => {
-  const blogs = [...blogList.value]
-  if (v.length > 0) {
-    const filters = blogs.filter(item => item.title.includes(v))
-    updateBlogList.value = filters
-  } else {
-    updateBlogList.value = blogs
-  }
-
-
-})
 
 watch(getLoading, (value) => {
   if (!value) {
@@ -225,28 +161,8 @@ useHead({
 });
 
 
-const infiniteOptions = ref({
-  endpoint: '/api/blog',
-  query: {category_id: null, locale: 'fa'},
-  perPage: 12,
-  target: bodyElement,
-  animateCallback: animateNewItems,
-})
 
 
-const updateActiveLinePosition = () => {
-  nextTick(() => {
-    if (subActiveTab.value) {
-
-      const activeElement = document.querySelector(`[ref="subItem_${subActiveTab.value}"]`)
-
-      if (activeElement) {
-        activeSubItemTop.value = activeElement.offsetTop
-        activeSubItemHeight.value = activeElement.offsetHeight
-      }
-    }
-  })
-}
 
 // واکنش به تغییرات subActiveTab
 const initPage = (val) => {
@@ -264,6 +180,17 @@ const initPage = (val) => {
 
 
 async function getBlogProduct() {
+
+  const query = {
+        locale: 'fa',
+        page: page.value,
+        per_page: per_page.value,
+      }
+
+  blogFn(query)
+
+
+
   return
   if(!product.value.code){
     return
@@ -327,7 +254,7 @@ const loadMore = async () => {
   if (page.value >= paginateInfo.value.last_page) return
 
   page.value += 1
-  await getBlogProduct(product.value.code)
+  await getBlogProduct()
 }
 
 const {reset} = useInfiniteScroll(
@@ -338,6 +265,10 @@ const {reset} = useInfiniteScroll(
       canLoadMore: () => page.value < paginateInfo.value.last_page,
     }
 )
+
+
+
+
 
 
 useHead({
@@ -351,6 +282,7 @@ onMounted(async () => {
 
   setTimeout(()=>{
     endLoading()
+
   },100)
 
 });

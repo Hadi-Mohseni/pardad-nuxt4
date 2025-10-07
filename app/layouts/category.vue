@@ -45,7 +45,7 @@
                     <div
                         v-for="(category, index) in categories"
                         :key="category.id"
-                        @click="goToBlogPage(category)"
+                        @click="toggleCategory(category)"
                         :style="{background : activeCategory?.slug === category.slug ? primaryColor : '#e1e1e1'}"
                         :class="[
                       'cursor-pointer px-4 py-2 rounded-2xl text-sm inline-flex items-center min-w-max transition-all duration-300',
@@ -66,7 +66,7 @@
                     <div
                         v-for="(subcategory, subIndex) in activeCategory?.products"
                         :key="subIndex"
-                        @click.stop="goToBlogPage(subcategory)"
+                        @click.stop="goToProductPage(subcategory)"
                         :class="[
                       'cursor-pointer px-4 text-xs border-b border-b-gray-500 h-6',
                       activeProduct?.slug === subcategory.slug ? 'text-[#FFFFFF] font-medium' : 'text-[#e2e2e2] font-normal',
@@ -76,7 +76,9 @@
                       <div
                           v-if="activeProduct?.slug === subcategory.slug"
                           class="absolute bottom-[-7px] left-1/2 -translate-x-1/2 bg-[#454545] w-1/3 h-[3px]"
-                      ></div>
+                      >
+
+                      </div>
                       <span>{{ subcategory.title }}</span>
                     </div>
                   </div>
@@ -164,6 +166,7 @@
                           @click="toggleCategory(category)"
                           class="cursor-pointer px-3 py-3 rounded-md text-xl md:text-base flex items-center justify-between hover:font-bold transition-all duration-200"
                           :class="[
+
           activeCategory?.slug === category.slug
             ? `hover:text-[${primaryColor}] text-[${primaryColor}] font-bold`
             : `hover:text-[${primaryColor}] text-[#1e1e1e] font-light`
@@ -175,7 +178,7 @@
         <svg
             v-if="category.products?.length > 0"
             class="w-4 h-4 ml-12 transition-transform duration-200"
-            :class="{ 'rotate-180': activeCategory?.slug === category.slug }"
+            :class="{ 'rotate-180': activeCategory?.slug === category.slug && openActiveCat }"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -185,7 +188,7 @@
       </span>
 
                       <!-- وقتی category انتخاب شد و products داشت -->
-                      <CollapseTransition :isOpen="activeCategory?.slug === category.slug">
+                      <CollapseTransition :isOpen="activeCategory?.slug === category.slug && openActiveCat">
                         <ul v-if="category.products?.length > 0" class="space-y-2 pl-4">
                           <li
                               v-for="(product, pIndex) in category.products"
@@ -259,12 +262,19 @@ const showContent = ref(false)
 const {endLoading} = useGlobalStore()
 const titleElement = ref(null)
 const containerRef = ref(null)
-const blogs = ref([])
+const blogs = ref({
+  list:[],
+  page:1,
+  limit:1,
+  loading:false
+})
 
 const route = useRoute()
 const router = useRouter()
 const activeCategory = ref(null)
 const activeProduct = ref(null)
+
+const openActiveCat = ref(true)
 
 const config = useRuntimeConfig()
 provide('blogs', blogs)
@@ -276,6 +286,10 @@ watch(getLoading, (value) => {
 
   }
 })
+function getBlogFn(params) {
+  console.log('پدر گفت:', params)
+}
+provide('getBlogFn', getBlogFn)
 
 const {data: response} = await useAsyncData(
     `new-categories-normal`,
@@ -296,10 +310,11 @@ const {data: response} = await useAsyncData(
     })
 
 
-const goToProductPage = (product) => {
+const goToProductPage = async (product) => {
   activeProduct.value = product
   updateGreenBarPosition(activeCategory.value.slug, product.slug)
-  router.push(`/product/${product.category_slug}/${product.slug}`)
+  await navigateTo(`/product/${product.category_slug}/${product.slug}`)
+
   // ریدایرکت
 }
 
@@ -320,11 +335,16 @@ const getProducts = async (category , select=false)=>{
 
 
     if(data.data.length > 0 && select){
-      const findPr = categories.value[findEl].products.find(item=>item.slug === route.params.product_name)
-      activeProduct.value = findPr
-      setActiveCatFunc(activeProduct.value.slug)
-      console.log(activeProduct.value.slug ,'ss')
-      getBlogListFunc(activeProduct.value.slug)
+      openActiveCat.value = true
+      setTimeout(()=>{
+        const findPr = categories.value[findEl].products.find(item=>item.slug === route.params.product_name)
+        activeProduct.value = findPr
+        if(activeProduct.value){
+          setActiveCatFunc(activeProduct.value.slug)
+          getBlogListFunc(activeProduct.value.slug)
+        }
+      } , 10)
+
     }
 
 
@@ -341,25 +361,7 @@ const getProducts = async (category , select=false)=>{
 
   }
 }
-if(response.value){
-
-
-
-  categories.value = response.value
-  activeCategory.value  = categories.value.find(item=>item.slug === route.params.category_name)
-
-
-  setActiveCategory(activeCategory.value)
-
-
-
-  getProducts(activeCategory.value , true)
-
-
-}
-
 const updateGreenBarPosition = async (categorySlug, subCategorySlug = null) => {
-
 
 
 
@@ -378,7 +380,6 @@ const updateGreenBarPosition = async (categorySlug, subCategorySlug = null) => {
     // If subcategory is active, find the subcategory element
     activeElement = containerRef.value.querySelector(`[data-product-slug="${subCategorySlug}"]`)
   }
-
 
 
 
@@ -410,24 +411,48 @@ const updateGreenBarPosition = async (categorySlug, subCategorySlug = null) => {
     }
   }
 }
+if(response.value){
 
 
-const toggleCategory = (category) => {
+
+  categories.value = response.value
+  activeCategory.value  = categories.value.find(item=>item.slug === route.params.category_name)
+
+
+  setActiveCategory(activeCategory.value)
+
+
+
+  getProducts(activeCategory.value , true)
+
+
+
+}
+
+
+
+
+const toggleCategory = async (category) => {
+
 
   if (activeCategory.value?.slug === category.slug) {
-    activeCategory.value = null
+
+    openActiveCat.value = !openActiveCat.value
     activeProduct.value = null
-    updateGreenBarPosition(null , null)
-    blogs.value = []
+    updateGreenBarPosition(activeCategory.value?.slug , null)
+    blogs.value.list = []
+
 
   } else {
+    openActiveCat.value = true
     activeProduct.value = null
     activeCategory.value = category
+    router.push(`/product/${category.slug}/list`)
     getProducts(activeCategory.value , false)
     getBlogListFunc('list')
     setTimeout(()=>{
       updateGreenBarPosition(category.slug , null)
-    },250)
+    },100)
 
 
   }
@@ -443,6 +468,9 @@ const initPage=()=>{
   setTimeout(() => {
     setTimeout(() => {
       store.setShowContent(true)
+      setTimeout(()=>{
+        updateGreenBarPosition(activeCategory.value?.slug , activeProduct.value?.slug)
+      },2000)
     }, 5)
   }, 10)
 }
@@ -454,8 +482,11 @@ const initPage=()=>{
 
 
 // Props from page
-const goToBlogPage = (category)=>{
-  router.push(`/product/${category.slug}`)
+const goToBlogPage = async (category)=>{
+
+
+  await navigateTo(`/product/${category.slug}`)
+
 
 }
 
@@ -518,7 +549,7 @@ async function getBlogProduct(code) {
   if(!code){
     return
   }
-
+  blogs.value.loading = true
   const config = useRuntimeConfig()
   try {
     const data = await $fetch(`${config.public.apiUrl}/product/${code}/blogs`, {
@@ -529,12 +560,12 @@ async function getBlogProduct(code) {
       },
     })
 
-    blogs.value = data.data
+    blogs.value.list = data.data
 
   } catch (error) {
     console.error("Error loading more items:", error)
   } finally {
-
+    blogs.value.loading = false
   }
 }
 
@@ -542,8 +573,10 @@ async function getBlogProduct(code) {
 
 
 const getBlogListFunc = async (val)=>{
+  blogs.value.list = []
 
   if(val === 'list'){
+    blogs.value.loading = true
     try {
       const data = await $fetch(`/api/blog`, {
         query: {
@@ -554,13 +587,13 @@ const getBlogListFunc = async (val)=>{
         },
       })
 
-      blogs.value = data.data
+      blogs.value.list = data.data
 
     } catch (error) {
       console.error("Error loading more items:", error)
 
     } finally {
-
+      blogs.value.loading = false
     }
       //request for category blogs
   }else{
@@ -573,8 +606,6 @@ const getBlogListFunc = async (val)=>{
         })
         , {})
     if (response.value) {
-
-
       getBlogProduct(response.value.data.code)
     }
   }
@@ -608,9 +639,6 @@ onMounted(()=>{
    setTimeout(() => {
     endLoading()
   }, 100)
-})
-onBeforeRouteLeave(()=>{
-  store.setShowContent(false)
 })
 
 onBeforeUnmount(()=>{

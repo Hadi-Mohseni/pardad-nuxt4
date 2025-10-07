@@ -195,6 +195,8 @@ const props = defineProps({
 
 })
 
+
+
 const titleElement = ref(null)
 
 const emit = defineEmits(['updateCategory', 'updateSubcategory'])
@@ -212,8 +214,9 @@ const selectTab = computed(() =>
    props.activeTab
 )
 
-
 const activeCat = ref(props.activeTab)
+
+/*const activeCat = computed(()=>props.activeTab)*/
 
 watch(
     () => props.activeTab, // getter function makes it reactive
@@ -278,16 +281,21 @@ const updateGreenBarPosition = async (categoryId, subCategoryId = null) => {
 }
 
 const handleGetBlog = (category, type , value) => {
- /* if (activeCat.value && activeCat.value.id !== category.id) {
-    console.log('aaaaaaaaaa')
+  if (activeCat.value && activeCat.value.id !== category.id) {
 
-  }*/
+    subActiveTab.value = null
+    activeCat.value  = null
+  }else{
+    subActiveTab.value = null
+    activeCat.value  = category
+    emit('updateCategory', category, type)
+    updateGreenBarPosition(category.id)
+  }
 
-  subActiveTab.value = null
-  activeCat.value  = category
 
-  emit('updateCategory', category, type)
-  updateGreenBarPosition(category.id)
+
+  console.log(activeCat.value)
+
 
 
 

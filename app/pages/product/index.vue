@@ -78,7 +78,7 @@
           <nuxt-link v-if="subCats.length >  0 " :to="`/product/${subCats[0].slug}`"  >
             {{ subCats[0].slug }}
             <div  v-if="subCats[0].image" class="absolute inset-0 flex items-center justify-center">
-              <img  :src="subCats[0].image" alt="">
+              <img  :src="subCats[0].image" alt=""  class="w-[80%] max-w-[220px] max-h-[220px]">
             </div>
 
             <div class="absolute left-2 top-2 text-base tracking-normal w-4 ">
@@ -92,10 +92,10 @@
           <nuxt-link v-if="subCats.length > 1 " :to="`/product/${subCats[1].slug}`"   >
             {{ subCats[1].slug }}
             <div  v-if="subCats[1].image" class="absolute inset-0 flex items-center justify-center">
-              <img  :src="subCats[1].image" alt="">
+              <img  :src="subCats[1].image" alt=""  class="w-[80%] max-w-[220px] max-h-[220px]">
             </div>
             <div class="absolute left-2 top-2 text-base tracking-normal w-4 ">
-              <img src="~/assets/img/Vector.png" alt="">
+              <img src="~/assets/img/Vector.png" alt=""  >
             </div>
           </nuxt-link>
         </div>
@@ -104,10 +104,10 @@
           <nuxt-link v-if="subCats.length > 2 " :to="`/product/${subCats[2].slug}`"  >
             {{ subCats[2].slug }}
             <div  v-if="subCats[2].image" class="absolute inset-0 flex items-center justify-center">
-              <img  :src="subCats[2].image" alt="">
+              <img  :src="subCats[2].image" alt=""  class="w-[80%] max-w-[220px] max-h-[220px]">
             </div>
             <div class="absolute left-2 top-2 text-base tracking-normal w-4 ">
-              <img src="~/assets/img/Vector.png" alt="">
+              <img src="~/assets/img/Vector.png" alt=""  >
             </div>
           </nuxt-link>
 
@@ -131,7 +131,7 @@ definePageMeta({
 })
 
 
-console.log('hey page rpoduct')
+
 
 const store = useGlobalStore()
 

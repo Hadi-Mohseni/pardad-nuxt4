@@ -5,7 +5,7 @@
        class="w-full h-full grid grid-cols-12 relative">
 
     <div class="lg:col-span-7 col-span-12 relative lg:order-1 order-2">
-      <div class="lg:pr-21 lg:pt-9 flex flex-col justify-between 2xl:justify-around h-full"
+      <div class="lg:pr-21 lg:pt-9 flex flex-col justify-between 2xl:justify-between h-full lg:pb-20 pb-8"
            ref="bodyElement">
 
         <div class=" mb-0 flex flex-col gap-x-1 items-start lg:mt-12 w-full"
@@ -35,19 +35,9 @@
           </div>
         </div>
 
-        <div class="w-max lg:mb-0">
-<!--          <div class="relative h-[1px] w-m my-2"
-               ref="seperatedLine">
-            &lt;!&ndash; First child: opacity 0.1 &ndash;&gt;
-            <div class="absolute top-0 right-0 w-full h-full bg-black opacity-10"></div>
-
-            &lt;!&ndash; Second child: scale + origin &ndash;&gt;
-            <div ref="seperatedLineChild"
-                 class="absolute top-0  w-full h-full bg-black"
-                 :class="(locale === 'en') ? 'origin-top-left right-0' : 'origin-top-left left-0'"></div>
-          </div>-->
+        <div class="w-max ">
           <div :class="(locale === 'en') && 'dir-ltr text-gray-400'"
-               class="mt-5 lg:mt-0 lg:mb-20 2xl:mb-0 opacity-75  font-normal lg:text-[14px] 2xl:text-[14px] text-xs lg:leading-[22px]">
+               class="mt-5 lg:mt-0   opacity-75  font-normal lg:text-[14px] 2xl:text-[14px] text-xs lg:leading-[22px]">
             <p class=""> {{ t('landing.home_page.footer.0.p') }}</p>
             <p class="">
               {{ t('landing.home_page.footer.1.p') }}
