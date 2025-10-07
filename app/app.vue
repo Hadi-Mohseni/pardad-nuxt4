@@ -4,6 +4,11 @@
     <MenuLogo ref="menuLogo"/>
     <Menu ref="menu"/>
     <MainLoading ref="mainLoading"  />
+
+    <CommonLoadingLine
+                class="hidden lg:flex"
+                ref="pageLine"
+                />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
@@ -35,7 +40,7 @@ const updateFavicon = () => {
     ],
   });
 };
-
+const pageLine = ref(null)
 
 // هنگام mount شدن کامپوننت، favicon را بررسی و تنظیم کنید
 onMounted(() => {
@@ -44,6 +49,15 @@ onMounted(() => {
     let lang_value = localStorage.getItem('lang') || 'fa';
     store.setLocale(lang_value);
     setAppLocale(lang_value);
+    pageLine.value.create()
+
+ setTimeout(()=>{
+   pageLine.value.timeScale(1);
+   setTimeout(()=>{
+     pageLine.value.start()
+   },100)
+
+ },100)
   }
 
   const preventDoubleClickZoom = (e) => {

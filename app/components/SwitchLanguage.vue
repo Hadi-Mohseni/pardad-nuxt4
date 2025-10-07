@@ -5,7 +5,8 @@
         v-for="(item, index) in locales"
         :key="index"
         @click="changeLocale(item)"
-        class="transition-colors duration-200 text-black-60 hover:opacity-60 flex mt-[3px]"
+        class="transition-colors duration-200 text-black-60 hover:opacity-60 flex "
+        :class="[locale !== 'en' && 'mt-[3px]']"
     >
       <span
           :class="[
