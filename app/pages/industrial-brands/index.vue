@@ -1,7 +1,7 @@
 <template>
   <NuxtLayout name="page">
     <template #content>
-      <div class="w-full h-full mt-10 lg:mt-0 px-4 md:pt-0 -pt-[100px] md:px-0">
+      <div class="w-full h-full mt-10 lg:mt-0  md:pt-0 -pt-[100px] ">
         <section>
           <ul
               ref="bodyElement"
@@ -60,7 +60,7 @@
     </template>
 
     <template #title>
-      <div class="fixed h-screen hidden text-[30px] lg:flex flex-col gap-y-8 pr-4 transition-all">
+      <div class="px-4 md:px-0 fixed h-screen hidden text-[30px] lg:flex flex-col gap-y-8 pr-4 transition-all">
         <h1
             ref="titleElement"
             class="lg:pr-4 md:pr-20 pr-4 text-right lg:before:content-none lg:after:content-none before:content-[''] before:left-0 before:bg-black-100/20 before:absolute before:bottom-0 before:right-0 before:h-[1px] after:content-[''] after:w-[8vw] after:bg-black-900 after:absolute after:bottom-0 after:right-[80px] after:h-[1px] text-[40px] lg:ml-10 xl2:ml-[300px] mb-10 lg:mb-0 font-light"
