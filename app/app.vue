@@ -50,7 +50,7 @@ onMounted(() => {
     let lang_value = localStorage.getItem('lang') || 'fa';
     store.setLocale(lang_value);
     setAppLocale(lang_value);
-    pageLine.value.create()
+   /* pageLine.value.create()*/
 
 /* setTimeout(()=>{
    pageLine.value.timeScale(1);
