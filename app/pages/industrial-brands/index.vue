@@ -61,7 +61,7 @@
           <div ref="infiniteScrollTrigger" class="h-64 w-full "></div>
 
           <!-- اسکلتون یا لودینگ (اختیاری) -->
-          <div v-if="isLoading" class="flex justify-center py-16">
+          <div v-show="isLoading" class="flex justify-center py-16">
             در حال بارگذاری...
           </div>
         </section>

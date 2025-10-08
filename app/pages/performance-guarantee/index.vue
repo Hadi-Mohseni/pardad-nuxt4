@@ -3,7 +3,7 @@
     <template #content>
       <!-- main content -->
       <div
-          v-if="isDataLoad"
+          v-show="isDataLoad"
           class="relative overflow-hidden min-h-screen flex flex-col md:grid md:grid-cols-2"
       >
         <!-- کارت‌ها -->
@@ -56,7 +56,7 @@
 
     <template #backgroundAnimation>
       <CommonPageAboutBackground
-          v-if="store.getContentLoad"
+          v-show="store.getContentLoad"
           ref="pageBackground"
       />
     </template>

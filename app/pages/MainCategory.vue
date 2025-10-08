@@ -16,7 +16,7 @@
 
                 </h1>
                                 <CommonHorizontalLine
-                                    v-if="showSection"
+                                    v-show="showSection"
                                     class="lg:hidden flex"
                                     ref="pageHorizontalLine"
                                     :element="titleElement"
@@ -54,7 +54,7 @@
                       class="relative cursor-pointer px-4 text-xs border-b border-b-gray-500 h-6"
                   >
                     <div
-                        v-if="activeCat?.id && !subActiveTab "
+                        v-show="activeCat?.id && !subActiveTab "
                         class="absolute bottom-[-7px] left-1/2 -translate-x-1/2 bg-[#454545] w-1/3 h-[3px]"
                     ></div>
                     <span>{{ activeCat?.title }}</span>
@@ -70,7 +70,7 @@
                       class="relative"
                   >
                     <div
-                        v-if="subActiveTab === subcategory.id"
+                        v-show="subActiveTab === subcategory.id"
                         class="absolute bottom-[-7px] left-1/2 -translate-x-1/2 bg-[#454545] w-1/3 h-[3px]"
                     ></div>
                     <span>{{ subcategory.title }}</span>
@@ -107,7 +107,7 @@
                       <span>{{ category.title }}</span>
 
                       <svg
-                          v-if="category.children?.length > 0"
+                          v-show="category.children?.length > 0"
                           class="w-4 h-4 ml-12 transition-transform duration-200"
                           :class="{ 'rotate-180': activeCat?.id === category.id }"
                           fill="none"
@@ -118,10 +118,10 @@
                       </svg>
                     </span>
 
-                    <div v-if="category.isLoading" class="text-xs text-gray-500 px-3 py-1">در حال بارگذاری...</div>
+                    <div v-show="category.isLoading" class="text-xs text-gray-500 px-3 py-1">در حال بارگذاری...</div>
                     <CollapseTransition :isOpen="activeCat?.id === category.id ">
                       <ul
-                          v-if="category.children?.length > 0"
+                          v-show="category.children?.length > 0"
                           class="space-y-2 pl-4"
                       >
                         <li
@@ -138,7 +138,7 @@
                     </CollapseTransition>
 
 <!--                    <ul
-                        v-if="category.children?.length > 0"
+                        v-show="category.children?.length > 0"
                         class="overflow-hidden transition-all duration-300 ease-in-out -mt-[10px]"
                         :class="{
                         'max-h-0': activeTab?.id !== category.id,

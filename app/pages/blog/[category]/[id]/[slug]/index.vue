@@ -13,7 +13,7 @@
 
 
             <div
-                v-if="desc"
+                v-show="desc"
                 class="text-[16px] tracking-tight lg:text-[17px] description"
                 id="main"
                 v-html="desc"
@@ -46,7 +46,7 @@
             <section id="comment" class="animate__animated animate__fadeInUp">
               <div class="mb-4 font-['PeydaXDemi']">
                 <h3 class="lg:text-[20px] text-[16px] text-[#565656] ">نظرات کاربران</h3>
-                <h4 v-if="response && response.contents" class="lg:text-[14px] text-xs text-[#878787] mt-1">نظرات
+                <h4 v-show="response && response.contents" class="lg:text-[14px] text-xs text-[#878787] mt-1">نظرات
                   کاربران درباره {{ response.contents[0].title }}</h4>
               </div>
 
@@ -85,7 +85,7 @@
     </template>
 
     <template #title>
-      <div v-if="response && response.contents"
+      <div v-show="response && response.contents"
            class="fixed h-screen hidden text-[25px]  lg:flex flex-col gap-y-8 pr-4 transition-all">
 
         <h1 @click="goToSection('main')"
@@ -101,7 +101,7 @@
         </h1>
 
         <client-only>
-          <div v-if="headings.length"
+          <div v-show="headings.length"
                class="flex flex-col gap-2">
           <span v-for="item in headings"
                 :key="item.id"
@@ -123,7 +123,7 @@
             بخش نظرات
           </span>
       </div>
-      <div v-if="response && response.contents" class="lg:hidden flex">
+      <div v-show="response && response.contents" class="lg:hidden flex">
         <h1 class="lg:pr-4 md:pr-20 pr-4 text-right pb-5 tracking-tighter
         lg:tracking-normal lg:pb-10 lg:before:content-none lg:after:content-none before:content-['']
         before:left-0 before:bg-black-100/20 before:absolute before:bottom-0 before:right-0 before:h-[1px]

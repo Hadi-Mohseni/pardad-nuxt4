@@ -3,7 +3,7 @@
     <template #content>
       <!-- main content -->
       <div
-          v-if="isDataLoad"
+          v-show="isDataLoad"
           class="relative overflow-hidden min-h-screen px-4 lg:px-32 md:px-16 flex flex-col lg:flex-row"
       >
         <!-- اعضای تیم -->
@@ -57,7 +57,7 @@
 
     <template #backgroundAnimation>
       <CommonPageAboutBackground
-          v-if="store.getContentLoad"
+          v-show="store.getContentLoad"
           ref="pageBackground"
       />
     </template>

@@ -2,7 +2,7 @@
   <div class="relative w-full" :class="[height]">
     <div class="blog-container z-10 w-full relative">
       <!--         TODO  @mousemove="onMouseMove"  add to first div-->
-      <div v-if="selection"
+      <div v-show="selection"
            class="absolute left-0 top-0 bottom-0 h-full  flex flex-col justify-center items-center gap-y-5 z-10">
         <div :class="indx + 1 === activeIndex ? 'text-white-100' : ''"
              class="flex justify-end w-full"
@@ -17,9 +17,9 @@
             - {{ sliderItemBtn.title }}
 
 
-            <template v-if="indx + 1 === activeIndex">
+            <template v-show="indx + 1 === activeIndex">
 
-              <div v-if="subListLoading" class="ml-4 mt-2">
+              <div v-show="subListLoading" class="ml-4 mt-2">
                 <svg class="fill-white-70 " width="24" height="24" viewBox="0 0 24 24"
                      xmlns="http://www.w3.org/2000/svg">
                   <rect x="1" y="6" width="2.8" height="12">
@@ -91,7 +91,7 @@
                 <h2 class="text-3xl text-right h-12">
                   {{ sliderItem.title }}
                 </h2>
-                <div v-if="showDescription">
+                <div v-show="showDescription">
 
                   <h3 class="text-1xl text-right h-8">
                     {{ sliderItem.subtitle }}
@@ -116,7 +116,7 @@
                   </h4>
                 </div>
 
-                <span v-if="showDescription" class="text-sm text-left">
+                <span v-show="showDescription" class="text-sm text-left">
                   بیشتر
               </span>
               </div>
@@ -125,7 +125,7 @@
           </li>
 
         </ul>
-        <div v-if="arrow"
+        <div v-show="arrow"
              class="absolute right-0 top-0 bottom-0 h-full  flex flex-col justify-center items-center gap-y-10 z-10">
           <button class="prev"
                   @click="prevSlideHandler">

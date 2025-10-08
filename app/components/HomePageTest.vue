@@ -1,6 +1,6 @@
 <template>
   <div ref="section"
-       v-if="showSection"
+       v-show="showSection"
        class="w-full h-full grid grid-cols-12 relative">
 
     <div class="lg:col-span-7 col-span-12 relative lg:order-1 order-2 py-4 lg:py-0">
