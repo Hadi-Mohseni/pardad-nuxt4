@@ -16,8 +16,8 @@
        after:bg-black-900 after:absolute after:bottom-0 after:right-[80px] after:h-[1px]
        text-[40px] md:text-[45px] lg:ml-10 xl2:ml-[300px] mb-10 lg:mb-0 font-light"
           ref="titleElement">
-        <BackButton/>
         {{ t('about_us.title') }}
+        <BackButton/>
       </h1>
 
     </template>

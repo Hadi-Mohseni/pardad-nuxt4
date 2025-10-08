@@ -96,8 +96,8 @@
          after:h-[1px] lg:ml-10 xl2:ml-[300px] text-[#2F55E8]"
             ref="titleElement"
             :class="[activeSection === 'main' ? 'text-[#2F55E8]' : 'text-[#7E7E7E]']">
-          <BackButton/>
           {{ response.contents[0].title }}
+          <BackButton/>
         </h1>
 
         <client-only>

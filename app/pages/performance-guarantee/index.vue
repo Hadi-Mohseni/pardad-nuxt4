@@ -49,8 +49,8 @@
         text-[28px] md:text-[45px] lg:ml-10 xl2:ml-[300px] mb-6 md:mb-0 font-light relative"
           ref="titleElement"
       >
-        <BackButton />
         {{ t("performance_guarantee.title") }}
+        <BackButton />
       </h1>
     </template>
 

@@ -50,8 +50,8 @@
         text-[40px] md:text-[45px] lg:ml-10 xl2:ml-[300px] mb-10 lg:mb-0 font-light relative"
           ref="titleElement"
       >
-        <BackButton />
         {{ t("our_team.title") }}
+        <BackButton />
       </h1>
     </template>
 

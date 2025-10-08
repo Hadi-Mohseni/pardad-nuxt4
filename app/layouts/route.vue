@@ -32,9 +32,9 @@
          after:h-[1px] lg:ml-10 xl2:ml-[300px] "
               ref="titleElement"
           >
-            <BackButton/>
-            {{ getLayoutData.title }}
 
+            {{ getLayoutData.title }}
+            <BackButton/>
           </h1>
 
         </div>
