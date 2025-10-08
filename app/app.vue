@@ -6,6 +6,7 @@
     <MainLoading ref="mainLoading"  />
 
     <CommonLoadingLine
+                v-if="false"
                 class="hidden lg:flex"
                 ref="pageLine"
                 />
@@ -51,13 +52,13 @@ onMounted(() => {
     setAppLocale(lang_value);
     pageLine.value.create()
 
- setTimeout(()=>{
+/* setTimeout(()=>{
    pageLine.value.timeScale(1);
    setTimeout(()=>{
      pageLine.value.start()
    },100)
 
- },100)
+ },100)*/
   }
 
   const preventDoubleClickZoom = (e) => {
