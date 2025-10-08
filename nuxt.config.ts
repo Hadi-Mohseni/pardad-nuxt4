@@ -13,7 +13,6 @@ export default defineNuxtConfig({
         lang: 'en',
       },
       title: 'گروه پرداد',
-
       script: [
         {src: '/TweenMax.min.js', defer: true},
         {src: '/TimelineMax.min.js', defer: true},
