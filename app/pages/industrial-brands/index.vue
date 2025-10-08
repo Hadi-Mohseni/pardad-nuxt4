@@ -66,7 +66,7 @@
             class="lg:pr-4 md:pr-20 pr-4 text-right lg:before:content-none lg:after:content-none before:content-[''] before:left-0 before:bg-black-100/20 before:absolute before:bottom-0 before:right-0 before:h-[1px] after:content-[''] after:w-[8vw] after:bg-black-900 after:absolute after:bottom-0 after:right-[80px] after:h-[1px] text-[40px] lg:ml-10 xl2:ml-[300px] mb-10 lg:mb-0 font-light"
         >
           {{ t('menuItems.industrialBrands') }}
-          <BackButton/>
+          <BackButton class="mt-3"/>
         </h1>
       </div>
       <div class="lg:hidden flex">

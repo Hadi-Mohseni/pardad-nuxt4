@@ -51,7 +51,7 @@
           ref="titleElement"
       >
         {{ t("our_team.title") }}
-        <BackButton />
+        <BackButton class="mt-3"/>
       </h1>
     </template>
 

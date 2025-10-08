@@ -46,11 +46,11 @@
     <template #title>
       <h1
           class="lg:pr-20 pr-4 text-right
-        text-[28px] md:text-[45px] lg:ml-10 xl2:ml-[300px] mb-6 md:mb-0 font-light relative"
+        text-[28px] md:text-[30px] lg:ml-10 xl2:ml-[300px] mb-6 md:mb-0 font-light relative"
           ref="titleElement"
       >
         {{ t("performance_guarantee.title") }}
-        <BackButton />
+        <BackButton class="mt-3"/>
       </h1>
     </template>
 

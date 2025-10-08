@@ -178,7 +178,7 @@
         {{
           t('contact_us.title')
         }}
-        <BackButton/>
+        <BackButton class="mt-3"/>
       </h1>
 
     </template>

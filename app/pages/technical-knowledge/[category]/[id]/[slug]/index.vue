@@ -97,7 +97,7 @@
             ref="titleElement"
             :class="[activeSection === 'main' ? 'text-[#2F55E8]' : 'text-[#7E7E7E]']">
           {{ response.contents[0].title }}
-          <BackButton/>
+          <BackButton class="mt-3"/>
         </h1>
 
         <client-only>

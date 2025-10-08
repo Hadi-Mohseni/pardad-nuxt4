@@ -23,7 +23,7 @@
        text-[40px] md:text-[45px] lg:ml-10 xl2:ml-[300px] mb-10 lg:mb-0 font-light"
           ref="titleElement">
         {{ t('commercial.title') }}
-        <BackButton/>
+        <BackButton class="mt-3"/>
       </h1>
 
     </template>
