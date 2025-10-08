@@ -54,12 +54,6 @@
       </h1>
     </template>
 
-    <template #backgroundAnimation>
-      <CommonPageAboutBackground
-          v-if="store.getContentLoad"
-          ref="pageBackground"
-      />
-    </template>
   </NuxtLayout>
 </template>
 
@@ -109,6 +103,7 @@ provide("contentRefs", {
   actions: actionElements,
   title: titleElement,
   subtitle: subtitleElement,
+  hasScroll: false
 });
 
 useSeoMeta({
