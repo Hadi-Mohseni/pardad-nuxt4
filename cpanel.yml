@@ -8,6 +8,8 @@ deployment:
     - npm ci --omit=dev
     - echo "🏗️ Building Nuxt SSR project..."
     - npm run build
+    - echo "📂 Deploying .output to test.pardad-group.com..."
+    - rsync -avh --delete .output/ /home/pardadgr/test.pardad-group.com/.output/
     - echo "🔁 Restarting Node.js app via Passenger..."
-    - touch tmp/restart.txt
+    - touch /home/pardadgr/test.pardad-group.com/tmp/restart.txt
     - echo "✅ Deployment completed successfully!"
