@@ -3,7 +3,7 @@ deployment:
   tasks:
     - echo "🚀 Starting Nuxt 4 SSR deployment..."
     - cd /home/pardadgr/nuxt4-git
-    - source /home/pardadgr/nodevenv/test.pardad-group.com/20/bin/activate
+    - source /home/pardadgr/nodevenv/test-nuxt/20/bin/activate
     - echo "📦 Installing production dependencies..."
     - npm ci --omit=dev
     - echo "🏗️ Building Nuxt SSR project..."
