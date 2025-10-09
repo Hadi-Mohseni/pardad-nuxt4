@@ -20,7 +20,7 @@
           </div>
         </Transition>
       </div>
-      <div class="lg:col-span-3 col-span-9 pt-[300px] order-1 lg:order-2 relative">
+      <div class="lg:col-span-3 col-span-9 lg:pt-[300px]  pt-[150px] order-1 lg:order-2 relative">
 
         <div  class="fixed hidden h-screen  text-[25px]  lg:flex flex-col gap-y-8 pr-4 transition-all">
 
