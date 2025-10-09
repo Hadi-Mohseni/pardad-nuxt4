@@ -175,10 +175,10 @@
        after:bg-black-900 after:absolute after:bottom-0 after:right-[80px] after:h-[1px]
        text-[40px] md:text-[45px] lg:ml-10 xl2:ml-[300px] mb-10 lg:mb-0 font-light"
           ref="titleElement">
-        <BackButton/>
         {{
           t('contact_us.title')
         }}
+        <BackButton class="mt-3"/>
       </h1>
 
     </template>

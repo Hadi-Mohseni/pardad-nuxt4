@@ -6,39 +6,32 @@
           v-show="isDataLoad"
           class="relative overflow-hidden min-h-screen px-4 lg:px-32 md:px-16 flex flex-col lg:flex-row"
       >
-        <!-- اعضای تیم -->
+        <!-- team cards -->
         <div
-            v-for="(member, index) in teamMembers"
-            :key="member.id"
-            @mouseover="hoverItemIndex = index"
-            @mouseleave="hoverItemIndex = null"
-            class="transition-all duration-700 flex-shrink-0 flex items-center justify-center relative cursor-pointer
-          border-[#E5E5E5]"
-            :class="[
-            index !== teamMembers.length - 1 && 'lg:border-l',
-            hoverItemIndex === index
-              ? 'lg:basis-[34%]'
-              : hoverItemIndex !== null
-              ? 'lg:basis-[22%]'
-              : 'lg:basis-[25%]',
-            'w-full h-[400px] lg:h-[calc(100vh-120px)]'
-          ]"
+            v-for="(item, index) in teamMembers"
+            :key="index"
+            class="relative group overflow-hidden cursor-pointer
+                 border-b border-gray-300 last:border-b-0"
         >
-          <!-- تصویر -->
-          <img
-              :src="member.image"
-              alt="member"
-              class="object-cover h-full transition-transform duration-700"
-              :class="hoverItemIndex === index ? 'scale-110' : 'scale-100'"
-          />
+          <!-- image + overlay -->
+          <div class="relative overflow-hidden">
+            <img
+                :src="item.image"
+                alt="content"
+                class="w-full h-[350px] object-cover transition-transform duration-700 ease-in-out group-hover:scale-x-[-1]"
+            />
 
-          <!-- متن معرفی -->
-          <div
-              class="absolute bottom-6 left-6 text-white opacity-0 transition-opacity duration-700"
-              :class="hoverItemIndex === index ? 'opacity-100' : 'opacity-0'"
-          >
-            <h3 class="text-xl font-semibold">{{ member.name }}</h3>
-            <p class="text-sm">{{ member.role }}</p>
+            <!-- overlay -->
+            <div
+                class="flex absolute inset-0 items-end justify-center
+                     md:opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                style="background: linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0));"
+            >
+              <div class="text-white text-center px-4 pb-10">
+                <h3 class="text-lg font-semibold mb-2">{{ item.name }}</h3>
+                <p class="text-sm leading-relaxed">{{ item.role }}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -47,11 +40,11 @@
     <template #title>
       <h1
           class="lg:pr-20 pr-4 text-right
-        text-[40px] md:text-[45px] lg:ml-10 xl2:ml-[300px] mb-10 lg:mb-0 font-light relative"
+        text-[28px] md:text-[30px] lg:ml-10 xl2:ml-[300px] mb-6 md:mb-0 font-light relative"
           ref="titleElement"
       >
-        <BackButton />
-        {{ t("our_team.title") }}
+        {{ t("performance_guarantee.title") }}
+        <BackButton class="mt-3"/>
       </h1>
     </template>
 
@@ -72,19 +65,20 @@ definePageMeta({
 });
 
 useHead({
-  meta: [{ name: "robots", content: "noindex, nofollow" }],
+  meta: [{name: "robots", content: "noindex, nofollow"}],
 });
 
-import { useGlobalStore } from "~/stores/global.js";
+import {useGlobalStore} from "~/stores/global.js";
 
 
-const {t , locale} = useI18n()
+const {t, locale} = useI18n()
 const store = useGlobalStore();
-const { endLoading } = store;
+const {endLoading} = store;
 
 const isDataLoad = ref(false);
 const hoverItemIndex = ref(null);
 
+// import Milad from '~/assets/images/lined-paper.png'
 import Milad from '~/assets/images/our-team/milad.png'
 // دیتا برای اعضای تیم
 const teamMembers = ref([
@@ -125,6 +119,7 @@ provide("contentRefs", {
   actions: actionElements,
   title: titleElement,
   subtitle: subtitleElement,
+  hasScroll: false
 });
 
 useSeoMeta({
