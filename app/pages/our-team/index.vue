@@ -3,8 +3,8 @@
     <template #content>
       <!-- main content -->
       <div
-          v-if="isDataLoad"
-          class="relative overflow-hidden min-h-screen grid md:grid-cols-4 grid-cols-2"
+          v-show="isDataLoad"
+          class="relative overflow-hidden min-h-screen px-4 lg:px-32 md:px-16 flex flex-col lg:flex-row"
       >
         <!-- team cards -->
         <div
@@ -48,6 +48,12 @@
       </h1>
     </template>
 
+    <template #backgroundAnimation>
+      <CommonPageAboutBackground
+          v-show="store.getContentLoad"
+          ref="pageBackground"
+      />
+    </template>
   </NuxtLayout>
 </template>
 

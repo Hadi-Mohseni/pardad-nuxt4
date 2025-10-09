@@ -19,6 +19,6 @@ const LazyComp = defineAsyncComponent(props.loader)
 
 <template>
   <div v-lazy-load="{ callback: () => show = true }">
-    <component :is="LazyComp" v-if="show" v-bind="componentProps" />
+    <component :is="LazyComp" v-show="show" v-bind="componentProps" />
   </div>
 </template>

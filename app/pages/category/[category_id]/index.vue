@@ -16,7 +16,7 @@
 
             <div class="w-full lg:w-full  mb-[1.5em] "
                  ref="bodyElement">
-              <div v-if="response.description"
+              <div v-show="response.description"
                    class="sm:text-sm lg:text-[16px] description"
                    v-html="response.description"
               >
@@ -37,23 +37,23 @@
     <div  class="container mx-auto px-4 mt-24 overflow-hidden  justify-center items-center w-full relative hidden lg:flex ">
       <div ref="sliders" class="w-[85%] lg:w-10/12 relative -mb-[110px]  h-auto m-auto ">
 
-        <MainSlider v-if="!mobileView" @selected-slider="selectItemFunc"   height="h-[360px] lg:h-[400px]" ref="slider_lg" :items="sliderItems"  route-name="main"></MainSlider>
+        <MainSlider v-show="!mobileView" @selected-slider="selectItemFunc"   height="h-[360px] lg:h-[400px]" ref="slider_lg" :items="sliderItems"  route-name="main"></MainSlider>
 
 
       </div>
-      <MainSliderArrow v-if="sliderItems.length > 0" class="absolute  right-24 top-0 bottom-0 justify-center items-center gap-y-10 flex-col hidden lg:flex -mb-[60px]" @click-arrow="selectArrow"/>
+      <MainSliderArrow v-show="sliderItems.length > 0" class="absolute  right-24 top-0 bottom-0 justify-center items-center gap-y-10 flex-col hidden lg:flex -mb-[60px]" @click-arrow="selectArrow"/>
     </div>
-    <div  v-if="mobileView" class="h-screen overflow-hidden ">
+    <div  v-show="mobileView" class="h-screen overflow-hidden ">
       <div ref="sliderSection" class="w-full mx-auto mt-[75px] px-4 h-screen flex items-center justify-center lg:hidden relative ">
         <div  ref="sliders" class="w-[85%] lg:w-10/12 relative h-auto m-auto">
-          <MainSlider v-if="mobileView" @selected-slider="selectItemFunc"   height="h-[360px] lg:h-[400px]" ref="slider_mb" :items="sliderItems"  route-name="blog" :show-description="false" ></MainSlider>
+          <MainSlider v-show="mobileView" @selected-slider="selectItemFunc"   height="h-[360px] lg:h-[400px]" ref="slider_mb" :items="sliderItems"  route-name="blog" :show-description="false" ></MainSlider>
         </div>
       </div>
     </div>
     <!-- main content  -->
 
-    <CommonLine class="hidden lg:flex" ref="pageLine" :element="titleElement" v-if="contentLoad"/>
-    <CommonScroll ref="pageScroll" :changeScroll="true" v-if="contentLoad"/>
+    <CommonLine class="hidden lg:flex" ref="pageLine" :element="titleElement" v-show="contentLoad"/>
+    <CommonScroll ref="pageScroll" :changeScroll="true" v-show="contentLoad"/>
   </div>
 
 </template>

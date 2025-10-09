@@ -26,17 +26,17 @@
       <div class="lg:col-span-3 col-span-9 pt-[300px] order-1 lg:order-2 relative">
         <slot name="title"></slot>
 
-        <CommonHorizontalLine v-if="store.getContentLoad"
+        <CommonHorizontalLine v-show="store.getContentLoad"
                               class="lg:hidden flex"
                               ref="pageHorizontalLine"
                               :element="contentRefs.mobileTitle?.value"/>
       </div>
       <slot name="backgroundAnimation"></slot>
-      <CommonLine v-if="store.getContentLoad"
+      <CommonLine v-show="store.getContentLoad"
                   class="hidden lg:flex"
                   ref="pageLine"
                   :element="contentRefs.title?.value"/>
-      <CommonScroll v-if="store.getContentLoad && hasScroll"
+      <CommonScroll v-show="store.getContentLoad && hasScroll"
                     ref="pageScroll"
                     :changeScroll="true"/>
     </div>

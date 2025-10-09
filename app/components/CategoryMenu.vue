@@ -138,7 +138,7 @@ const goToPage = (item: any) => {
             >
               {{ category.title }}
               <svg
-                  v-if="category.children?.length > 0"
+                  v-show="category.children?.length > 0"
                   class="w-4 h-4 ml-12 transition-transform duration-200"
                   :class="{ 'rotate-180': getActiveCategory?.id === category.id }"
                   fill="none"
@@ -150,7 +150,7 @@ const goToPage = (item: any) => {
             </span>
 
             <CollapseTransition :isOpen="getActiveCategory?.id === category.id">
-              <ul v-if="category.children?.length > 0" class="space-y-2 pl-4">
+              <ul v-show="category.children?.length > 0" class="space-y-2 pl-4">
                 <li
                     v-for="subcategory in category.children"
                     :key="subcategory.id"
