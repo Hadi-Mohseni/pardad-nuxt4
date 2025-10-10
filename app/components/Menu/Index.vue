@@ -7,7 +7,7 @@
         <Menu-navToggleBtn  @change-state="changeState" ref="menuNav"/>
         <MenuLink  ref="menuLink"/>
       </div>
-      <MenuItems @hide-menu="hideMenu"  ref="menuItems"  v-show="showMenu"/>
+      <MenuItems @hide-menu="hideMenu"  ref="menuItems"  v-if="showMenu"/>
 
     </div>
 

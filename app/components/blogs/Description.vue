@@ -2,7 +2,7 @@
 
   <div>
     <div
-        v-show="content"
+        v-if="content"
         class="text-[15px] tracking-tight lg:text-[17px] description"
         id="main"
         v-html="content"

@@ -3,7 +3,7 @@
     <template #content>
       <!-- main content -->
       <div
-          v-show="isDataLoad"
+          v-if="isDataLoad"
           class="relative overflow-hidden min-h-screen flex flex-col md:grid md:grid-cols-2"
       >
         <!-- کارت‌ها -->
@@ -54,12 +54,6 @@
       </h1>
     </template>
 
-    <template #backgroundAnimation>
-      <CommonPageAboutBackground
-          v-show="store.getContentLoad"
-          ref="pageBackground"
-      />
-    </template>
   </NuxtLayout>
 </template>
 

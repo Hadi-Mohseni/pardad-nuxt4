@@ -13,7 +13,7 @@
       <p class="md:text-[18px] text-sm text-[#565656]  my-2 leading-7">
         {{ comment.content }}
       </p>
-      <div v-show="comment.replies && comment.replies.length > 0" class="bg-[#F5F5F7] p-4 rounded-2xl ">
+      <div v-if="comment.replies && comment.replies.length > 0" class="bg-[#F5F5F7] p-4 rounded-2xl ">
         <div class="flex items-center md:text-[14px] text-xs text-[#767676]">
           <span class="mdi mdi-headset"></span>
           <span class="text-md mr-3 leading-7">

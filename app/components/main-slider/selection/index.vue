@@ -23,7 +23,7 @@
 
 
 
-        <template v-show="sliderItemBtn.id === requestedId">
+        <template v-if="sliderItemBtn.id === requestedId">
 
           <div v-if="loading" class="ml-4 mt-2 text-right flex justify-end">
             <svg class="fill-white-70 " width="24" height="24" viewBox="0 0 24 24"

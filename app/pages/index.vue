@@ -1,6 +1,6 @@
 <template>
 
-<div v-show="getShowContent">
+<div v-if="getShowContent">
   <section ref="section" v-show="showSection" class="" data-page="home" style="">
 
     <!--      <canvas class="home__background"></canvas>-->

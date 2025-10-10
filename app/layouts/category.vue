@@ -23,7 +23,7 @@
                     </h1>
 
                   <CommonHorizontalLine
-                      v-show="showSection"
+                      v-if="showSection"
                       class="lg:hidden flex"
                       ref="pageHorizontalLine"
                       :element="titleElement"
@@ -74,7 +74,7 @@
                         class="relative"
                     >
                       <div
-                          v-show="activeProduct?.slug === subcategory.slug"
+                          v-if="activeProduct?.slug === subcategory.slug"
                           class="absolute bottom-[-7px] left-1/2 -translate-x-1/2 bg-[#454545] w-1/3 h-[3px]"
                       >
 
@@ -113,7 +113,7 @@
                       <span>{{ category.title }}</span>
 
                       <svg
-                          v-show="category.children?.length > 0"
+                          v-if="category.children?.length > 0"
                           class="w-4 h-4 ml-12 transition-transform duration-200"
                           :class="{ 'rotate-180': getActiveCategory?.slug === category.slug }"
                           fill="none"
@@ -124,10 +124,10 @@
                       </svg>
                     </span>
 
-                      <div v-show="category.isLoading" class="text-xs text-gray-500 px-3 py-1">در حال بارگذاری...</div>
+                      <div v-if="category.isLoading" class="text-xs text-gray-500 px-3 py-1">در حال بارگذاری...</div>
                       <CollapseTransition :isOpen="getActiveCategory?.id === category.id ">
                         <ul
-                            v-show="category.children?.length > 0"
+                            v-if="category.children?.length > 0"
                             class="space-y-2 pl-4"
                         >
                           <li
@@ -176,7 +176,7 @@
         <span>{{ category.title }}</span>
 
         <svg
-            v-show="category.products?.length > 0"
+            v-if="category.products?.length > 0"
             class="w-4 h-4 ml-12 transition-transform duration-200"
             :class="{ 'rotate-180': activeCategory?.slug === category.slug && openActiveCat }"
             fill="none"
@@ -189,7 +189,7 @@
 
                       <!-- وقتی category انتخاب شد و products داشت -->
                       <CollapseTransition :isOpen="activeCategory?.slug === category.slug && openActiveCat">
-                        <ul v-show="category.products?.length > 0" class="space-y-2 pl-4">
+                        <ul v-if="category.products?.length > 0" class="space-y-2 pl-4">
                           <li
                               v-for="(product, pIndex) in category.products"
                               :key="pIndex"

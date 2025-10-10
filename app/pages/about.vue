@@ -23,7 +23,7 @@
     </template>
 
     <template #backgroundAnimation>
-      <CommonPageAboutBackground v-show="store.getContentLoad"
+      <CommonPageAboutBackground v-if="store.getContentLoad"
                                  ref="pageBackground"/>
     </template>
 
