@@ -48,7 +48,7 @@ onMounted(() => {
 
   if (process.client) {
     setInterval(()=>{
-      console.log('heloooooooooo test page')
+      console.log('heloooooooooo test page 3')
     },1001)
     let lang_value = localStorage.getItem('lang') || 'fa';
     store.setLocale(lang_value);
