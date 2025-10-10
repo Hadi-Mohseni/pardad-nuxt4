@@ -49,10 +49,10 @@
             <div class="flex items-center gap-4 lg:flex-col lg:justify-end lg:h-4/6 lg:gap-0">
               <!-- Image -->
               <div
-                  class="relative w-[80px] lg:w-full transition-all duration-500"
+                  class="relative  w-[80px] lg:w-full transition-all duration-500"
                   :class="[index === hoverItemIndex ? 'lg:translate-x-[-40%]' : 'lg:translate-x-0']"
               >
-                <img :src="category.image" class="max-w-[80px] w-[80px] h-[80px] lg:max-w-[190px]" alt="">
+                <img :src="category.image" class="w-[80px] h-[80px] lg:w-[190px] lg:h-[190px]" alt="">
               </div>
 
               <!-- Short desc -->
