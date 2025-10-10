@@ -17,7 +17,7 @@
         {{ item.code.toUpperCase() }}
       </span>
       <span
-          v-show="index < locales.length - 1"
+          v-if="index < locales.length - 1"
           class="text-gray-500 mx-1 lg:text-xs text-xs"
       >
         /

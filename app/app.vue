@@ -6,7 +6,7 @@
     <MainLoading ref="mainLoading"  />
 
     <CommonLoadingLine
-                v-show="false"
+                v-if="false"
                 class="hidden lg:flex"
                 ref="pageLine"
                 />

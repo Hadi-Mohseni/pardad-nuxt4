@@ -184,7 +184,7 @@
     </template>
 
     <template #backgroundAnimation>
-      <CommonPageContactBackground ref="pageBackground" v-show="store.getContentLoad"/>
+      <CommonPageContactBackground ref="pageBackground" v-if="store.getContentLoad"/>
     </template>
 
   </NuxtLayout>

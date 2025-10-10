@@ -56,10 +56,10 @@
         <CommonHorizontalLine
             class="lg:hidden flex"
             ref="pageHorizontalLine"
-            v-show="getContentLoad"
+            v-if="getContentLoad"
             :element="mobileTitle"/>
         <CommonLine
-            v-show="getContentLoad"
+            v-if="getContentLoad"
             class="hidden lg:flex"
             ref="pageLine"
             :element="titleElement"/>

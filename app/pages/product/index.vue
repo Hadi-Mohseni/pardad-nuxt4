@@ -1,6 +1,6 @@
 <template>
 
-  <div v-show="isDataLoad" class="w-full lg:mt-0 px-4 md:pt-0 lg:pt-[170px] md:px-0 h-[calc(100vh)] overflow-hidden">
+  <div v-if="isDataLoad" class="w-full lg:mt-0 px-4 md:pt-0 lg:pt-[170px] md:px-0 h-[calc(100vh)] overflow-hidden">
     <div class="overflow-hidden h-full transition-all duration-1000">
 
       <div
@@ -74,11 +74,14 @@
       <div  :class="[showSubCategory ? '-translate-y-full' : '-translate-y-0']" class="lg:grid lg:grid-cols-12 flex flex-col    transition-all duration-1000 h-full ">
 
 
-        <div :class="[subHoverItemIndex === 1 ? 'text-black' : 'text-white']" class="col-span-12 lg:row-span-6  transition-all duration-500  bg-blend-darken border-[#C5C5C5] border-y lg:text-[140px] text-[40px] relative lg:tracking-[40px] tracking-[20px]  flex items-center justify-center">
-          <nuxt-link v-show="subCats.length >  0 " :to="`/product/${subCats[0].slug}`"  >
+        <div :class="[subHoverItemIndex === 1 ? 'text-black' : 'text-white']" class="col-span-12 lg:row-span-6
+         transition-all duration-500 h-[120px] lg:h-auto bg-blend-darken border-[#C5C5C5]
+         border-y lg:text-[140px] text-[40px] relative lg:tracking-[40px] tracking-[20px]
+           flex items-center justify-center">
+          <nuxt-link v-if="subCats.length >  0 " :to="`/product/${subCats[0].slug}`"  >
             {{ subCats[0].slug }}
-            <div  v-show="subCats[0].image" class="absolute inset-0 flex items-center justify-center">
-              <img  :src="subCats[0].image" alt=""  class="w-[80%] max-w-[220px] max-h-[220px]">
+            <div  v-if="subCats[0].image" class="absolute inset-0 flex items-center justify-center">
+              <img  :src="subCats[0].image" alt=""  class="w-[100px] h-[100px] lg:w-[220px] lg:h-[220px]">
             </div>
 
             <div class="absolute left-2 top-2 text-base tracking-normal w-4 ">
@@ -89,10 +92,10 @@
         </div>
         <div :class="[subHoverItemIndex === 2 ? 'text-black' : 'text-white']" class="lg:col-span-5 h-[120px] lg:h-auto col-span-12 lg:row-span-6  transition-all duration-500  lg:border-l border-b lg:border-b-none border-[#C5C5C5] lg:text-[140px] text-[40px] lg:tracking-[40px] tracking-[20px] relative flex items-center justify-center">
 
-          <nuxt-link v-show="subCats.length > 1 " :to="`/product/${subCats[1].slug}`"   >
+          <nuxt-link v-if="subCats.length > 1 " :to="`/product/${subCats[1].slug}`"   >
             {{ subCats[1].slug }}
-            <div  v-show="subCats[1].image" class="absolute inset-0 flex items-center justify-center">
-              <img  :src="subCats[1].image" alt=""  class="w-[80%] max-w-[220px] max-h-[220px]">
+            <div  v-if="subCats[1].image" class="absolute inset-0 flex items-center justify-center">
+              <img  :src="subCats[1].image" alt=""  class="w-[100px] h-[100px] lg:w-[220px] lg:h-[220px]">
             </div>
             <div class="absolute left-2 top-2 text-base tracking-normal w-4 ">
               <img src="~/assets/img/Vector.png" alt=""  >
@@ -100,11 +103,11 @@
           </nuxt-link>
         </div>
 
-        <div   :class="[subHoverItemIndex === 3 ? 'text-black' : 'text-white']" class="lg:col-span-7 col-span-12 lg:row-span-6 transition-all duration-500 px-2  lg:text-[140px] text-[40px] relative lg:tracking-[40px] tracking-[20px] flex items-center justify-center relative">
-          <nuxt-link v-show="subCats.length > 2 " :to="`/product/${subCats[2].slug}`"  >
+        <div   :class="[subHoverItemIndex === 3 ? 'text-black' : 'text-white']" class="lg:col-span-7 h-[120px] lg:h-auto col-span-12 lg:row-span-6 transition-all duration-500 px-2  lg:text-[140px] text-[40px]  lg:tracking-[40px] tracking-[20px] flex items-center justify-center relative">
+          <nuxt-link v-if="subCats.length > 2 " :to="`/product/${subCats[2].slug}`"  >
             {{ subCats[2].slug }}
-            <div  v-show="subCats[2].image" class="absolute inset-0 flex items-center justify-center">
-              <img  :src="subCats[2].image" alt=""  class="w-[80%] max-w-[220px] max-h-[220px]">
+            <div  v-if="subCats[2].image" class="absolute inset-0 flex items-center justify-center">
+              <img  :src="subCats[2].image" alt=""  class="w-[100px] h-[100px] lg:w-[220px] lg:h-[220px]">
             </div>
             <div class="absolute left-2 top-2 text-base tracking-normal w-4 ">
               <img src="~/assets/img/Vector.png" alt=""  >

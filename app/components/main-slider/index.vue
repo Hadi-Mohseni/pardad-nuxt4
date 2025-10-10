@@ -28,7 +28,7 @@
               <h2 class="text-3xl text-right h-12">
                 {{ item.title }}
               </h2>
-              <div v-show="showDescription" class="flex flex-col gap-y-4 ">
+              <div v-if="showDescription" class="flex flex-col gap-y-4 ">
 
                 <h3 class="text-1xl text-right h-8 mb-6 md:mb-1">
                   {{ item.subtitle }}
@@ -37,7 +37,7 @@
                 </h4>
               </div>
 
-              <span v-show="showDescription" class="text-sm text-left">
+              <span v-if="showDescription" class="text-sm text-left">
                   بیشتر
               </span>
             </nuxt-link>
