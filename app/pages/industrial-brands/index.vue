@@ -12,7 +12,7 @@
                 :key="brand.id"
                 :data-id="brand.id"
                 :id="brand.slug"
-                class="brand-item group w-full h-[300px] relative flex justify-center items-center flex-shrink-0"
+                class="brand-item group w-full h-[300px] relative flex flex-col md:flex-row justify-center items-center flex-shrink-0"
 
             >
 
@@ -22,7 +22,7 @@
                   :src="brand.image"
                   :alt="brand.name"
               />
-              <div class="brand-details w-full absolute left-0 bottom-0 block text-center dir-ltr tracking-[0.26em] opacity-0 group-hover:opacity-100
+              <div class="mt-5 md:mt-0 brand-details w-full md:absolute left-0 bottom-0 block text-center dir-ltr tracking-[0.26em] md:opacity-0 group-hover:opacity-100
                           transition-opacity duration-300">
 
                 <div
@@ -43,7 +43,7 @@
 
               </div>
               <div
-                  class="absolute inset-0 border border-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 sm:border-[#6391A9]"
+                  class="absolute inset-0 border border-transparent md:opacity-0 group-hover:opacity-100 transition-opacity duration-300 sm:border-[#6391A9]"
                   :class="(index + 1) % 3 === 0 && 'border-l-0'"
               ></div>
             </li>
