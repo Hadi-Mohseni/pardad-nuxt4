@@ -1,0 +1,15 @@
+---
+deployment:
+  tasks:
+    - echo "🚀 Starting Nuxt 4 SSR deployment..."
+    - cd /home/pardadgr/nuxt4-git
+    - source /home/pardadgr/nodevenv/test-nuxt/20/bin/activate
+    - echo "📦 Installing production dependencies..."
+    - npm ci --omit=dev
+    - echo "🏗️ Building Nuxt SSR project..."
+    - npm run build
+    - echo "📂 Deploying .output to test.pardad-group.com..."
+    - rsync -avh --delete .output/ /home/pardadgr/test-nuxt/.output/
+    - echo "🔁 Restarting Node.js app via Passenger..."
+    - touch /home/pardadgr/test-nuxt/tmp/restart.txt
+    - echo "✅ Deployment completed successfully!"

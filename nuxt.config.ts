@@ -3,6 +3,11 @@
 import tailwindcss from '@tailwindcss/vite'
 export default defineNuxtConfig({
 
+  nitro: {
+        compressPublicAssets: true,
+        minify: true
+  },
+
   app: {
     head: {
       htmlAttrs: {

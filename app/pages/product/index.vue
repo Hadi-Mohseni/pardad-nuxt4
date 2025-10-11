@@ -14,8 +14,8 @@
             @mouseleave="closeHoverCategory(index)"
             @click="openSubCategories(category)"
             class="transition-all duration-1000 border-[#C5C5C5] flex-shrink-0
-           flex-row items-center justify-between px-4 py-6
-           lg:h-full lg:flex-col lg:px-0 lg:py-8"
+           flex-row items-center justify-between px-2
+           lg:h-full lg:flex-col lg:px-0 lg:py-8 py-2"
             :class="[
       index !== 3 && 'lg:border-l',
       hoverItemIndex === index
@@ -49,16 +49,16 @@
             <div class="flex items-center gap-4 lg:flex-col lg:justify-end lg:h-4/6 lg:gap-0">
               <!-- Image -->
               <div
-                  class="relative w-[80px] lg:w-full transition-all duration-500"
+                  class="relative  w-[80px] lg:w-full transition-all duration-500"
                   :class="[index === hoverItemIndex ? 'lg:translate-x-[-40%]' : 'lg:translate-x-0']"
               >
-                <img :src="category.image" class="max-w-[80px] lg:max-w-[190px]" alt="">
+                <img :src="category.image" class="w-[80px] h-[80px] lg:w-[190px] lg:h-[190px]" alt="">
               </div>
 
               <!-- Short desc -->
               <div
                   class="text-[#515151] text-sm lg:text-justify transition-all duration-500
-                 opacity-100 lg:opacity-0 lg:w-7/12"
+                 opacity-100 lg:opacity-0 lg:w-7/12 hidden lg:flex"
                   :class="[index === hoverItemIndex ? 'lg:opacity-100' : '']"
               >
                 {{ category.short_desc }}
@@ -71,14 +71,17 @@
 
 
 
-      <div  :class="[showSubCategory ? '-translate-y-full' : '-translate-y-0']" class="grid grid-cols-12    transition-all duration-1000 h-full ">
+      <div  :class="[showSubCategory ? '-translate-y-full' : '-translate-y-0']" class="lg:grid lg:grid-cols-12 flex flex-col    transition-all duration-1000 h-full ">
 
 
-        <div :class="[subHoverItemIndex === 1 ? 'text-black' : 'text-white']" class="col-span-12 lg:row-span-6  transition-all duration-500  bg-blend-darken border-[#C5C5C5] border-y lg:text-[140px] text-[40px] relative lg:tracking-[40px] tracking-[20px]  flex items-center justify-center">
+        <div :class="[subHoverItemIndex === 1 ? 'text-black' : 'text-white']" class="col-span-12 lg:row-span-6
+         transition-all duration-500 h-[120px] lg:h-auto bg-blend-darken border-[#C5C5C5]
+         border-y lg:text-[140px] text-[40px] relative lg:tracking-[40px] tracking-[20px]
+           flex items-center justify-center">
           <nuxt-link v-if="subCats.length >  0 " :to="`/product/${subCats[0].slug}`"  >
             {{ subCats[0].slug }}
             <div  v-if="subCats[0].image" class="absolute inset-0 flex items-center justify-center">
-              <img  :src="subCats[0].image" alt=""  class="w-[80%] max-w-[220px] max-h-[220px]">
+              <img  :src="subCats[0].image" alt=""  class="w-[100px] h-[100px] lg:w-[220px] lg:h-[220px]">
             </div>
 
             <div class="absolute left-2 top-2 text-base tracking-normal w-4 ">
@@ -87,12 +90,12 @@
           </nuxt-link>
 
         </div>
-        <div :class="[subHoverItemIndex === 2 ? 'text-black' : 'text-white']" class="lg:col-span-5 col-span-12 lg:row-span-6  transition-all duration-500  lg:border-l border-b lg:border-b-none border-[#C5C5C5] lg:text-[140px] text-[40px] lg:tracking-[40px] tracking-[20px] relative flex items-center justify-center">
+        <div :class="[subHoverItemIndex === 2 ? 'text-black' : 'text-white']" class="lg:col-span-5 h-[120px] lg:h-auto col-span-12 lg:row-span-6  transition-all duration-500  lg:border-l border-b lg:border-b-none border-[#C5C5C5] lg:text-[140px] text-[40px] lg:tracking-[40px] tracking-[20px] relative flex items-center justify-center">
 
           <nuxt-link v-if="subCats.length > 1 " :to="`/product/${subCats[1].slug}`"   >
             {{ subCats[1].slug }}
             <div  v-if="subCats[1].image" class="absolute inset-0 flex items-center justify-center">
-              <img  :src="subCats[1].image" alt=""  class="w-[80%] max-w-[220px] max-h-[220px]">
+              <img  :src="subCats[1].image" alt=""  class="w-[100px] h-[100px] lg:w-[220px] lg:h-[220px]">
             </div>
             <div class="absolute left-2 top-2 text-base tracking-normal w-4 ">
               <img src="~/assets/img/Vector.png" alt=""  >
@@ -100,11 +103,11 @@
           </nuxt-link>
         </div>
 
-        <div   :class="[subHoverItemIndex === 3 ? 'text-black' : 'text-white']" class="lg:col-span-7 col-span-12 lg:row-span-6 transition-all duration-500 px-2  lg:text-[140px] text-[40px] relative lg:tracking-[40px] tracking-[20px] flex items-center justify-center relative">
+        <div   :class="[subHoverItemIndex === 3 ? 'text-black' : 'text-white']" class="lg:col-span-7 h-[120px] lg:h-auto col-span-12 lg:row-span-6 transition-all duration-500 px-2  lg:text-[140px] text-[40px]  lg:tracking-[40px] tracking-[20px] flex items-center justify-center relative">
           <nuxt-link v-if="subCats.length > 2 " :to="`/product/${subCats[2].slug}`"  >
             {{ subCats[2].slug }}
             <div  v-if="subCats[2].image" class="absolute inset-0 flex items-center justify-center">
-              <img  :src="subCats[2].image" alt=""  class="w-[80%] max-w-[220px] max-h-[220px]">
+              <img  :src="subCats[2].image" alt=""  class="w-[100px] h-[100px] lg:w-[220px] lg:h-[220px]">
             </div>
             <div class="absolute left-2 top-2 text-base tracking-normal w-4 ">
               <img src="~/assets/img/Vector.png" alt=""  >
@@ -132,13 +135,14 @@ definePageMeta({
 
 
 
-
+import {useGlobalStore} from '~/stores/global.js'
 const store = useGlobalStore()
 
-const {endLoading ,getLayoutData} = store
+const {endLoading  } = store
+const {getLoading,getContentLoad, getIsLoadingPlayed , getLayoutData , getHasBack} = storeToRefs(useGlobalStore())
 
 
-import {useGlobalStore} from '~/stores/global.js'
+
 import img from 'assets/img/01.png'
 
 const categories = ref([])
@@ -176,14 +180,24 @@ if(response.value){
 
 
 
+watch(getHasBack , (v)=>{
+ if(!v){
+   closeSubCategories()
+ }
+})
+
 
 
 const subCats = computed(()=>{
-  const find = categories.value.findIndex(item=>item.id === selectedItem.value.id)
-  if(find > -1){
-    return categories.value[find].children
+  if(selectedItem.value){
+    const find = categories.value.findIndex(item=>item.id === selectedItem.value.id)
+    if(find > -1){
+      return categories.value[find].children
+    }
+    return []
   }
   return []
+
 })
 
 
@@ -201,9 +215,12 @@ const selectedItem = ref({});
 
 const hoverItemIndex = ref(null);
 const openSubCategories = (value) => {
+  store.setHasBack(true)
   showSubCategory.value = true;
   selectedItem.value = value
+
 };
+
 const openHoverCategory = (index) => {
   hoverItemIndex.value = index;
 };
@@ -214,7 +231,7 @@ const closeHoverCategory = (index) => {
 
 const closeSubCategories = () => {
   showSubCategory.value = false;
-  selectedItem.value = null
+
 };
 
 // Provide layout refs for animation

@@ -20,7 +20,7 @@
           </div>
         </Transition>
       </div>
-      <div class="lg:col-span-3 col-span-9 pt-[300px] order-1 lg:order-2 relative">
+      <div class="lg:col-span-3 col-span-9 lg:pt-[300px]  pt-[150px] order-1 lg:order-2 relative">
 
         <div  class="fixed hidden h-screen  text-[25px]  lg:flex flex-col gap-y-8 pr-4 transition-all">
 
@@ -34,12 +34,27 @@
           >
 
             {{ getLayoutData.title }}
-            <BackButton class="mt-3"/>
+            <button v-if="getHasBack && route.path === '/product'"
+                    @click="setGoBack"
+                    class="flex items-center mt-3">
+              <!--    <svg class="w-4 h-4"-->
+              <!--         viewBox="0 0 24 24"-->
+              <!--         xmlns="http://www.w3.org/2000/svg"-->
+              <!--         fill="none">-->
+              <!--      <path stroke="#950000"-->
+              <!--            stroke-linecap="round"-->
+              <!--            stroke-linejoin="round"-->
+              <!--            stroke-width="2"-->
+              <!--            d="m5 12 6-6m-6 6 6 6m-6-6h14"/>-->
+              <!--    </svg>-->
+              <span class="text-sm text-gray-500">{{t('back')}}</span>
+            </button>
+            <BackButton v-else class="mt-3"/>
           </h1>
 
         </div>
-        <div  class="lg:hidden flex">
-          <h1 class="lg:pr-4 md:pr-20 pr-4 text-right pb-5 tracking-tighter
+        <div  class="lg:hidden flex flex-col lg:pr-4 md:pr-20 pr-4 pb-5">
+          <h1 class=" text-right  tracking-tighter
         lg:tracking-normal lg:pb-10 lg:before:content-none lg:after:content-none before:content-['']
         before:left-0 before:bg-black-100/20 before:absolute before:bottom-0 before:right-0 before:h-[1px]
         after:content-[''] after:w-[8vw] after:bg-black-900 after:absolute after:bottom-0 after:right-[80px]
@@ -49,6 +64,22 @@
 
            {{getLayoutData.title}}
           </h1>
+          <button v-if="getHasBack && route.path === '/product'"
+                  @click="setGoBack"
+                  class="flex items-center mt-3 ">
+            <!--    <svg class="w-4 h-4"-->
+            <!--         viewBox="0 0 24 24"-->
+            <!--         xmlns="http://www.w3.org/2000/svg"-->
+            <!--         fill="none">-->
+            <!--      <path stroke="#950000"-->
+            <!--            stroke-linecap="round"-->
+            <!--            stroke-linejoin="round"-->
+            <!--            stroke-width="2"-->
+            <!--            d="m5 12 6-6m-6 6 6 6m-6-6h14"/>-->
+            <!--    </svg>-->
+            <span class="text-sm text-gray-500">{{t('back')}}</span>
+          </button>
+          <BackButton v-else class="mt-3"/>
         </div>
 
 
@@ -86,17 +117,21 @@ useHead({
   // where `%s` is replaced with the title
   titleTemplate: '%s',
 })
-
+const hasBackBtn = ref(true)
 const pageMeta = useRoute().meta;
-
+const {t} = useI18n()
 const route = useRoute()
-const {getLoading,getContentLoad, getIsLoadingPlayed , getLayoutData} = storeToRefs(useGlobalStore())
+const {getLoading,getContentLoad, getIsLoadingPlayed , getLayoutData , getHasBack} = storeToRefs(useGlobalStore())
 const {setMainLoading , setShowLogo , startLoading } = useGlobalStore()
 const router = useRouter()
 const transitionName = ref('page-transition')
 const transitionMode = ref('out-in')
 const titleElement = ref()
 const mobileTitle = ref()
+
+const setGoBack = ()=>{
+  store.setHasBack(false)
+}
 
 const {
   create: createContentAnimation,

@@ -13,17 +13,22 @@ export default defineNuxtRouteMiddleware((to, from) => {
         setContactNav(true)
     }
 
-    setMenuHandler('CLOSE')
 
-    startLoading()
-    setMainLoading(true)
 
-    /*if(import.meta.client){
+    if(import.meta.client){
         if(to.meta.layout !== 'route' && to.meta.layout !== 'category'){
+            setMenuHandler('CLOSE')
 
+            startLoading()
+            setMainLoading(true)
         }
 
 
-    }*/
+    }else{
+        setMenuHandler('CLOSE')
+
+        startLoading()
+        setMainLoading(true)
+    }
 
 })

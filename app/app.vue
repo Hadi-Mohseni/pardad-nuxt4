@@ -47,6 +47,9 @@ const pageLine = ref(null)
 onMounted(() => {
 
   if (process.client) {
+    setInterval(()=>{
+      console.log('heloooooooooo test page 34')
+    },1002)
     let lang_value = localStorage.getItem('lang') || 'fa';
     store.setLocale(lang_value);
     setAppLocale(lang_value);

@@ -13,9 +13,9 @@
                 :key="product.id"
                 :data-id="product.id"
                 :class="(index ) % 3 === 0 && 'border-l-0'"
-                class="px-4 transition-all duration-300 my-auto  text-left text-white  border border-transparent group w-full h-[300px] relative  hover:border-[#B2B2B2]">
+                class="px-4 transition-all duration-300 my-auto  text-left text-white flex  lg:block  border border-transparent group w-full h-[300px] relative  hover:border-[#B2B2B2]">
 
-            <div class="inset-0 absolute translate-y-1/2 translate-x-1/2 bottom-1/2 ">
+            <div class="inset-0 absolute lg:translate-y-1/2 lg:translate-x-1/2 bottom-1/2 ">
               <img
                   class="backface-hidden w-[80%] max-w-[150px] max-h-[150px]"
                   :src="img"
@@ -69,11 +69,19 @@
           در حال بارگذاری...
         </div>
       </section>
+
+
+
+      <div class="py-8 px-4">
+        <BlogsProductDescription :category="category"/>
+      </div>
     </div>
 
 </template>
 
 <script setup>
+
+
 definePageMeta({
   dataPage: 'industrial-brands',
   layout:'route',
