@@ -135,13 +135,14 @@ definePageMeta({
 
 
 
-
+import {useGlobalStore} from '~/stores/global.js'
 const store = useGlobalStore()
 
-const {endLoading ,getLayoutData} = store
+const {endLoading  } = store
+const {getLoading,getContentLoad, getIsLoadingPlayed , getLayoutData , getHasBack} = storeToRefs(useGlobalStore())
 
 
-import {useGlobalStore} from '~/stores/global.js'
+
 import img from 'assets/img/01.png'
 
 const categories = ref([])
@@ -179,14 +180,24 @@ if(response.value){
 
 
 
+watch(getHasBack , (v)=>{
+ if(!v){
+   closeSubCategories()
+ }
+})
+
 
 
 const subCats = computed(()=>{
-  const find = categories.value.findIndex(item=>item.id === selectedItem.value.id)
-  if(find > -1){
-    return categories.value[find].children
+  if(selectedItem.value){
+    const find = categories.value.findIndex(item=>item.id === selectedItem.value.id)
+    if(find > -1){
+      return categories.value[find].children
+    }
+    return []
   }
   return []
+
 })
 
 
@@ -204,9 +215,12 @@ const selectedItem = ref({});
 
 const hoverItemIndex = ref(null);
 const openSubCategories = (value) => {
+  store.setHasBack(true)
   showSubCategory.value = true;
   selectedItem.value = value
+
 };
+
 const openHoverCategory = (index) => {
   hoverItemIndex.value = index;
 };
@@ -217,7 +231,7 @@ const closeHoverCategory = (index) => {
 
 const closeSubCategories = () => {
   showSubCategory.value = false;
-  selectedItem.value = null
+
 };
 
 // Provide layout refs for animation

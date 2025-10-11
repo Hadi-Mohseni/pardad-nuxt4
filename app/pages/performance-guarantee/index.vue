@@ -24,7 +24,7 @@
             <img
                 :src="item.image"
                 alt="content"
-                class="w-full object-cover mt-5 mb-10 md:mb-0"
+                class=" object-cover mt-5 mb-10 md:mb-0 max-w-[395px] w-[75%] mx-auto"
             />
 
             <!-- اورلی فقط دسکتاپ -->
@@ -44,9 +44,12 @@
     </template>
 
     <template #title>
-      <h1
-          class="lg:pr-20 pr-4 text-right
-        text-[28px] md:text-[30px] lg:ml-10 xl2:ml-[300px] mb-6 md:mb-0 font-light relative"
+      <h1 class=" pr-4 text-right
+      lg:before:content-none lg:after:content-none before:content-['']
+       before:left-0 before:bg-black-100/20 before:absolute before:bottom-0
+       before:right-0 before:h-[1px] after:content-[''] after:w-[8vw]
+       after:bg-black-900 after:absolute after:bottom-0 after:right-[80px] after:h-[1px]
+       text-[40px] md:text-[45px] lg:ml-10 xl2:ml-[300px] mb-10 lg:mb-0 font-light"
           ref="titleElement"
       >
         {{ t("performance_guarantee.title") }}

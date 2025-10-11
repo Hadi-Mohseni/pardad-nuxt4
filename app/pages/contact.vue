@@ -168,7 +168,7 @@
     </template>
 
     <template #title>
-      <h1 class="lg:pr-20 pr-4 text-right
+      <h1 class=" pr-4 text-right
       lg:before:content-none lg:after:content-none before:content-['']
        before:left-0 before:bg-black-100/20 before:absolute before:bottom-0
        before:right-0 before:h-[1px] after:content-[''] after:w-[8vw]

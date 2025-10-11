@@ -17,6 +17,7 @@ export const useGlobalStore = defineStore('global', {
             isStart: false,
             isEnd: false,
             contentLoad: false,
+            hasBack: false,
             locale: 'fa',
             layout:{
                 title:'دسته بندی محصولات',
@@ -28,6 +29,10 @@ export const useGlobalStore = defineStore('global', {
 
         setLocale(value) {
             this.locale = value
+        },
+        setHasBack(value) {
+            console.log({value})
+            this.hasBack = value
         },
         setShowContent(payload) {
             this.isShowContent = payload
@@ -91,6 +96,7 @@ export const useGlobalStore = defineStore('global', {
             return this.appLocale;
         },
         getShowContent: (state) => state.isShowContent,
+        getHasBack: (state) => state.hasBack,
         getThemeObj: (state) => state.themeObj,
         getLayoutData: (state) => state.layout,
         getLoadingStart: (state) => state.isStart,

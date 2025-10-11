@@ -69,11 +69,19 @@
           در حال بارگذاری...
         </div>
       </section>
+
+
+
+      <div class="py-8 px-4">
+        <BlogsProductDescription :category="category"/>
+      </div>
     </div>
 
 </template>
 
 <script setup>
+
+
 definePageMeta({
   dataPage: 'industrial-brands',
   layout:'route',
