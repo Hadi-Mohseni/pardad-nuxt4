@@ -7,6 +7,7 @@ export const useGlobalStore = defineStore('global', {
             themeObj: 'black',
             showLoading: true,
             isShowContent:false,
+            getLoadingType:'main',
             loading: true,
             isLoadingPlayed: false,
             showLogo: false,
@@ -36,6 +37,9 @@ export const useGlobalStore = defineStore('global', {
         },
         setShowContent(payload) {
             this.isShowContent = payload
+        },
+        setLoadingType(payload) {
+            this.loadingType = payload
         },
         setLayoutData(value) {
             this.layout.title = value.title
@@ -101,7 +105,7 @@ export const useGlobalStore = defineStore('global', {
         getLayoutData: (state) => state.layout,
         getLoadingStart: (state) => state.isStart,
         getLoadingEnd: (state) => state.isEnd,
-
+        getLoadingType: (state) => state.loadingType,
         getLoading: (state) => state.loading,
         getIsLoadingPlayed: (state) => state.isLoadingPlayed,
         getShowLogo: (state) => state.showLogo,
