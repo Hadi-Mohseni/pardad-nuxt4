@@ -10,7 +10,9 @@
     </template>
 
     <template v-else>
+      <ClientOnly>
       <CommonLineWrapper ref="pageLine" />
+      </ClientOnly>
     </template>
 
     <NuxtLayout>
