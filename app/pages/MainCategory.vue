@@ -282,7 +282,8 @@ const updateGreenBarPosition = async (categoryId, subCategoryId = null) => {
 
 const handleGetBlog = (category, type , value) => {
   if (activeCat.value && activeCat.value.id !== category.id) {
-
+    emit('updateCategory', category, type)
+    updateGreenBarPosition(category.id)
     subActiveTab.value = null
     activeCat.value  = null
   }else{

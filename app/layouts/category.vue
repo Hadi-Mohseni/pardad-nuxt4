@@ -441,6 +441,8 @@ const toggleCategory = async (category) => {
     activeProduct.value = null
     updateGreenBarPosition(activeCategory.value?.slug , null)
     blogs.value.list = []
+    router.push(`/product/${category.slug}/list`)
+    getBlogListFunc('list')
 
 
   } else {

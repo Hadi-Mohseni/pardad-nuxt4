@@ -14,9 +14,9 @@ export default defineNuxtConfig({
         lang: 'en',
       },
       title: 'گروه پرداد',
-       /*meta: [
+       meta: [
            {name: 'google-site-verification', content: 'pq8Ud3rzIIL_Qnwi_M89CNGzVwchAC72U8zCiiy7vng'}
-       ],*/
+       ],
       script: [
         {src: '/TweenMax.min.js', defer: true},
         {src: '/TimelineMax.min.js', defer: true},
@@ -69,6 +69,12 @@ export default defineNuxtConfig({
     plugins: [
       tailwindcss(),
     ],
+  },
+  site: {
+    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://dev.pardad-group.com',
+    name: 'گروه پرداد',
+    description: '',
+    defaultLocale: 'fa',
   },
   plugins: [
     {src: '~/plugins/lozad.client.ts'},

@@ -3,9 +3,9 @@
 
     <MenuLogo />
     <Menu />
-
+    <MainLoading ref="mainLoading" />
     <!-- ✅ نوع لودینگ با استور کنترل می‌شود -->
-    <template v-if="getLoadingType === 'main'">
+<!--    <template v-if="getLoadingType === 'main'">
       <MainLoading ref="mainLoading" />
     </template>
 
@@ -13,7 +13,7 @@
       <ClientOnly>
       <CommonLineWrapper ref="pageLine" />
       </ClientOnly>
-    </template>
+    </template>-->
 
     <NuxtLayout>
       <NuxtPage />
