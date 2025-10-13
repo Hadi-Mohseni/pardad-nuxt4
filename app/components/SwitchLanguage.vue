@@ -17,7 +17,7 @@
         {{ item.code.toUpperCase() }}
       </span>
       <span
-          v-if="index < locales.length - 1"
+          v-show="index < locales.length - 1"
           class="text-gray-500 mx-1 lg:text-xs text-xs"
       >
         /
@@ -38,19 +38,17 @@ const store = useGlobalStore()
 
 const def = useCookie('lang')
 // reactive state
-const language = ref(def.value)
+const language = ref(def.value || 'fa')
 
 
 
 // set locale
 const changeLocale = async (lang) => {
-
   language.value = lang.code
-  locale.value = lang.code
-
   store.setLocale(lang.code)
   setAppLocale(lang.code)
-  await setLocale(lang.code)
+  await setLocale(lang.code) // فایل ترجمه لود میشه
+  locale.value = lang.code   // بعد از لود، مقدار رو ست کن
 }
 
 onMounted(() => {

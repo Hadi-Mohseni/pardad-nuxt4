@@ -45,6 +45,10 @@ export default defineNuxtConfig({
     defaultLocale: 'fa', // پوشه‌ای که فایل‌های ترجمه‌ات توشه
     strategy: 'no_prefix', // یا 'prefix_except_default' اگر بخوای URL چندزبانه داشته باشی
 
+    lazy: true,
+    langDir: 'locales/',
+    detectBrowserLanguage: false,
+    preload: ['fa', 'en', 'ar']
   },
   css: [
     '~/assets/css/main-3.css',

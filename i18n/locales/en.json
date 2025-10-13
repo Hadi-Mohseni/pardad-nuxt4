@@ -1,89 +1,111 @@
 {
-    "home": "Home",
-    "menuItems": {
-        "category": "Weblog",
-        "technicalKnowledge": "Technical Knowledge",
-        "industrialBrands": "Industrial Brands",
-        "pardadMedia": "Pardad Media",
-        "about": "About Pardad",
-        "contact": "Contact Us",
-        "product": "Product",
-        "performanceGuarantee": "Performance Guarantee",
-        "ourTeam": "Our Team"
-    },
-    "landing": {
-        "home_page": {
-            "main_title": "Pardad Industrial Group",
-            "sub_title": "(PJSC)",
-            "main_paraph": [
-                { "p": "A pioneer in importing" },
-                { "p": "and supplying industrial" },
-                { "p": "parts and equipment" }
-            ],
-            "total_main_paraph": "A pioneer in importing and supplying industrial parts and equipment",
-            "footer": [
-                { "p": "Trust, the foundation of lasting partnerships, is" },
-                { "p": "what we hope to carry with us on this journey." },
-                { "p": "Explore the sections below to discover more" },
-                { "p": "about Pardad Group and our areas of specialization." }
-            ]
+  "home": "Home",
+  "menuItems": {
+    "category": "Weblog",
+    "technicalKnowledge": "Technical Knowledge",
+    "industrialBrands": "Industrial Brands",
+    "pardadMedia": "Pardad Media",
+    "about": "About Pardad",
+    "contact": "Contact Us",
+    "product": "Product",
+    "performanceGuarantee": "Performance Guarantee",
+    "ourTeam": "Our Team"
+  },
+  "landing": {
+    "home_page": {
+      "main_title": "Pardad Industrial Group",
+      "sub_title": "(PJSC)",
+      "main_paraph": [
+        {
+          "p": "A pioneer in importing"
         },
-        "first_page": {
-            "paragraph": "Pardad Group is a cohesive organization comprising four strategic divisions in the field of industrial equipment and components, covering power transmission, electrodrives, industrial electricity, and industrial facilities.\nAmong these, the Commercial Division functions as a structured international trade unit, playing a key role in the import process, while the dedicated Logistics Division acts as an efficient complement, creating a significant distinction in the organization’s operations.",
-            "footer": [
-                { "p": "A Unified Group of Four Leading" },
-                { "p": "Divisions in Industrial Equipment" }
-            ]
+        {
+          "p": "and supplying industrial"
         },
-        "second_page": {
-            "footer": "pardad group",
-            "description": [
-                {
-                    "p": "The Power Transmission Business Unit of Pardad Group, through its Commercial Unit, serves as the exclusive importer of bearings and, in collaboration with other importers, supplies power transmission belts and industrial chains."
-                },
-                {
-                    "p": "Pardad Group’s Electrodrive Equipment Business Unit, working alongside its Commercial Unit, specializes in importing electric motors and gearboxes and actively engages with partner companies to supply industrial pumps."
-                },
-                {
-                    "p": "The Industrial Electricity Business Unit of Pardad Group not only imports industrial switches through its Commercial Division but also collaborates with other importers in the sector. Additionally, this division works directly with domestic manufacturers to supply industrial cables and lighting solutions."
-                },
-                {
-                    "p": "Pardad Group’s Industrial Facilities Business Unit, supported by its Commercial Unit, exclusively imports a variety of industrial hoses and collaborates with local partners to supply and import industrial valves and pipes."
-                }
-            ]
+        {
+          "p": "parts and equipment"
+        }
+      ],
+      "total_main_paraph": "A pioneer in importing and supplying industrial parts and equipment",
+      "footer": [
+        {
+          "p": "Trust, the foundation of lasting partnerships, is"
         },
-        "third_page": {
-            "description": "Pardad Group’s Domestic and International Commercial Unit, as a key pillar of the holding, plays a central role in sourcing, purchasing, and importing a wide range of industrial equipment and products. In addition, this unit supports the other business units by facilitating the import of industrial machinery components upon customer request. To ensure the quality and integrity of supplied equipment, Pardad Industrial Group relies on its dedicated Logistics Unit to handle the delivery of equipment to industries across the country.",
-            "footer": "COMMERCIAL & LOGISTICS UNIT OF PARDAD GROUP"
+        {
+          "p": "what we hope to carry with us on this journey."
         },
-        "fourth_page": {}
+        {
+          "p": "Explore the sections below to discover more"
+        },
+        {
+          "p": "about Pardad Group and our areas of specialization."
+        }
+      ]
     },
-    "contact_us": {
-        "title": "Contact Us",
-        "subtitle": "One call to start cooperation",
-        "addresses": [
-            {
-                "title": "Office 1:",
-                "description": "5th Floor, Unit 501, No. 5 Bisheh Alley, Sohrevardi Shomali, Abbas Abad, Tehran, Iran"
-            },
-            {
-                "title": "Office 2:",
-                "description": "5th Floor, Unit 501, Block 1, Amir Kabir Commercial Complex, South Nazem-ol-Toba Alley, Amir Kabir St., Tehran, Iran"
-            },
-            {
-                "title": "Store:",
-                "description": "1st Floor, Unit A-15, Amir Kabir Commercial Complex, South Nazem-ol-Toba Alley, Amir Kabir St., Tehran, Iran"
-            }
-        ]
+    "first_page": {
+      "paragraph": "Pardad Group is a cohesive organization comprising four strategic divisions in the field of industrial equipment and components, covering power transmission, electrodrives, industrial electricity, and industrial facilities.\nAmong these, the Commercial Division functions as a structured international trade unit, playing a key role in the import process, while the dedicated Logistics Division acts as an efficient complement, creating a significant distinction in the organization’s operations.",
+      "footer": [
+        {
+          "p": "A Unified Group of Four Leading"
+        },
+        {
+          "p": "Divisions in Industrial Equipment"
+        }
+      ]
     },
-    "blog": "Pardad Blog",
-    "about_us": { "title": "About Us" },
-    "commercial": { "title": "International trade" },
-    "our_team": {
-        "title": "Our Team Members"
+    "second_page": {
+      "footer": "pardad group",
+      "description": [
+        {
+          "p": "The Power Transmission Business Unit of Pardad Group, through its Commercial Unit, serves as the exclusive importer of bearings and, in collaboration with other importers, supplies power transmission belts and industrial chains."
+        },
+        {
+          "p": "Pardad Group’s Electrodrive Equipment Business Unit, working alongside its Commercial Unit, specializes in importing electric motors and gearboxes and actively engages with partner companies to supply industrial pumps."
+        },
+        {
+          "p": "The Industrial Electricity Business Unit of Pardad Group not only imports industrial switches through its Commercial Division but also collaborates with other importers in the sector. Additionally, this division works directly with domestic manufacturers to supply industrial cables and lighting solutions."
+        },
+        {
+          "p": "Pardad Group’s Industrial Facilities Business Unit, supported by its Commercial Unit, exclusively imports a variety of industrial hoses and collaborates with local partners to supply and import industrial valves and pipes."
+        }
+      ]
     },
-    "performance_guarantee": {
-        "title": "Performance Guarantee"
+    "third_page": {
+      "description": "Pardad Group’s Domestic and International Commercial Unit, as a key pillar of the holding, plays a central role in sourcing, purchasing, and importing a wide range of industrial equipment and products. In addition, this unit supports the other business units by facilitating the import of industrial machinery components upon customer request. To ensure the quality and integrity of supplied equipment, Pardad Industrial Group relies on its dedicated Logistics Unit to handle the delivery of equipment to industries across the country.",
+      "footer": "COMMERCIAL & LOGISTICS UNIT OF PARDAD GROUP"
     },
-    "back": "Back"
+    "fourth_page": {}
+  },
+  "contact_us": {
+    "title": "Contact Us",
+    "subtitle": "One call to start cooperation",
+    "addresses": [
+      {
+        "title": "Office 1:",
+        "description": "5th Floor, Unit 501, No. 5 Bisheh Alley, Sohrevardi Shomali, Abbas Abad, Tehran, Iran"
+      },
+      {
+        "title": "Office 2:",
+        "description": "5th Floor, Unit 501, Block 1, Amir Kabir Commercial Complex, South Nazem-ol-Toba Alley, Amir Kabir St., Tehran, Iran"
+      },
+      {
+        "title": "Store:",
+        "description": "1st Floor, Unit A-15, Amir Kabir Commercial Complex, South Nazem-ol-Toba Alley, Amir Kabir St., Tehran, Iran"
+      }
+    ]
+  },
+  "blog": "Pardad Blog",
+  "about_us": {
+    "title": "About Us"
+  },
+  "commercial": {
+    "title": "International trade"
+  },
+  "our_team": {
+    "title": "Our Team Members"
+  },
+  "performance_guarantee": {
+    "title": "Performance Guarantee"
+  },
+  "back": "Back"
 }
