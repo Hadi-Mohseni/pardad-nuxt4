@@ -1,4 +1,4 @@
-export const useLoadingLineVerticalAnimation = () => {
+export const useLoadingLineHorizontalAnimation = () => {
 
     const animationTimeline = ref(null)
     const line = ref(null)//
@@ -16,38 +16,39 @@ export const useLoadingLineVerticalAnimation = () => {
         line.value = reference
         const tl = new TimelineLite({ paused: true })
 
+
         // نسبت سرعت کل انیمیشن (مثلاً 1 = معمولی، 2 = دو برابر سریع‌تر)
-        const speed = 2  // این متغیر رو بعداً می‌تونی تغییر بدی
+        const speed = 1  // این متغیر رو بعداً می‌تونی تغییر بدی
 
         // حالت اولیه
         tl.set([options.background, options.runner], {
-            transformOrigin: 'top center',
-            scaleY: 0
+            transformOrigin: 'right center',
+            scaleX: 0
         })
 
         // مرحله ۱: پر شدن بک‌گراند
         tl.to(options.background, 0.7 / speed, {
-            scaleY: 1,
+            scaleX: 1,
             ease: Power3.easeOut
         })
 
         // مرحله ۲: بالا رفتن runner
         tl.to(options.runner, 0.7 / speed, {
-            scaleY: 1,
+            scaleX: 1,
             ease: Power2.easeInOut
         })
 
         // مرحله ۳: پایین رفتن runner
         tl.to(options.runner, 0.7 / speed, {
-            transformOrigin: 'bottom center',
-            scaleY: 0,
+            transformOrigin: 'left center',
+            scaleX: 0,
             ease: Power2.easeInOut
         })
 
         // مرحله ۴: خالی شدن بک‌گراند
         tl.to(options.background, 0.7 / speed, {
-            scaleY: 0,
-            transformOrigin: 'bottom center',
+            scaleX: 0,
+            transformOrigin: 'left center',
             ease: Power3.easeOut
         })
 

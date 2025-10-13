@@ -1,20 +1,21 @@
 <template>
   <div class="relative dir-rtl">
 
-    <MenuLogo ref="menuLogo"/>
-    <Menu ref="menu"/>
-    <MainLoading ref="mainLoading"  />
+    <MenuLogo />
+    <Menu />
 
-    <CommonLoadingLine
-                v-if="false"
-                class="hidden lg:flex"
-                ref="pageLine"
-                />
+    <!-- ✅ نوع لودینگ با استور کنترل می‌شود -->
+    <template v-if="getLoadingType === 'main'">
+      <MainLoading ref="mainLoading" />
+    </template>
+
+    <template v-else>
+      <CommonLineWrapper ref="pageLine" />
+    </template>
+
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
-
-
 
   </div>
 </template>
@@ -23,7 +24,8 @@
 import { useHead, onMounted } from '#imports';
 import {setAppLocale} from "~/services/preference";
 const route = useRoute()
-const store = useGlobalStore();
+const store = useGlobalStore()
+const { getLoadingType } = storeToRefs(store)
 
 // تابع برای تشخیص تم مرورگر و تغییر favicon
 const updateFavicon = () => {
@@ -43,17 +45,47 @@ const updateFavicon = () => {
 };
 const pageLine = ref(null)
 
+watch(
+    () => [route.fullPath, getLoadingType.value],
+    async ([path, type]) => {
+      if (type === 'line') {
+        // چون <CommonLineWrapper> ممکنه هنوز mount نشده باشه:
+        await nextTick()
+
+        if (pageLine.value && typeof pageLine.value.init === 'function') {
+          try {
+            pageLine.value.init()
+            console.log(`✅ CommonLineWrapper init برای مسیر ${path} اجرا شد`)
+          } catch (err) {
+            console.warn('⚠️ خطا هنگام اجرای init در CommonLineWrapper', err)
+          }
+        } else {
+          console.warn('⚠️ CommonLineWrapper هنوز mount نشده')
+        }
+      }
+    },
+    { immediate: true }
+)
+
+onMounted(() => {
+  // فقط وقتی کامپوننت line نمایش داده میشه، init بزن
+  if (getLoadingType.value === 'line') {
+    nextTick(() => {
+      if (pageLine.value?.init) pageLine.value.init()
+    })
+  }
+})
+
 // هنگام mount شدن کامپوننت، favicon را بررسی و تنظیم کنید
 onMounted(() => {
 
   if (process.client) {
-    setInterval(()=>{
-      console.log('heloooooooooo test page 34')
-    },1002)
+
     let lang_value = localStorage.getItem('lang') || 'fa';
     store.setLocale(lang_value);
     setAppLocale(lang_value);
-   /* pageLine.value.create()*/
+
+
 
 /* setTimeout(()=>{
    pageLine.value.timeScale(1);
