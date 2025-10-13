@@ -8,7 +8,7 @@
 
     <div class="w-full grid grid-cols-12 relative h-max lg:pr-20">
       <div class="lg:col-span-7 col-span-12 relative lg:w-[75%] mx-auto h-full">
-        <div class="lg:text-[20px] text-base font-light lg:leading-10 leading-7"
+        <div class="lg:text-[20px] text-base font-light lg:leading-8 leading-7"
              ref="titleElement">
           <p class="text-justify -mt-20"
              :class="(locale === 'en') && 'dir-ltr'" ref="bodyElement">

@@ -5,7 +5,7 @@
        class="w-full h-full grid grid-cols-12 relative">
 
     <div class="lg:col-span-7 col-span-12 relative lg:order-1 order-2">
-      <div class="lg:pr-21 lg:pt-9 flex flex-col justify-between 2xl:justify-between h-full lg:pb-20 pb-8"
+      <div class="lg:pr-21 pt-10 lg:pt-9 flex flex-col justify-between 2xl:justify-between lg:h-full lg:pb-20 pb-0"
            ref="bodyElement">
 
         <div class=" mb-0 flex flex-col gap-x-1 items-start lg:mt-12 w-full"
@@ -35,7 +35,7 @@
           </div>
         </div>
 
-        <div class="w-max ">
+        <div class="lg:w-max">
           <div :class="(locale === 'en') && 'dir-ltr text-gray-400'"
                class="mt-5 lg:mt-0   opacity-75  font-normal lg:text-[14px] 2xl:text-[14px] text-xs lg:leading-[22px]">
             <p class=""> {{ t('landing.home_page.footer.0.p') }}</p>
