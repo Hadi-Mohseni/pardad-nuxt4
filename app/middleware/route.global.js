@@ -1,5 +1,4 @@
 import {useGlobalStore} from "~/stores/global.js";
-
 export default defineNuxtRouteMiddleware((to, from) => {
     const {setContactNav , setMenuHandler , setThemeObj , startLoading , setMainLoading} = useGlobalStore()
     if(import.meta.client){
@@ -12,23 +11,15 @@ export default defineNuxtRouteMiddleware((to, from) => {
     }else{
         setContactNav(true)
     }
-
-
-
     if(import.meta.client){
         if(to.meta.layout !== 'route' && to.meta.layout !== 'category'){
             setMenuHandler('CLOSE')
-
             startLoading()
             setMainLoading(true)
         }
-
-
     }else{
         setMenuHandler('CLOSE')
-
         startLoading()
         setMainLoading(true)
     }
-
 })

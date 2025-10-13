@@ -71,7 +71,7 @@ export default defineNuxtConfig({
     ],
   },
   site: {
-    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://dev.pardad-group.com',
+    url: 'http://localhost:3001',
     name: 'گروه پرداد',
     description: '',
     defaultLocale: 'fa',
