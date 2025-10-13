@@ -1,58 +1,65 @@
 <template>
   <NuxtLayout name="page">
     <template #content>
-      <div class="w-full h-full mt-10 lg:mt-0  md:pt-0 -pt-[100px] ">
+      <div class="w-full h-full md:mt-10 lg:mt-0  md:pt-0 -pt-[100px] ">
         <section>
           <ul
               ref="bodyElement"
-              class="grid w-full pb-[7vw] gap-y-6 grid-cols-2  lg:grid-cols-3"
+              class="grid w-full pb-[7vw] md:gap-y-6 grid-cols-2 lg:grid-cols-3"
           >
             <li
                 v-for="(brand, index) in brands"
                 :key="brand.id"
                 :data-id="brand.id"
                 :id="brand.slug"
-                class="brand-item group w-full h-[300px] relative flex flex-col md:flex-row justify-center items-center flex-shrink-0"
+                class="brand-item group w-full md:h-[300px] h-[220px]
+                relative flex flex-col md:flex-row justify-center items-center flex-shrink-0"
+
 
             >
 
-
               <img
-                  class="backface-hidden w-[80%] max-w-[150px] max-h-[150px]"
+                  class="w-[80px] h-auto md:w-[150px] md:h-[150px] object-contain mt-16"
                   :src="brand.image"
                   :alt="brand.name"
               />
-              <div class="mt-5 md:mt-0 brand-details w-full md:absolute left-0 bottom-0 block text-center dir-ltr tracking-[0.26em] md:opacity-0 group-hover:opacity-100
+
+              <div class="mt-5 md:mt-0 brand-details w-full md:absolute left-0 bottom-0 block text-center
+               dir-ltr tracking-[0.26em] md:opacity-0 group-hover:opacity-100
                           transition-opacity duration-300">
 
                 <div
-                    class="w-full flex flex-col gap-1 mx-3 text-left text-[10px] sm:text-[calc(0.3vw+5.2px)] uppercase text-[#000]">
+                    class="mb-4 w-full flex flex-col gap-1 mx-3 text-left text-[10px] sm:text-[calc(0.3vw+5.2px)] uppercase text-[#000]">
 
                   <span class="font-bold">{{ brand.name }}</span>
                   <span @click="downloadFile(brand.action)"
                         class="text-body-80 cursor-pointer">DOWNLOAD CATALOUGE</span>
                 </div>
 
-                <div
-                    class="w-[50px] after:content-[''] after:absolute after:-bottom-1 after:left-0
-                    after:block after:w-full after:h-px after:bg-black
-                    after:scale-x-0 after:transition-transform after:duration-300
+                <div class="w-full flex justify-start md:justify-center mx-3 md:mx-0">
+                  <div
+                      class="w-[50px] after:content-[''] after:absolute after:bottom-0 after:left-0
+                    after:block after:w-full after:h-[1.5px] after:bg-black
+                    after:scale-x-100 md:after:scale-x-0
+                    after:transition-transform after:duration-300
                     group-hover:after:scale-x-100 z-[2] relative inline-block
                     "
-                ></div>
+                  ></div>
+                </div>
 
               </div>
               <div
-                  class="absolute inset-0 border border-transparent md:opacity-0 group-hover:opacity-100 transition-opacity duration-300 sm:border-[#6391A9]"
+                  class="absolute inset-0 border md:border-t border-t-0 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300 border-gray-100 md:border-[#2222224d]"
                   :class="(index + 1) % 3 === 0 && 'border-l-0'"
               ></div>
             </li>
           </ul>
 
-          <div ref="infiniteScrollTrigger" class="h-64 w-full "></div>
+          <div ref="infiniteScrollTrigger" class="h-64 w-full"></div>
 
           <!-- اسکلتون یا لودینگ (اختیاری) -->
-          <div v-if="isLoading" class="flex justify-center py-16">
+          <div v-if="isLoading"
+               class="flex justify-center py-16">
             در حال بارگذاری...
           </div>
         </section>
@@ -63,7 +70,10 @@
       <div class="px-4 md:px-0 fixed h-screen hidden text-[30px] lg:flex flex-col gap-y-8 pr-4 transition-all">
         <h1
             ref="titleElement"
-            class="lg:pr-4 md:pr-20 pr-4 text-right lg:before:content-none lg:after:content-none before:content-[''] before:left-0 before:bg-black-100/20 before:absolute before:bottom-0 before:right-0 before:h-[1px] after:content-[''] after:w-[8vw] after:bg-black-900 after:absolute after:bottom-0 after:right-[80px] after:h-[1px] text-[40px] lg:ml-10 xl2:ml-[300px] mb-10 lg:mb-0 font-light"
+            class="lg:pr-4 md:pr-20 pr-4 text-right lg:before:content-none lg:after:content-none
+             before:content-[''] before:left-0 before:bg-black-100/20 before:absolute before:bottom-0
+             before:right-0 before:h-[1px] after:content-[''] after:w-[8vw] after:bg-black-900 after:absolute
+              after:bottom-0 after:right-[80px] after:h-[1px] text-[40px] lg:ml-10 xl2:ml-[300px] mb-10 lg:mb-0 font-light"
         >
           {{ t('menuItems.industrialBrands') }}
           <BackButton class="mt-3"/>
