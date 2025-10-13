@@ -7,7 +7,7 @@ export const useGlobalStore = defineStore('global', {
             themeObj: 'black',
             showLoading: true,
             isShowContent:false,
-            getLoadingType:'main',
+            loadingType:'main',
             loading: true,
             isLoadingPlayed: false,
             showLogo: false,
